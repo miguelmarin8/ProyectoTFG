@@ -21,7 +21,7 @@ function mostrarContrasena() {
 }
 
 function mostrarTablaRegistro() {
-    var tablausu = document.getElementById('usuarios');
+    var tablausu = document.getElementById('usuarios').style.display = 'none';
     if (tablausu.style.display === 'none') {
         tablausu.style.display = 'block';
     } else {

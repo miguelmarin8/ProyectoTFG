@@ -15,13 +15,6 @@
     <link rel="stylesheet" href="css/estilos.css">
     <title>Area Administrador</title>
 </head>
-<style>
-    td,
-    th {
-        border: #DCDCDC 1px solid;
-    }
-</style>
-
 <body>
 
     <?php
@@ -31,25 +24,14 @@
     include_once "otros/filtrado.php";
     $conexion = Singleton::singleton();
     $datosUsuarios = $conexion->tablaUsuarios();
-    // $datosProductos = $conexion->tablaProductos();
 
     echo '<pre>';
     print_r($_SESSION['usuario']);
     echo '</pre>';
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-        for ($i = 0; $i < count($datosUsuarios); $i++) {
-            if (isset($_POST["eliminarUsuario$i"])) {
-                //$conexion->eliminarCuenta($_POST["id_usuario$i"]);
-                //header("location:areaAdministrador.php");
-                echo $_POST["id_usuario$i"];
-            }
-        }
-
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+    {
+    
     }
 
     ?>
@@ -121,17 +103,16 @@
                         SECCIÓN USUARIOS
                         <img src="img/usuarios.jpg" class="card-img-top" alt="...">
                         <div class="card-body ">
-                            <button type="button" onclick="mostrarTablaRegistro()" class="btn btn-info">Registros</button>
+                            <a href="administrarUsuarios.php"><button type="button" class="btn btn-info">Registros</button></a>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card text-center" style="width: 19rem;">
+                    <div class="card text-center" style="width: 20rem;">
                         SECCIÓN PRODUCTOS
                         <img src="img/productos.jpg" class="card-img-top" alt="...">
                         <div class="card-body ">
-                            <a href="nuevoProducto.php"><button type="button" class="btn btn-info">Nuevo</button></a>
-                            <button type="button" class="btn btn-info">Productos</button>
+                            <a href="administrarProductos.php"><button type="button" class="btn btn-info">Productos</button></a>
                         </div>
                     </div>
                 </div>
@@ -146,66 +127,8 @@
                 </div>
             </div>
         </div>
-        <!--FIN TARJETAS--->
-
-        <!--TABLA USUARIOS--->
-        <div class="container" id="usuarios" style="margin-top: 10px;padding-bottom: 100px;">
-            <table id="tablax" class="table">
-                <thead class="text-center">
-                    <tr>
-                        <th style="background-color: #ECECEC;">Id</th>
-                        <th style="background-color: #ECECEC;">Nombre</th>
-                        <th style="background-color: #ECECEC;">Apellidos</th>
-                        <th style="background-color: #ECECEC;">Email</th>
-                        <th style="background-color: #ECECEC;">Usuario</th>
-                        <th style="background-color: #ECECEC;">Última Sesión</th>
-                        <th style="background-color: #ECECEC;">Fecha Alta</th>
-                        <th style="background-color: #ECECEC;">Editar</th>
-                        <th style="background-color: #ECECEC;">Borrar</th>
-                    </tr>
-                </thead>
-                <tbody class="text-center">
-                    <?php
-                    for ($i = 0; $i < count($datosUsuarios); $i++) {
-                        echo "<tr>";
-                        echo "<td> <input readonly type = 'text' name = 'id_usuario$i' style = 'text-align: center; border: 0; width: 50px; background-color: white' value='" . $datosUsuarios[$i]['id_usuario'] . "'</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['nombre'] . "</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['apellidos'] . "</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['email'] . "</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['usuario'] . "</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['fecha'] . "</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['fecha_alta'] . "</td>";
-                        if ($datosUsuarios[$i]['id_usuario'] == 1) {
-                            echo "<td><button disabled id='modificar" . $i . "' name='modificar" . $i . "' class='btn btn-warning'><i class='fa fa-fw fa-pen'></i></button></td>";
-                        } else {
-                            echo "<td><button id='modificar" . $i . "' name='modificar" . $i . "' class='btn btn-warning'><i class='fa fa-fw fa-pen'></i></button></td>";
-                        }
-                        echo "</td>";
-                        if ($datosUsuarios[$i]['id_usuario'] == 1) {
-                            echo "<td><input disabled type = 'submit' id='eliminarUsuario" . $i . "' name='eliminarUsuario" . $i . "'/></td>";
-                        } else {
-                            echo "<td><input type = 'submit' id='eliminarUsuario" . $i . "' name='eliminarUsuario" . $i . "' value = 'Eliminar'/></td>";
-                        }
-                        echo "</td>";
-
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-        <!--FIN TABLA USUARIOS -->
     </form>
-    <!-- JQUERY -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <!-- DATATABLES -->
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <!-- BOOTSTRAP -->
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script type="text/javascript" src="js/funciones.js"></script>
-
-
-
+        <!--FIN TARJETAS--->
 </body>
 
 </html>

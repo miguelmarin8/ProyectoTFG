@@ -99,7 +99,7 @@
                 <div class="form-group">
                     <i class="fa fa-fw fa-envelope" style="font-size: 40px ;"></i><br>
                     <h3><?php echo "Hola " . "<strong>" . $usuario . "</strong>" ?></h3>
-                    <p>Para cualquier consulta, no dudes en ponerte en contacto conn nosotros</p>
+                    <p>Para cualquier consulta, no dudes en ponerte en contacto con nosotros</p>
                     <label for="nombre">Nombre</label>
                     <input type="text" class="form-control" name="nombre" id="nombre" value="<?php echo $nombre; ?>" readonly>
                     <label for="apellidos">Apellidos</label>
@@ -108,7 +108,7 @@
                     <input type="email" class="form-control" name="email" id="email" value="<?php echo $email; ?>" readonly>
                     <label for="usuario">Usuario</label>
                     <input type="text" class="form-control" name="usuario" id="usuario" value="<?php echo $usuario; ?>" readonly> <br>
-                    <textarea name="textarea" rows="10" cols="50">Escribenos tu opinión</textarea>
+                    <textarea name="textarea" rows="10" cols="50">Escribe tu opinión...</textarea>
 
                     <br><br>
 

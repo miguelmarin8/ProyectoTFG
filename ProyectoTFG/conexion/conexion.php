@@ -125,7 +125,7 @@ class Singleton
 
     public function tablaProductos()
     {
-        $consulta = $this->con->prepare("SELECT codigo_producto,id_producto,nombre,marca,color,precio,sexo,id_talla FROM producto");
+        $consulta = $this->con->prepare("SELECT * FROM producto");
         $consulta->execute();
         if ($consulta->execute()) {
             $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
