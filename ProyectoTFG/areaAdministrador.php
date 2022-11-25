@@ -43,7 +43,7 @@
             if (isset($_POST["eliminarUsuario$i"])) {
                 //$conexion->eliminarCuenta($_POST["id_usuario$i"]);
                 //header("location:areaAdministrador.php");
-                 echo $_POST["id_usuario$i"];
+                echo $_POST["id_usuario$i"];
             }
         }
 
@@ -87,6 +87,9 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="contacta.php"><i class="fa fa-fw fa-address-book"></i>Contacta</a>
+                    </li>
                     <li class="nav-item dropdown" class="d-flex">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
                             <i class="fa fa-fw fa-wrench"></i>Configuración
