@@ -1,0 +1,32 @@
+/*------------PAGINA INICIO.PHP-----------------*/
+
+#formularioInicio{background-color: powderblue;}
+#apple{max-width: 25px;}
+#google{max-width: 30px;}
+
+hr {height: 0px;background-color: black;}
+
+/*-----------FIN PAGINA INICIO.PHP-----------*/
+
+/*------------PAGINA REGISTRO.PHP-----------------*/
+
+#formularioRegistro{background-color: powderblue;}
+
+/*-----------FIN PAGINA REGISTRO.PHP-----------*/
+
+/*------------PAGINA PAGINAPRINCIPAL.PHP-----------------*/
+
+#cabecera{background-color: powderblue; height: 250px;}
+
+/*-----------FIN PAGINA PAGINAPRINCIPAL.PHP-----------*/
+
+/*-----------FIN PAGINA AreaAdmin.PHP-----------*/
+
+#registroUsu{
+    /* border: 1px solid; */
+    padding: 5px;
+    box-shadow: 10px 10px 50px 1px #7c7c81;
+    border-radius: 10px;
+  }
+  
+/*-----------FIN PAGINA AreaAdmin.PHP-----------*/
