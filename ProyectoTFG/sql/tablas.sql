@@ -20,7 +20,8 @@ CREATE TABLE
         `talla` VARCHAR(10) NOT NULL
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
-INSERT INTO tallas (`talla`) VALUES ('XXS'),('XS'),('S'),('M'),('L'),('XL'),('XXL');
+INSERT INTO tallas (`talla`)
+VALUES ('XXS'), ('XS'), ('S'), ('M'), ('L'), ('XL'), ('XXL');
 
 CREATE TABLE
     `producto`(
@@ -36,3 +37,16 @@ CREATE TABLE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 /*INSERT INTO producto (`id_producto`,`nombre`, `color`, `precio`,`id_talla`,`existencias`) VALUES (1,'Camiseta', 'Blanco', 7,5,800);*/
+
+CREATE TABLE
+    `carrito`(
+        `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        `id_producto` INT NOT NULL,
+        `nombre` VARCHAR(100) NOT NULL,
+        `precio` INT NOT NULL,
+        `existencias` INT NOT NULL,
+        `id_talla` INT NOT NULL,
+        `cantidad` INT NOT NULL,
+        `color` VARCHAR(10) NOT NULL,
+        FOREIGN KEY (`id_talla`) REFERENCES tallas (`id_talla`)
+    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;

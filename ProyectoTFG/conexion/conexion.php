@@ -41,16 +41,15 @@ class Singleton
         $consulta->execute();
     }
 
-    public function anadirProducto($id,$nombre,$color,$precio,$talla,$existencias,$imagen)
+    public function anadirProducto($id,$nombre,$precio,$talla,$existencias,$imagen)
     {
-        $consulta = $this->con->prepare("INSERT INTO producto (id_producto,nombre,color,precio,id_talla,existencias,imagen) values (?,?,?,?,?,?,?)");
+        $consulta = $this->con->prepare("INSERT INTO producto (id_producto,nombre,precio,id_talla,existencias,imagen) values (?,?,?,?,?,?)");
         $consulta->bindparam(1, $id);
         $consulta->bindparam(2, $nombre);
-        $consulta->bindparam(3, $color);
-        $consulta->bindparam(4, $precio);
-        $consulta->bindparam(5, $talla);
-        $consulta->bindparam(6, $existencias);
-        $consulta->bindparam(7, $imagen);
+        $consulta->bindparam(3, $precio);
+        $consulta->bindparam(4, $talla);
+        $consulta->bindparam(5, $existencias);
+        $consulta->bindparam(6, $imagen);
         $consulta->execute();
     }
 
@@ -157,6 +156,13 @@ class Singleton
         $consulta->execute();
     }
 
+    public function eliminarCarrito($id)
+    {
+        $consulta = $this->con->prepare("DELETE FROM carrito where id = ?");
+        $consulta->bindparam(1, $id);
+        $consulta->execute();
+    }
+
     public function registroAnteriores($usuario)
     {
         $consulta = $this->con->prepare("SELECT * FROM registro WHERE usuario = ?");
@@ -182,13 +188,51 @@ class Singleton
         }
     }
 
-    public function seleccionarProductos()
-    {
-        $consulta = $this->con->prepare("SELECT id_producto FROM producto");
-        $consulta->execute();
 
+    public function seleccionarProducto($id)
+    {
+        $consulta = $this->con->prepare("SELECT id_producto,nombre,precio,id_talla,existencias FROM producto WHERE id_producto = ?");
+        $consulta->bindParam(1, $id);
+        $consulta->execute();
         if ($consulta->execute()) {
             $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $datos;
+        } else {
+            return false;
+        }
+    }
+
+    public function añadirCarrito($id,$nombre,$precio,$existencias,$talla,$cantidad,$color)
+    {
+        $consulta = $this->con->prepare("INSERT INTO carrito (id_producto,nombre,precio,existencias,id_talla,cantidad,color) values (?,?,?,?,?,?,?)");
+        $consulta->bindparam(1, $id);
+        $consulta->bindparam(2, $nombre);
+        $consulta->bindparam(3, $precio);
+        $consulta->bindparam(4, $existencias);
+        $consulta->bindparam(5, $talla);
+        $consulta->bindparam(6, $cantidad);
+        $consulta->bindparam(7, $color);
+        $consulta->execute();
+    }
+
+    public function seleccionarCarrito()
+    {
+        $consulta = $this->con->prepare("SELECT * FROM carrito");
+        $consulta->execute();
+        if ($consulta->execute()) {
+            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $datos;
+        } else {
+            return false;
+        }
+    }
+
+    public function sumarCarrito()
+    {
+        $consulta = $this->con->prepare("SELECT SUM(precio) FROM carrito");
+        $consulta->execute();
+        if ($consulta->execute()) {
+            $datos = $consulta->fetch(PDO::FETCH_ASSOC);
             return $datos;
         } else {
             return false;

@@ -47,7 +47,6 @@
         if (isset($_POST["guardarProducto"])) {
             $id_producto = $_POST['id_producto'];
             $nombre = $_POST['nombre'];
-            $color = $_POST['color'];
             $precio = $_POST['precio'];
             $id_talla = $_POST['id_talla'];
             $existencias = $_POST['existencias'];
@@ -56,7 +55,8 @@
             if ($revisar !== false) {
                 $image = $_FILES['image']['tmp_name'];
                 $imgContenido = addslashes(file_get_contents($image));
-                $insertar = $conexion->anadirProducto($id_producto, $nombre, $color, $precio, $id_talla, $existencias, $imgContenido);
+                $insertar = $conexion->anadirProducto($id_producto, $nombre, $precio, $id_talla, $existencias, $imgContenido);
+                header("location:administrarProductos.php");
             }
         }
     }
@@ -97,6 +97,9 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="carrito.php"><i class="fa fa-solid fa-cart-arrow-down"></i>Carrito</a>
+                    </li>
                     <li class="nav-item dropdown" class="d-flex">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
                             <i class="fa fa-fw fa-wrench"></i>Configuración
@@ -133,11 +136,10 @@
                         <th style="background-color: #ECECEC;">Id Registro</th>
                         <th style="background-color: #ECECEC;">Id Producto</th>
                         <th style="background-color: #ECECEC;">Nombre</th>
-                        <th style="background-color: #ECECEC;">Color</th>
                         <th style="background-color: #ECECEC;">Precio</th>
                         <th style="background-color: #ECECEC;">Talla</th>
                         <th style="background-color: #ECECEC;">Existencias</th>
-                        <th style="background-color: #ECECEC;">Imagen</th>
+                        <!--<th style="background-color: #ECECEC;">Imagen</th>-->
                         <th style="background-color: #ECECEC;">Editar</th>
                         <th style="background-color: #ECECEC;">Borrar</th>
                     </tr>
@@ -149,8 +151,8 @@
                         echo "<td> <input readonly type = 'text' name = 'id_registro$i' style = 'text-align: center; border: 0; width: 50px; background-color: white' value='" . $datosProductos[$i]['id_registro'] . "'</td>";
                         echo "<td>"  . $datosProductos[$i]['id_producto'] . "</td>";
                         echo "<td>"  . $datosProductos[$i]['nombre'] . "</td>";
-                        echo "<td>"  . $datosProductos[$i]['color'] . "</td>";
                         echo "<td>"  . $datosProductos[$i]['precio'] . "</td>";
+                        echo "<td>";
                         if ($datosProductos[$i]['id_talla'] == 1) {
                             echo "XXS";
                         } elseif ($datosProductos[$i]['id_talla'] == 2) {
@@ -166,9 +168,9 @@
                         } else {
                             echo "XXL";
                         }
-                        echo "<td>";
+                        echo "</td>";
                         echo "<td>"  . $datosProductos[$i]['existencias'] . "</td>";
-                        echo "<td>"  . $datosProductos[$i]['imagen'] . "</td>";
+                        //echo "<td>"  . $datosProductos[$i]['imagen'] . "</td>";
                         echo "<td><input type = 'submit' id='modificarProducto" . $i . "' name='modificarProducto" . $i . "' value = 'Modificar'/></td>";
                         echo "<td><input type = 'submit' id='eliminarProducto" . $i . "' name='eliminarProducto" . $i . "' value = 'Eliminar'/></td>";
                         echo "</tr>";
@@ -181,10 +183,10 @@
     </form>
 
     <!-- MODAL NUEVO ROL -->
-    <div class="modal" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+    <form id="#" autocomplete="off" class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header" style="background-color: #0d6efd; color: white;">
                         <h4 class="modal-title">Productos</h4>
@@ -194,34 +196,31 @@
                     <div class="container">
                         <!--FORMULARIO-->
                         <div class="m-0 row justify-content-center align-items-center">
-                            <form id="#" autocomplete="off" class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
-                                <div class="form-group">
-                                    <h3><strong>NUEVO PRODUCTO</strong></h3>
-                                    <p>Para añadir un nuevo producto debes rellenar todos los campos</p>
-                                    <br>
-                                    <label for="id_producto">Identificación Producto</label>
-                                    <input type="text" class="form-control" name="id_producto" id="id_producto" value="" required>
-                                    <label for="nombre">Nombre</label>
-                                    <input type="text" class="form-control" name="nombre" id="nombre" value="" required>
-                                    <label for="color">Color</label>
-                                    <input type="text" class="form-control" name="color" id="color" value="" required>
-                                    <label for="precio">Precio</label>
-                                    <input type="text" class="form-control" name="precio" id="precio" value="" required>
-                                    <label for="talla">Talla</label> <br>
-                                    <select name="id_talla">
-                                        <option value="XXS">XSS</option>
-                                        <option value="XS">XS</option>
-                                        <option value="S">S</option>
-                                        <option value="M">M</option>
-                                        <option value="L">L</option>
-                                        <option value="XL">XL</option>
-                                        <option value="XXL">XXL</option>
-                                    </select> <br><br>
-                                    <label for="existencias">Existencias</label>
-                                    <input type="text" class="form-control" name="existencias" id="existencias" value="" required>
-                                    <label for="imagen">Imagen</label>
-                                    <input type="file" class="form-control" name="image" id="image" value="" required> <br>
-                                </div>
+                            <div class="form-group">
+                                <h3><strong>NUEVO PRODUCTO</strong></h3>
+                                <p style="color:red">*Para añadir un nuevo producto debes rellenar todos los campos*</p>
+                                <br>
+                                <label for="id_producto">Identificación Producto</label>
+                                <input type="text" class="form-control" name="id_producto" id="id_producto" value="" required>
+                                <label for="nombre">Nombre</label>
+                                <input type="text" class="form-control" name="nombre" id="nombre" value="" required>
+                                <label for="precio">Precio</label>
+                                <input type="number" class="form-control" name="precio" id="precio" value="" required>
+                                <label for="talla">Talla</label> <br>
+                                <select name="id_talla">
+                                    <option value="1">XSS</option>
+                                    <option value="2">XS</option>
+                                    <option value="3">S</option>
+                                    <option value="4">M</option>
+                                    <option value="5">L</option>
+                                    <option value="6">XL</option>
+                                    <option value="7">XXL</option>
+                                </select> <br><br>
+                                <label for="existencias">Existencias</label>
+                                <input type="text" class="form-control" name="existencias" id="existencias" value="" required>
+                                <label for="imagen">Imagen</label>
+                                <input type="file" class="form-control" name="image" id="image" value="" required> <br>
+                            </div>
                         </div>
                         <!--FIN FORMULARIO-->
                     </div>
@@ -230,17 +229,19 @@
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                         <input type="submit" id="guardarProducto" name="guardarProducto" class="btn btn-success" value="Guardar Cambios">
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- JQUERY -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <!-- DATATABLES -->
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <!-- BOOTSTRAP -->
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script type="text/javascript" src="js/funciones.js"></script>
+        <form id="#" autocomplete="off" class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
+        </form>
+
+        <!-- JQUERY -->
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <!-- DATATABLES -->
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <!-- BOOTSTRAP -->
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+        <script type="text/javascript" src="js/funciones.js"></script>
 </body>
 
 </html>

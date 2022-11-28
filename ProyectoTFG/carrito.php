@@ -9,18 +9,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="css/estilos.css">
-    <title>administrar Usuarios</title>
+    <title>Compra</title>
 </head>
-<style>
-    td,
-    th {
-        border: #DCDCDC 1px solid;
-    }
-</style>
+
 
 <body>
 
@@ -30,32 +23,29 @@
     include_once "conexion/conexion.php";
     include_once "otros/filtrado.php";
     $conexion = Singleton::singleton();
-    $datosUsuarios = $conexion->tablaUsuarios();
-    // $datosProductos = $conexion->tablaProductos();
+    $datosCarrito = $conexion->seleccionarCarrito();
 
-    echo '<pre>';
-    print_r($_SESSION['usuario']);
-    echo '</pre>';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        for ($i = 0; $i < count($datosUsuarios); $i++) {
-            if (isset($_POST["eliminarUsuario$i"])) {
-                //$conexion->eliminarCuenta($_POST["id_usuario$i"]);
-                //header("location:areaAdministrador.php");
-                echo $_POST["id_usuario$i"];
+        for ($i = 0; $i < count($datosCarrito); $i++) {
+            if (isset($_POST["eliminarProducto$i"])) {
+                $conexion->eliminarCarrito($_POST["id$i"]);
+                header("location:carrito.php");
             }
         }
 
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
+        if(isset($_POST['revisar']))
+        {
+           $precioTotal = $conexion->sumarCarrito();
+        }
+
+        print_r($precioTotal);
     }
 
     ?>
     <div id="cabecera" class="col-auto p-5 text-center">
-        <p class="display-4" style="font-family: Lucida Handwriting;text-shadow: 0px 0px 9px #000;color: black;">ADMINISTRAR USUARIOS</p>
-        <p class="display-7" style="font-family: cursive;"></p>
+        <p class="display-4" style="font-family: Lucida Handwriting;text-shadow: 0px 0px 9px #000;color: black;">BIENVENIDO A MR</p>
     </div>
 
     <!-- MENÚ -->
@@ -116,63 +106,60 @@
     <!-- FIN MENÚ -->
 
 
-    <!--TABLA USUARIOS--->
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" style="margin-top: 100px;">
         <div class="container" id="usuarios" style="margin-top: 10px;padding-bottom: 100px;">
-            <h1 style="justify-content:center;text-align:center">TABLA USUARIOS</h1>
+            <h1 style="justify-content:center;text-align:center"><?php echo "Hola " . $_SESSION['usuario'] . " esta es tu elección" ?></h1><br>
             <table id="tablax" class="table">
                 <thead class="text-center">
                     <tr>
-                        <th style="background-color: #ECECEC;">Id</th>
+                        <th style="background-color: #ECECEC;">Id Registro</th>
+                        <th style="background-color: #ECECEC;">Id Producto</th>
                         <th style="background-color: #ECECEC;">Nombre</th>
-                        <th style="background-color: #ECECEC;">Apellidos</th>
-                        <th style="background-color: #ECECEC;">Email</th>
-                        <th style="background-color: #ECECEC;">Usuario</th>
-                        <th style="background-color: #ECECEC;">Última Sesión</th>
-                        <th style="background-color: #ECECEC;">Fecha Alta</th>
-                        <th style="background-color: #ECECEC;">Editar</th>
+                        <th style="background-color: #ECECEC;">Precio</th>
+                        <th style="background-color: #ECECEC;">Existencias</th>
+                        <th style="background-color: #ECECEC;">Talla</th>
+                        <th style="background-color: #ECECEC;">Cantidad</th>
                         <th style="background-color: #ECECEC;">Borrar</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
                     <?php
-                    for ($i = 0; $i < count($datosUsuarios); $i++) {
+                    for ($i = 0; $i < count($datosCarrito); $i++) {
                         echo "<tr>";
-                        echo "<td> <input readonly type = 'text' name = 'id_usuario$i' style = 'text-align: center; border: 0; width: 50px; background-color: white' value='" . $datosUsuarios[$i]['id_usuario'] . "'</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['nombre'] . "</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['apellidos'] . "</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['email'] . "</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['usuario'] . "</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['fecha'] . "</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['fecha_alta'] . "</td>";
-                        if ($datosUsuarios[$i]['id_usuario'] == 1) {
-                            echo "<td><button disabled id='modificar" . $i . "' name='modificar" . $i . "' class='btn btn-warning'><i class='fa fa-fw fa-pen'></i></button></td>";
+                        echo "<td> <input readonly type = 'text' name = 'id$i' style = 'text-align: center; border: 0; width: 50px; background-color: white' value='" . $datosCarrito[$i]['id'] . "'</td>";
+                        echo "<td>"  . $datosCarrito[$i]['id_producto'] . "</td>";
+                        echo "<td>"  . $datosCarrito[$i]['nombre'] . "</td>";
+                        echo "<td>"  . $datosCarrito[$i]['precio'] . "</td>";
+                        echo "<td>"  . $datosCarrito[$i]['existencias'] . "</td>";
+                        echo "<td>";
+                        if ($datosCarrito[$i]['id_talla'] == 1) {
+                            echo "XXS";
+                        } elseif ($datosCarrito[$i]['id_talla'] == 2) {
+                            echo "XS";
+                        } elseif ($datosCarrito[$i]['id_talla'] == 3) {
+                            echo "S";
+                        } elseif ($datosCarrito[$i]['id_talla'] == 4) {
+                            echo "M";
+                        } elseif ($datosCarrito[$i]['id_talla'] == 5) {
+                            echo "L";
+                        } elseif ($datosCarrito[$i]['id_talla'] == 6) {
+                            echo "XL";
                         } else {
-                            echo "<td><button id='modificar" . $i . "' name='modificar" . $i . "' class='btn btn-warning'><i class='fa fa-fw fa-pen'></i></button></td>";
+                            echo "XXL";
                         }
                         echo "</td>";
-                        if ($datosUsuarios[$i]['id_usuario'] == 1) {
-                            echo "<td><input disabled type = 'submit' id='eliminarUsuario" . $i . "' name='eliminarUsuario" . $i . "' value = 'Eliminar'/></td>";
-                        } else {
-                            echo "<td><input type = 'submit' id='eliminarUsuario" . $i . "' name='eliminarUsuario" . $i . "' value = 'Eliminar'/></td>";
-                        }
-                        echo "</td>";
-
+                        echo "<td>"  . $datosCarrito[$i]['color'] . "</td>";
+                        echo "<td><input type = 'submit' id='eliminarProducto" . $i . "' name='eliminarProducto" . $i . "' value = 'Eliminar'/></td>";
                         echo "</tr>";
                     }
                     ?>
                 </tbody>
             </table>
+            <input type="submit" id="pagar" name="pagar" value="Pagar" style="float:right;margin: 10px;">
+            <input type="submit" id="revisar" name="revisar" value="Calcular Precio" style="float:right;margin: 10px">
+            <p><?php echo "El precio total de su compra es de: " . $precioTotal . "€ muchas gracias."?></p>
         </div>
-        <!--FIN TABLA USUARIOS -->
     </form>
-    <!-- JQUERY -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <!-- DATATABLES -->
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <!-- BOOTSTRAP -->
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script type="text/javascript" src="js/funciones.js"></script>
 
 
 </body>

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/estilos.css">
     <title>Area Administrador</title>
 </head>
+
 <body>
 
     <?php
@@ -29,9 +30,7 @@
     print_r($_SESSION['usuario']);
     echo '</pre>';
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') 
-    {
-    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     ?>
@@ -71,6 +70,9 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="contacta.php"><i class="fa fa-fw fa-address-book"></i>Contacta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="carrito.php"><i class="fa fa-solid fa-cart-arrow-down"></i>Carrito</a>
                     </li>
                     <li class="nav-item dropdown" class="d-flex">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
@@ -128,7 +130,7 @@
             </div>
         </div>
     </form>
-        <!--FIN TARJETAS--->
+    <!--FIN TARJETAS--->
 </body>
 
 </html>

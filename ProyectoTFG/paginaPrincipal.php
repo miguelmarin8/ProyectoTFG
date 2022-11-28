@@ -76,6 +76,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="contacta.php"><i class="fa fa-fw fa-address-book"></i>Contacta</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="carrito.php"><i class="fa fa-solid fa-cart-arrow-down"></i>Carrito</a>
+                    </li>
                     <li class="nav-item dropdown" class="d-flex">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
                             <i class="fa fa-fw fa-wrench"></i>Configuración
@@ -96,112 +99,110 @@
     </nav>
     <!-- FIN MENÚ -->
 
-    <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-        <div class="container" style="margin-top: 50px;">
-            <div class="row align-items-center">
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
-                        </div>
+    <div class="container" style="margin-top: 50px;">
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="card text-center" style="width: 18rem;">
+                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                    Camiseta Nike
+                    <div class="card-body ">
+                        <a href="informacion.php"><button name="medicamentos" class="btn btn-light">Información</button></a>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
-                        </div>
+            </div>
+            <div class="col">
+                <div class="card text-center" style="width: 18rem;">
+                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                    Camiseta Nike
+                    <div class="card-body ">
+                        <button name="medicamentos" class="btn btn-light">Información</button>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
-                        </div>
+            </div>
+            <div class="col">
+                <div class="card text-center" style="width: 18rem;">
+                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                    Camiseta Nike
+                    <div class="card-body ">
+                        <button name="medicamentos" class="btn btn-light">Información</button>
                     </div>
                 </div>
-
             </div>
 
         </div>
 
+    </div>
 
-        <!--SEGUNDA LÍNEA-->
-        <div class="container" style="margin-top: 100px;">
-            <div class="row align-items-center">
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
-                        </div>
-                    </div>
-                </div>
 
+    <!--SEGUNDA LÍNEA-->
+    <div class="container" style="margin-top: 100px;">
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="card text-center" style="width: 18rem;">
+                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                    Camiseta Nike
+                    <div class="card-body ">
+                        <button name="medicamentos" class="btn btn-light">Información</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-center" style="width: 18rem;">
+                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                    Camiseta Nike
+                    <div class="card-body ">
+                        <button name="medicamentos" class="btn btn-light">Información</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-center" style="width: 18rem;">
+                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                    Camiseta Nike
+                    <div class="card-body ">
+                        <button name="medicamentos" class="btn btn-light">Información</button>
+                    </div>
+                </div>
             </div>
 
         </div>
 
-        <!--TERCERA LÍNEA-->
-        <div class="container" style="margin-top: 100px;">
-            <div class="row align-items-center">
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
-                        </div>
-                    </div>
-                </div>
+    </div>
 
+    <!--TERCERA LÍNEA-->
+    <div class="container" style="margin-top: 100px;">
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="card text-center" style="width: 18rem;">
+                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                    Camiseta Nike
+                    <div class="card-body ">
+                        <button name="medicamentos" class="btn btn-light">Información</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-center" style="width: 18rem;">
+                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                    Camiseta Nike
+                    <div class="card-body ">
+                        <button name="medicamentos" class="btn btn-light">Información</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-center" style="width: 18rem;">
+                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                    Camiseta Nike
+                    <div class="card-body ">
+                        <button name="medicamentos" class="btn btn-light">Información</button>
+                    </div>
+                </div>
             </div>
 
         </div>
-    </form>
+
+    </div>
 
 
 </body>
