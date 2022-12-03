@@ -50,14 +50,14 @@
                     <label for="email">Email</label>
                     <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
                     <br>
-                    <input type="submit" id="registrar" name="registrar" class="btn btn-success" value="Register"><br><br>
+                    <input type="submit" id="enviar" name="enviar" class="btn btn-success" value="Enviar"><br><br>
                 </div>
                 <hr style="width:40%; float: left;">O
                 <hr style="width:40%;float: right;">
                 <br>
                 <br>
 
-                <p>Don´t have an account?<a href="registro.php"> Sing Up</a></p>
+                <p>¿No tienes cuenta?<a href="registro.php"> Registrate</a></p>
 
             </form>
 

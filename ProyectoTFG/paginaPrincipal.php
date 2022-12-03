@@ -24,17 +24,14 @@
     include_once "otros/filtrado.php";
     $conexion = Singleton::singleton();
     $usuario = $_SESSION['usuario'];
-    //$productos = $conexion->seleccionarProductos();
 
-    //Actualizamos fecha cada vez que entremos
 
-    echo '<pre>';
+   /* echo '<pre>';
     print_r($usuario);
-    echo '</pre>';
+    echo '</pre>';*/
 
 
 
-    //print_r($hola);
 
     ?>
     <div id="cabecera" class="col-auto p-5 text-center">

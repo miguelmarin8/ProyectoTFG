@@ -23,6 +23,14 @@
     th {
         border: #DCDCDC 1px solid;
     }
+
+    img {
+        transition: transform .2s;
+    }
+
+    img:hover {
+        transform: scale(5);
+    }
 </style>
 
 <body>
@@ -34,7 +42,6 @@
     include_once "otros/filtrado.php";
     $conexion = Singleton::singleton();
     $datosProductos = $conexion->tablaProductos();
-
     echo '<pre>';
     print_r($_SESSION['usuario']);
     echo '</pre>';
@@ -51,15 +58,15 @@
             $id_talla = $_POST['id_talla'];
             $existencias = $_POST['existencias'];
 
-            $revisar = getimagesize($_FILES["image"]["tmp_name"]);
-            if ($revisar !== false) {
-                $image = $_FILES['image']['tmp_name'];
-                $imgContenido = addslashes(file_get_contents($image));
-                $insertar = $conexion->anadirProducto($id_producto, $nombre, $precio, $id_talla, $existencias, $imgContenido);
-                header("location:administrarProductos.php");
-            }
+            $rutaenservidor = "img";
+            $rutatemporal = $_FILES['imagen']['tmp_name'];
+            $rutadestino = $rutaenservidor . "/" . $_FILES['imagen']['name'];
+            $insertar = $conexion->anadirProducto($id_producto, $nombre, $precio, $id_talla, $existencias, $rutadestino);
+            header("location:administrarProductos.php");
         }
     }
+
+
 
     ?>
     <div id="cabecera" class="col-auto p-5 text-center">
@@ -139,7 +146,7 @@
                         <th style="background-color: #ECECEC;">Precio</th>
                         <th style="background-color: #ECECEC;">Talla</th>
                         <th style="background-color: #ECECEC;">Existencias</th>
-                        <!--<th style="background-color: #ECECEC;">Imagen</th>-->
+                        <th style="background-color: #ECECEC;">Imagen</th>
                         <th style="background-color: #ECECEC;">Editar</th>
                         <th style="background-color: #ECECEC;">Borrar</th>
                     </tr>
@@ -170,7 +177,7 @@
                         }
                         echo "</td>";
                         echo "<td>"  . $datosProductos[$i]['existencias'] . "</td>";
-                        //echo "<td>"  . $datosProductos[$i]['imagen'] . "</td>";
+                        echo "<td>"  . '<img style = "max-width: 90px" src = "' . $datosProductos[$i]['imagen'] . '"/>' . "</td>";
                         echo "<td><input type = 'submit' id='modificarProducto" . $i . "' name='modificarProducto" . $i . "' value = 'Modificar'/></td>";
                         echo "<td><input type = 'submit' id='eliminarProducto" . $i . "' name='eliminarProducto" . $i . "' value = 'Eliminar'/></td>";
                         echo "</tr>";
@@ -219,7 +226,7 @@
                                 <label for="existencias">Existencias</label>
                                 <input type="text" class="form-control" name="existencias" id="existencias" value="" required>
                                 <label for="imagen">Imagen</label>
-                                <input type="file" class="form-control" name="image" id="image" value="" required> <br>
+                                <input type="file" class="form-control" name="imagen" id="imagen" value="" required> <br>
                             </div>
                         </div>
                         <!--FIN FORMULARIO-->

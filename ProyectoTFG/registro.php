@@ -54,8 +54,8 @@
                 $errores[] = "- El email no puede tener más de 100 letras";
             } elseif (empty($usuario)) {
                 $errores[] = "- El usuario no puede estar vacío";
-            } elseif (strlen($usuario) > 10) {
-                $errores[] = "- El usuario no puede tener más de 10 caracteres";
+            } elseif (strlen($usuario) > 20) {
+                $errores[] = "- El usuario no puede tener más de 20 caracteres";
             } elseif (empty($password)) {
                 $errores[] = "- La contraseña no puede estar vacíoa";
             } elseif (strlen($password) > 20) {
@@ -118,7 +118,7 @@
 
                 </div>
                 <br>
-                <p>Have an account?<a href="inicio.php"> Sing Up</a></p>
+                <p>¿Ya tienes cuenta?<a href="inicio.php"> Inicia Sesión</a></p>
             </form>
 
         </div>

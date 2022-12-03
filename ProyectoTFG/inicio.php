@@ -51,7 +51,6 @@
                 $errores[] = "El usuario o la contraseña no coinciden";
             }
         }
-    } else {
     }
     ?>
 
@@ -124,14 +123,16 @@
                             ?>
                             <!--VISUALIZAR ERRORES-->
                             <br>
-                            <input type="submit" id="log" name="log" class="btn btn-success" value="Log In">
+                            <input type="submit" id="log" name="log" class="btn btn-success" value="Iniciar Sesion">
                         </div>
                         <br>
-                        <p>Forgot password?<a href="contraseña.php"> Recover Password</a></p>
-                        <p>Don´t have an account?<a href="registro.php"> Sing Up</a></p>
-                        <br>
+                        <p>¿Has olvidado la contraseña?<a href="contraseña.php"> Recuperar Contraseña</a></p>
+                        <p>¿No tienes cuenta?<a href="registro.php"> Registrate</a></p>
+                    
+                        <!--<p>Entrar sin cuenta<a href="paginaPrincipal.php"> Entrar</a></p>-->
+
                         <div>
-                            <h6>Sign In With</h6>
+                            <h6>Iniciar sesión con: </h6>
                             <button type="button" class="btn btn-light">Continue With <img id="apple" src="img/apple.jpg" /></button>
                             <button type="button" class="btn btn-light">Continue With <img id="google" src="img/google.jpg" /></button>
                         </div>

@@ -26,9 +26,9 @@
     $conexion = Singleton::singleton();
     $datosUsuarios = $conexion->tablaUsuarios();
 
-    echo '<pre>';
+   /* echo '<pre>';
     print_r($_SESSION['usuario']);
-    echo '</pre>';
+    echo '</pre>';*/
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }

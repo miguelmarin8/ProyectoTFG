@@ -2,16 +2,16 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <!-- JavaScript Bundle with Popper -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="css/estilos.css">
-    <title>Compra</title>
+    <title>Carrito</title>
 </head>
 
 
@@ -119,6 +119,7 @@
                         <th style="background-color: #ECECEC;">Existencias</th>
                         <th style="background-color: #ECECEC;">Talla</th>
                         <th style="background-color: #ECECEC;">Cantidad</th>
+                        <th style="background-color: #ECECEC;">Color</th>
                         <th style="background-color: #ECECEC;">Borrar</th>
                     </tr>
                 </thead>
@@ -148,6 +149,7 @@
                             echo "XXL";
                         }
                         echo "</td>";
+                        echo "<td>"  . $datosCarrito[$i]['cantidad'] . "</td>";
                         echo "<td>"  . $datosCarrito[$i]['color'] . "</td>";
                         echo "<td><input type = 'submit' id='eliminarProducto" . $i . "' name='eliminarProducto" . $i . "' value = 'Eliminar'/></td>";
                         echo "</tr>";
@@ -156,7 +158,7 @@
                 </tbody>
             </table>
             <input type="submit" id="pagar" name="pagar" value="Pagar" style="float:right;margin: 10px;">
-            <input type="submit" id="revisar" name="revisar" value="Calcular Precio" style="float:right;margin: 10px">
+            <input type="submit" id="revisar" name="revisar" value="Factura" style="float:right;margin: 10px">
             <p><?php echo "El precio total de su compra es de: " . $precioTotal . "€ muchas gracias."?></p>
         </div>
     </form>

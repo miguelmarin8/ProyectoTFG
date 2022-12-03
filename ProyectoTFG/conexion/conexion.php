@@ -238,4 +238,10 @@ class Singleton
             return false;
         }
     }
+
+    public function eliminarCarritoEntero()
+    {
+        $consulta = $this->con->prepare("DELETE FROM carrito");
+        $consulta->execute();
+    }
 }
