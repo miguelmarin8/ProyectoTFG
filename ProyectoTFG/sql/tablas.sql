@@ -1,4 +1,4 @@
--- Active: 1668888614883@@127.0.0.1@3306@tienda
+-- Active: 1644947064554@@127.0.0.1@3306@tienda
 
 USE tienda;
 
@@ -44,9 +44,8 @@ CREATE TABLE
         `id_producto` INT NOT NULL,
         `nombre` VARCHAR(100) NOT NULL,
         `precio` INT NOT NULL,
-        `existencias` INT NOT NULL,
         `id_talla` INT NOT NULL,
-        `cantidad` INT NOT NULL,
+        `existencias` INT NOT NULL,
         `color` VARCHAR(10) NOT NULL,
         FOREIGN KEY (`id_talla`) REFERENCES tallas (`id_talla`)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;

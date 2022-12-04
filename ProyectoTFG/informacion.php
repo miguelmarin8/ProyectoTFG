@@ -49,24 +49,7 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (isset($_POST["añadirCarrito"])) {
-            if ($_POST['cantidad'] == 1) {
-                $conexion->añadirCarrito($_POST['id_producto'], $_POST['nombre'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['cantidad'], $_POST['color']);
-            }
-            if ($_POST['cantidad'] == 2) {
-                $conexion->añadirCarrito($_POST['id_producto'], $_POST['nombre'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['cantidad'], $_POST['color']);
-                $conexion->añadirCarrito($_POST['id_producto'], $_POST['nombre'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['cantidad'], $_POST['color']);
-            }
-            if ($_POST['cantidad'] == 3) {
-                $conexion->añadirCarrito($_POST['id_producto'], $_POST['nombre'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['cantidad'], $_POST['color']);
-                $conexion->añadirCarrito($_POST['id_producto'], $_POST['nombre'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['cantidad'], $_POST['color']);
-                $conexion->añadirCarrito($_POST['id_producto'], $_POST['nombre'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['cantidad'], $_POST['color']);
-            }
-            if ($_POST['cantidad'] == 4) {
-                $conexion->añadirCarrito($_POST['id_producto'], $_POST['nombre'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['cantidad'], $_POST['color']);
-                $conexion->añadirCarrito($_POST['id_producto'], $_POST['nombre'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['cantidad'], $_POST['color']);
-                $conexion->añadirCarrito($_POST['id_producto'], $_POST['nombre'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['cantidad'], $_POST['color']);
-                $conexion->añadirCarrito($_POST['id_producto'], $_POST['nombre'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['cantidad'], $_POST['color']);
-            }
+            $conexion->añadirCarrito($_POST['id_producto'], $_POST['nombre'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['color']);
         }
     }
 
@@ -165,13 +148,6 @@
                                 <option value="<?php echo $tallaS; ?>">S</option>
                                 <option value="<?php echo $tallaM; ?>">M</option>
                                 <option value="<?php echo $tallaL; ?>">L</option>
-                            </select><br>
-                            <label for="cantidad">Cantidad</label>
-                            <select name="cantidad">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
                             </select><br>
                             <label for="color">Color</label>
                             <select name="color">

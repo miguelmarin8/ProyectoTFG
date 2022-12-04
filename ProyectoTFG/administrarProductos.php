@@ -41,9 +41,9 @@
     $conexion = Singleton::singleton();
     $datosProductos = $conexion->tablaProductos();
 
-    echo '<pre>';
+    /*echo '<pre>';
     print_r($_SESSION['usuario']);
-    echo '</pre>';
+    echo '</pre>';*/
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -51,32 +51,33 @@
         if (isset($_POST['editarProducto'])) {
             if ($_POST['id_tallaP'] == "XXS") {
                 $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 1, $_POST['existenciasP'], $_POST['id_registroP']);
-                header("location:administrarProductos.php");
             } elseif ($_POST['id_tallaP'] == "XS") {
                 $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 2, $_POST['existenciasP'], $_POST['id_registroP']);
-                header("location:administrarProductos.php");
             } elseif ($_POST['id_tallaP'] == "S") {
                 $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 3, $_POST['existenciasP'], $_POST['id_registroP']);
-                header("location:administrarProductos.php");
             } elseif ($_POST['id_tallaP'] == "M") {
                 $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 4, $_POST['existenciasP'], $_POST['id_registroP']);
-                header("location:administrarProductos.php");
             } elseif ($_POST['id_tallaP'] == "L") {
                 $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 5, $_POST['existenciasP'], $_POST['id_registroP']);
-                header("location:administrarProductos.php");
             } elseif ($_POST['id_tallaP'] == "XL") {
                 $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 6, $_POST['existenciasP'], $_POST['id_registroP']);
-                header("location:administrarProductos.php");
             } else {
                 $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 7, $_POST['existenciasP'], $_POST['id_registroP']);
-                header("location:administrarProductos.php");
             }
+            echo '<script>alert("Producto modificado correctamente")
+            document.location=("administrarProductos.php");
+            </script>';
         }
+
+
 
         if (isset($_POST['eliminarProducto'])) {
             $conexion->eliminarProducto($_POST['id_registroP2']);
             $conexion->incrementarTablaProducto();
-            header("location:administrarProductos.php");
+        
+            echo '<script>alert("Producto eliminado correctamente")
+            document.location=("administrarProductos.php");
+            </script>';
         }
 
         if (isset($_POST["guardarProducto"])) {
@@ -112,26 +113,33 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link active" aria-current="page" href="#">NOVEDADES</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
-                            Dropdown
+                            Hombre
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="#">Camisetas</a></li>
+                            <li><a class="dropdown-item" href="#">Pantalones</a></li>
+                            <li><a class="dropdown-item" href="#">Calzado</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
+                            Mujer
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Camisetas</a></li>
+                            <li><a class="dropdown-item" href="#">Pantalones</a></li>
+                            <li><a class="dropdown-item" href="#">Calzado</a></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="contacta.php"><i class="fa fa-fw fa-address-book"></i>Contacta</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="carrito.php"><i class="fa fa-solid fa-cart-arrow-down"></i>Carrito</a>
                     </li>
@@ -145,11 +153,6 @@
                         </ul>
                     </li>
                 </ul>
-
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>

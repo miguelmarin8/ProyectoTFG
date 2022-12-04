@@ -225,16 +225,15 @@ class Singleton
         }
     }
 
-    public function añadirCarrito($id,$nombre,$precio,$existencias,$talla,$cantidad,$color)
+    public function añadirCarrito($id,$nombre,$precio,$existencias,$talla,$color)
     {
-        $consulta = $this->con->prepare("INSERT INTO carrito (id_producto,nombre,precio,existencias,id_talla,cantidad,color) values (?,?,?,?,?,?,?)");
+        $consulta = $this->con->prepare("INSERT INTO carrito (id_producto,nombre,precio,existencias,id_talla,color) values (?,?,?,?,?,?)");
         $consulta->bindparam(1, $id);
         $consulta->bindparam(2, $nombre);
         $consulta->bindparam(3, $precio);
         $consulta->bindparam(4, $existencias);
         $consulta->bindparam(5, $talla);
-        $consulta->bindparam(6, $cantidad);
-        $consulta->bindparam(7, $color);
+        $consulta->bindparam(6, $color);
         $consulta->execute();
     }
 
@@ -275,6 +274,12 @@ class Singleton
         $consulta->execute();
     }
 
+    public function incrementarTablaCarrito()
+    {
+        $consulta = $this->con->prepare("ALTER TABLE carrito AUTO_INCREMENT = 1");
+        $consulta->execute();
+    }
+
     public function incrementarTablaProducto()
     {
         $consulta = $this->con->prepare("ALTER TABLE producto AUTO_INCREMENT = 1");
@@ -292,6 +297,30 @@ class Singleton
         $consulta->bindparam(6, $id_reg);
         if ($consulta->execute()) {
             return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function contarProductos()
+    {
+        $consulta = $this->con->prepare("SELECT COUNT(*) FROM carrito");
+        $consulta->execute();
+        if ($consulta->execute()) {
+            $datos = $consulta->fetch(PDO::FETCH_ASSOC);
+            return $datos;
+        } else {
+            return false;
+        }
+    }
+
+    public function seleccionarNombreCarrito()
+    {
+        $consulta = $this->con->prepare("SELECT nombre FROM carrito");
+        $consulta->execute();
+        if ($consulta->execute()) {
+            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $datos;
         } else {
             return false;
         }

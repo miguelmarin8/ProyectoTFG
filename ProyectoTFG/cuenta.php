@@ -66,7 +66,9 @@
                 $errores[] = "- La contraseña no puede tener más de 20 caracteres";
             } else {
                 $conexion->modificar_registro($nombre, $apellidos, $password, $id_usuario);
-                header("location:inicio.php");
+                echo '<script>alert("Usuario modificado correctamente. Vuelva a iniciar sesión")
+                document.location=("inicio.php");
+                </script>';
             }
         }
 
@@ -74,7 +76,9 @@
 
             $id_usuario = filtrado($_POST['id_usuario']);
             $conexion->eliminarCuenta($id_usuario);
-            header("location:inicio.php");
+            echo '<script>alert("Has sido dado de baja. Muchas gracias")
+            document.location=("inicio.php");
+            </script>';
         }
     } else {
     }
@@ -93,37 +97,47 @@
         <p class="display-4" style="font-family: Lucida Handwriting;text-shadow: 0px 0px 9px #000;color: black;">MI CUENTA</p>
     </div>
 
-    <!-- MENÚ -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- MENÚ -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="paginaPrincipal.php">HOME</a>
             <a href="areaAdministrador.php"><button class="btn btn-outline-secondary" name="admin" id="admin" <?php if ($_SESSION['usuario'] != "MiguelMB") { ?> style="display:none;" <?php } ?>>Area Administrador</button></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class=" navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link active" aria-current="page" href="#">NOVEDADES</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
-                            Dropdown
+                            Hombre
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="#">Camisetas</a></li>
+                            <li><a class="dropdown-item" href="#">Pantalones</a></li>
+                            <li><a class="dropdown-item" href="#">Calzado</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
+                            Mujer
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Camisetas</a></li>
+                            <li><a class="dropdown-item" href="#">Pantalones</a></li>
+                            <li><a class="dropdown-item" href="#">Calzado</a></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="contacta.php"><i class="fa fa-fw fa-address-book"></i>Contacta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="carrito.php"><i class="fa fa-solid fa-cart-arrow-down"></i>Carrito</a>
+                    </li>
                     <li class="nav-item dropdown" class="d-flex">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
                             <i class="fa fa-fw fa-wrench"></i>Configuración
@@ -134,16 +148,11 @@
                         </ul>
                     </li>
                 </ul>
-
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>
     <!-- FIN MENÚ -->
-
+    
     <div class="container">
         <!--FORMULARIO-->
         <div class="m-0 row justify-content-center align-items-center">

@@ -20,8 +20,8 @@ function mostrarContrasena() {
     }
 }
 
-function mostrarTablaRegistro() {
-    var tablausu = document.getElementById('usuarios').style.display = 'none';
+function mostrarFactura() {
+    var tablausu = document.getElementById('resumenCompra');
     if (tablausu.style.display === 'none') {
         tablausu.style.display = 'block';
     } else {

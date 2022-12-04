@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS only -->
@@ -14,35 +14,46 @@
     <title>Carrito</title>
 </head>
 
+<style>
+    #tablaCarrito th {
+        background-color: orange;
+    }
+
+    #factura {
+        float: right;
+        margin: 10px;
+        background-color: #A7F766;
+        border-radius: 10px;
+    }
+</style>
 
 <body>
-
     <?php
-
     session_start();
     include_once "conexion/conexion.php";
     include_once "otros/filtrado.php";
     $conexion = Singleton::singleton();
     $datosCarrito = $conexion->seleccionarCarrito();
 
+    $calcularProductos = $conexion->contarProductos();
+    $calucalarNombres = $conexion->seleccionarNombreCarrito();
+    $cacularPrecioTotal = $conexion->sumarCarrito(); //Sumar precios
 
+    $productosTotal = implode(',', $calcularProductos); //Para sacar solo el valor del array
+    $precioTotal = implode(',', $cacularPrecioTotal); //Para sacar solo el valor del array
+    //$nombreTotal = implode(',', $calucalarNombres); //Para sacar solo el valor del array
+
+ 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         for ($i = 0; $i < count($datosCarrito); $i++) {
             if (isset($_POST["eliminarProducto$i"])) {
                 $conexion->eliminarCarrito($_POST["id$i"]);
+                $conexion->incrementarTablaCarrito();
                 header("location:carrito.php");
             }
         }
-
-        if(isset($_POST['revisar']))
-        {
-           $precioTotal = $conexion->sumarCarrito();
-        }
-
-        print_r($precioTotal);
     }
-
     ?>
     <div id="cabecera" class="col-auto p-5 text-center">
         <p class="display-4" style="font-family: Lucida Handwriting;text-shadow: 0px 0px 9px #000;color: black;">BIENVENIDO A MR</p>
@@ -59,31 +70,32 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link active" aria-current="page" href="#">NOVEDADES</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
-                            Dropdown
+                            Hombre
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="#">Camisetas</a></li>
+                            <li><a class="dropdown-item" href="#">Pantalones</a></li>
+                            <li><a class="dropdown-item" href="#">Calzado</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
+                            Mujer
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Camisetas</a></li>
+                            <li><a class="dropdown-item" href="#">Pantalones</a></li>
+                            <li><a class="dropdown-item" href="#">Calzado</a></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="contacta.php"><i class="fa fa-fw fa-address-book"></i>Contacta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="carrito.php"><i class="fa fa-solid fa-cart-arrow-down"></i>Carrito</a>
                     </li>
                     <li class="nav-item dropdown" class="d-flex">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
@@ -95,11 +107,6 @@
                         </ul>
                     </li>
                 </ul>
-
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>
@@ -109,18 +116,17 @@
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" style="margin-top: 100px;">
         <div class="container" id="usuarios" style="margin-top: 10px;padding-bottom: 100px;">
             <h1 style="justify-content:center;text-align:center"><?php echo "Hola " . $_SESSION['usuario'] . " esta es tu elección" ?></h1><br>
-            <table id="tablax" class="table">
+            <table id="tablaCarrito" class="table">
                 <thead class="text-center">
                     <tr>
-                        <th style="background-color: #ECECEC;">Id Registro</th>
-                        <th style="background-color: #ECECEC;">Id Producto</th>
-                        <th style="background-color: #ECECEC;">Nombre</th>
-                        <th style="background-color: #ECECEC;">Precio</th>
-                        <th style="background-color: #ECECEC;">Existencias</th>
-                        <th style="background-color: #ECECEC;">Talla</th>
-                        <th style="background-color: #ECECEC;">Cantidad</th>
-                        <th style="background-color: #ECECEC;">Color</th>
-                        <th style="background-color: #ECECEC;">Borrar</th>
+                        <th>Registro</th>
+                        <th>Id Producto</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Existencias</th>
+                        <th>Talla</th>
+                        <th>Color</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
@@ -149,21 +155,29 @@
                             echo "XXL";
                         }
                         echo "</td>";
-                        echo "<td>"  . $datosCarrito[$i]['cantidad'] . "</td>";
                         echo "<td>"  . $datosCarrito[$i]['color'] . "</td>";
-                        echo "<td><input type = 'submit' id='eliminarProducto" . $i . "' name='eliminarProducto" . $i . "' value = 'Eliminar'/></td>";
+                        echo "<td><input type = 'submit' id='eliminarProducto" . $i . "' name='eliminarProducto" . $i . "' value = 'Eliminar' style = 'background-color:#FF5D5D;'/></td>";
                         echo "</tr>";
                     }
                     ?>
                 </tbody>
             </table>
-            <input type="submit" id="pagar" name="pagar" value="Pagar" style="float:right;margin: 10px;">
-            <input type="submit" id="revisar" name="revisar" value="Factura" style="float:right;margin: 10px">
-            <p><?php echo "El precio total de su compra es de: " . $precioTotal . "€ muchas gracias."?></p>
+            <button type="button" id="factura" name="factura" onclick="mostrarFactura()">Resumen y Pagar</button>
+
+            <div id="resumenCompra" style="display:none;">
+                <h1>Resumen de su compra</h1>
+                <p style="font-size:20px;"><?php for ($i = 0; $i < count($calucalarNombres); $i++) {
+                                                echo "Usted se lleva: <strong>" . $calucalarNombres[$i]['nombre'] . "</strong>";
+                                                print_r("<br>");
+                                            } ?> </p>
+                <p style="font-size:20px;"><?php echo "Usted se lleva una cantidad de: <strong>" . $productosTotal . "</strong> productos" ?></p>
+                <p style="font-size:20px;"><?php echo "El precio total de su compra es de: <strong>" . $precioTotal . "€</strong>" ?></p>
+                <input type="submit" id="pagar" name="pagar" value="Pagar">
+            </div>
         </div>
+
     </form>
-
-
+    <script type="text/javascript" src="js/funciones.js"></script>
 </body>
 
 </html>
