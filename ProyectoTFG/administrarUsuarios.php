@@ -38,18 +38,21 @@
     echo '</pre>';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-        for ($i = 0; $i < count($datosUsuarios); $i++) {
-            if (isset($_POST["eliminarUsuario$i"])) {
-                //$conexion->eliminarCuenta($_POST["id_usuario$i"]);
-                //header("location:areaAdministrador.php");
-                echo $_POST["id_usuario$i"];
-            }
-        }
-
         echo "<pre>";
         print_r($_POST);
         echo "</pre>";
+
+        if (isset($_POST['editarUsuario'])) {
+            $conexion->modificarRegistroAdmin($_POST['nombre'], $_POST['apellidos'], $_POST['email'], $_POST['usuario'], $_POST['id_usuario']);
+            header("location:administrarUsuarios.php");
+        }
+
+        if (isset($_POST['eliminarUsuario'])) {
+            $conexion->eliminarCuenta($_POST['id_usuario2']);
+            $conexion->incrementarTablaRegistro();
+            header("location:administrarUsuarios.php");
+        }
+        
     }
 
     ?>
@@ -117,55 +120,136 @@
 
 
     <!--TABLA USUARIOS--->
-    <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" style="margin-top: 100px;">
-        <div class="container" id="usuarios" style="margin-top: 10px;padding-bottom: 100px;">
-            <h1 style="justify-content:center;text-align:center">TABLA USUARIOS</h1>
-            <table id="tablax" class="table">
-                <thead class="text-center">
-                    <tr>
-                        <th style="background-color: #ECECEC;">Id</th>
-                        <th style="background-color: #ECECEC;">Nombre</th>
-                        <th style="background-color: #ECECEC;">Apellidos</th>
-                        <th style="background-color: #ECECEC;">Email</th>
-                        <th style="background-color: #ECECEC;">Usuario</th>
-                        <th style="background-color: #ECECEC;">Última Sesión</th>
-                        <th style="background-color: #ECECEC;">Fecha Alta</th>
-                        <th style="background-color: #ECECEC;">Editar</th>
-                        <th style="background-color: #ECECEC;">Borrar</th>
-                    </tr>
-                </thead>
-                <tbody class="text-center">
-                    <?php
-                    for ($i = 0; $i < count($datosUsuarios); $i++) {
-                        echo "<tr>";
-                        echo "<td> <input readonly type = 'text' name = 'id_usuario$i' style = 'text-align: center; border: 0; width: 50px; background-color: white' value='" . $datosUsuarios[$i]['id_usuario'] . "'</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['nombre'] . "</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['apellidos'] . "</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['email'] . "</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['usuario'] . "</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['fecha'] . "</td>";
-                        echo "<td>"  . $datosUsuarios[$i]['fecha_alta'] . "</td>";
-                        if ($datosUsuarios[$i]['id_usuario'] == 1) {
-                            echo "<td><button disabled id='modificar" . $i . "' name='modificar" . $i . "' class='btn btn-warning'><i class='fa fa-fw fa-pen'></i></button></td>";
-                        } else {
-                            echo "<td><button id='modificar" . $i . "' name='modificar" . $i . "' class='btn btn-warning'><i class='fa fa-fw fa-pen'></i></button></td>";
-                        }
-                        echo "</td>";
-                        if ($datosUsuarios[$i]['id_usuario'] == 1) {
-                            echo "<td><input disabled type = 'submit' id='eliminarUsuario" . $i . "' name='eliminarUsuario" . $i . "' value = 'Eliminar'/></td>";
-                        } else {
-                            echo "<td><input type = 'submit' id='eliminarUsuario" . $i . "' name='eliminarUsuario" . $i . "' value = 'Eliminar'/></td>";
-                        }
-                        echo "</td>";
-
-                        echo "</tr>";
+    <div class="container" id="usuarios" style="margin-top: 10px;padding-bottom: 100px;">
+        <h1 style="justify-content:center;text-align:center">TABLA USUARIOS</h1>
+        <table id="tablaUsuarios" class="table">
+            <thead class="text-center">
+                <tr>
+                    <th style="background-color: #ECECEC;">Id</th>
+                    <th style="background-color: #ECECEC;">Nombre</th>
+                    <th style="background-color: #ECECEC;">Apellidos</th>
+                    <th style="background-color: #ECECEC;">Email</th>
+                    <th style="background-color: #ECECEC;">Usuario</th>
+                    <th style="background-color: #ECECEC;">Última Sesión</th>
+                    <th style="background-color: #ECECEC;">Fecha Alta</th>
+                    <th style="background-color: #ECECEC;">Editar</th>
+                    <th style="background-color: #ECECEC;">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <?php
+                for ($i = 0; $i < count($datosUsuarios); $i++) {
+                    echo "<tr>";
+                    echo "<td>"  . $datosUsuarios[$i]['id_usuario'] . "</td>";
+                    echo "<td>"  . $datosUsuarios[$i]['nombre'] . "</td>";
+                    echo "<td>"  . $datosUsuarios[$i]['apellidos'] . "</td>";
+                    echo "<td>"  . $datosUsuarios[$i]['email'] . "</td>";
+                    echo "<td>"  . $datosUsuarios[$i]['usuario'] . "</td>";
+                    echo "<td>"  . $datosUsuarios[$i]['fecha'] . "</td>";
+                    echo "<td>"  . $datosUsuarios[$i]['fecha_alta'] . "</td>";
+                    if ($datosUsuarios[$i]['usuario'] == "MiguelMB") {
+                        echo "<td><button disabled class='btn btn-warning btnEditarUsuario'><i class='fa fa-fw fa-pen'></i></button></td>";
+                    } else {
+                        echo "<td><button class='btn btn-warning btnEditarUsuario'><i class='fa fa-fw fa-pen'></i></button></td>";
                     }
-                    ?>
-                </tbody>
-            </table>
+                    echo "</td>";
+                    if ($datosUsuarios[$i]['usuario'] == "MiguelMB") {
+                        echo "<td><button disabled class='btn btn-danger btnBorrarUsuario'><i class='fa fa-fw fa-trash'></i></button></td>";
+                    } else {
+                        echo "<td><button class='btn btn-danger btnBorrarUsuario'><i class='fa fa-fw fa-trash'></i></button></td>";
+                    }
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <!--FIN TABLA USUARIOS -->
+
+    <!--MODAL PARA MODFICAR-->
+    <form id="#" autocomplete="off" class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+        <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header" style="background-color: #0d6efd; color: white;">
+                        <h4 class="modal-title">Usuarios</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="container">
+                        <!--FORMULARIO-->
+                        <div class="m-0 row justify-content-center align-items-center">
+                            <div class="form-group">
+                                <h3><strong>EDITAR USUARIO</strong></h3>
+                                <br>
+                                <label for="id_usuario">Id Usuario</label>
+                                <input type="text" class="form-control" name="id_usuario" id="id_usuario" readonly>
+                                <label for="nombre">Nombre</label>
+                                <input type="text" class="form-control" name="nombre" id="nombre">
+                                <label for="apellidos">Apellidos</label>
+                                <input type="text" class="form-control" name="apellidos" id="apellidos">
+                                <label for="email">Email</label> <br>
+                                <input type="text" class="form-control" name="email" id="email">
+                                <label for="usuario">Usuario</label>
+                                <input type="text" class="form-control" name="usuario" id="usuario">
+                            </div>
+                        </div>
+                        <!--FIN FORMULARIO-->
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                        <input type="submit" id="editarUsuario" name="editarUsuario" class="btn btn-success" value="Guardar Cambios">
+                    </div>
+                </div>
+            </div>
         </div>
-        <!--FIN TABLA USUARIOS -->
     </form>
+
+
+
+    <!--MODAL PARA ELIMINAR-->
+    <form id="#" autocomplete="off" class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+        <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post">
+                        <!-- Modal Header -->
+                        <div class="modal-header" style="background-color: #0d6efd; color: white;">
+                            <h4 class="modal-title">Eliminar</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="container">
+                            <!--FORMULARIO-->
+                            <div class="m-0 row justify-content-center align-items-center">
+                                <div class="form-group">
+                                    <h3><strong>ELIMINAR USUARIO</strong></h3>
+                                    <strong><p style="font-size:17px">¿Estas seguro de querer eliminar permanentemente este usuario?</p></strong>
+                                    <br>
+                                    <label for="id_usuario2">Id Usuario</label>
+                                    <input type="text" class="form-control" name="id_usuario2" id="id_usuario2" readonly>
+                                    <label for="email2">Email</label>
+                                    <input type="text" class="form-control" name="email2" id="email2" readonly>
+                                    <label for="usuario2">Usuario</label>
+                                    <input type="text" class="form-control" name="usuario2" id="usuario2" readonly>
+                                </div>
+                            </div>
+                            <!--FIN FORMULARIO-->
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <input type="submit" id="eliminarUsuario" name="eliminarUsuario" class="btn btn-success" value="Aceptar">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <!-- DATATABLES -->

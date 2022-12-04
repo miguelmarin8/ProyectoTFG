@@ -149,10 +149,31 @@ class Singleton
         }
     }
 
+    public function modificarRegistroAdmin($nombre, $apellidos, $email, $usuario,$id_usu)
+    {
+        $consulta = $this->con->prepare("UPDATE registro SET nombre = ?, apellidos = ?, email = ? , usuario = ? WHERE id_usuario = ?");
+        $consulta->bindparam(1, $nombre);
+        $consulta->bindparam(2, $apellidos);
+        $consulta->bindparam(3, $email);
+        $consulta->bindparam(4, $usuario);
+        $consulta->bindparam(5, $id_usu);
+        if ($consulta->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function eliminarCuenta($id_usu)
     {
         $consulta = $this->con->prepare("DELETE FROM registro where id_usuario = ?");
         $consulta->bindparam(1, $id_usu);
+        $consulta->execute();
+    }
+
+    public function incrementarTablaRegistro()
+    {
+        $consulta = $this->con->prepare("ALTER TABLE registro AUTO_INCREMENT = 1");
         $consulta->execute();
     }
 
@@ -242,6 +263,19 @@ class Singleton
     public function eliminarCarritoEntero()
     {
         $consulta = $this->con->prepare("DELETE FROM carrito");
+        $consulta->execute();
+    }
+
+    public function eliminarProducto($id)
+    {
+        $consulta = $this->con->prepare("DELETE FROM producto WHERE id_registro = ?");
+        $consulta->bindparam(1, $id);
+        $consulta->execute();
+    }
+
+    public function incrementarTablaProducto()
+    {
+        $consulta = $this->con->prepare("ALTER TABLE producto AUTO_INCREMENT = 1");
         $consulta->execute();
     }
 }
