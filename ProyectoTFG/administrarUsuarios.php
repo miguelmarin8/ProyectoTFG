@@ -38,9 +38,10 @@
     echo '</pre>';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        echo "<pre>";
+        
+        /*echo "<pre>";
         print_r($_POST);
-        echo "</pre>";
+        echo "</pre>";*/
 
         if (isset($_POST['editarUsuario'])) {
             $conexion->modificarRegistroAdmin($_POST['nombre'], $_POST['apellidos'], $_POST['email'], $_POST['usuario'], $_POST['id_usuario']);

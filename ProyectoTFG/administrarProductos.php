@@ -2,7 +2,6 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +10,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="css/estilos.css">
@@ -42,14 +40,44 @@
     include_once "otros/filtrado.php";
     $conexion = Singleton::singleton();
     $datosProductos = $conexion->tablaProductos();
+
     echo '<pre>';
     print_r($_SESSION['usuario']);
     echo '</pre>';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
+
+
+        if (isset($_POST['editarProducto'])) {
+            if ($_POST['id_tallaP'] == "XXS") {
+                $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 1, $_POST['existenciasP'], $_POST['id_registroP']);
+                header("location:administrarProductos.php");
+            } elseif ($_POST['id_tallaP'] == "XS") {
+                $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 2, $_POST['existenciasP'], $_POST['id_registroP']);
+                header("location:administrarProductos.php");
+            } elseif ($_POST['id_tallaP'] == "S") {
+                $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 3, $_POST['existenciasP'], $_POST['id_registroP']);
+                header("location:administrarProductos.php");
+            } elseif ($_POST['id_tallaP'] == "M") {
+                $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 4, $_POST['existenciasP'], $_POST['id_registroP']);
+                header("location:administrarProductos.php");
+            } elseif ($_POST['id_tallaP'] == "L") {
+                $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 5, $_POST['existenciasP'], $_POST['id_registroP']);
+                header("location:administrarProductos.php");
+            } elseif ($_POST['id_tallaP'] == "XL") {
+                $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 6, $_POST['existenciasP'], $_POST['id_registroP']);
+                header("location:administrarProductos.php");
+            } else {
+                $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 7, $_POST['existenciasP'], $_POST['id_registroP']);
+                header("location:administrarProductos.php");
+            }
+        }
+
+        if (isset($_POST['eliminarProducto'])) {
+            $conexion->eliminarProducto($_POST['id_registroP2']);
+            $conexion->incrementarTablaProducto();
+            header("location:administrarProductos.php");
+        }
 
         if (isset($_POST["guardarProducto"])) {
             $id_producto = $_POST['id_producto'];
@@ -126,10 +154,11 @@
         </div>
     </nav>
     <!-- FIN MENÚ -->
-    <!--TABLA USUARIOS--->
-    <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" style="margin-top: 100px;">
-        <div class="container" id="usuarios" style="margin-top: 10px;padding-bottom: 100px;">
-            <h1 style="justify-content:center;text-align:center">TABLA PRODUCTOS</h1>
+
+    <!--TABLA PRODUCTOS--->
+    <div class="container" id="productos" style="margin-top: 50px;padding-bottom: 100px;">
+        <h1 style="justify-content:center;text-align:center">TABLA PRODUCTOS</h1>
+        <div class="row">
             <div class="container" style="padding-bottom:30px">
                 <div class="row">
                     <div class="col-lg-12">
@@ -137,59 +166,59 @@
                     </div>
                 </div>
             </div>
-            <table id="tablax" class="table">
-                <thead class="text-center">
-                    <tr>
-                        <th style="background-color: #ECECEC;">Id Registro</th>
-                        <th style="background-color: #ECECEC;">Id Producto</th>
-                        <th style="background-color: #ECECEC;">Nombre</th>
-                        <th style="background-color: #ECECEC;">Precio</th>
-                        <th style="background-color: #ECECEC;">Talla</th>
-                        <th style="background-color: #ECECEC;">Existencias</th>
-                        <th style="background-color: #ECECEC;">Imagen</th>
-                        <th style="background-color: #ECECEC;">Editar</th>
-                        <th style="background-color: #ECECEC;">Borrar</th>
-                    </tr>
-                </thead>
-                <tbody class="text-center">
-                    <?php
-                    for ($i = 0; $i < count($datosProductos); $i++) {
-                        echo "<tr>";
-                        echo "<td> <input readonly type = 'text' name = 'id_registro$i' style = 'text-align: center; border: 0; width: 50px; background-color: white' value='" . $datosProductos[$i]['id_registro'] . "'</td>";
-                        echo "<td>"  . $datosProductos[$i]['id_producto'] . "</td>";
-                        echo "<td>"  . $datosProductos[$i]['nombre'] . "</td>";
-                        echo "<td>"  . $datosProductos[$i]['precio'] . "</td>";
-                        echo "<td>";
-                        if ($datosProductos[$i]['id_talla'] == 1) {
-                            echo "XXS";
-                        } elseif ($datosProductos[$i]['id_talla'] == 2) {
-                            echo "XS";
-                        } elseif ($datosProductos[$i]['id_talla'] == 3) {
-                            echo "S";
-                        } elseif ($datosProductos[$i]['id_talla'] == 4) {
-                            echo "M";
-                        } elseif ($datosProductos[$i]['id_talla'] == 5) {
-                            echo "L";
-                        } elseif ($datosProductos[$i]['id_talla'] == 6) {
-                            echo "XL";
-                        } else {
-                            echo "XXL";
-                        }
-                        echo "</td>";
-                        echo "<td>"  . $datosProductos[$i]['existencias'] . "</td>";
-                        echo "<td>"  . '<img style = "max-width: 90px" src = "' . $datosProductos[$i]['imagen'] . '"/>' . "</td>";
-                        echo "<td><input type = 'submit' id='modificarProducto" . $i . "' name='modificarProducto" . $i . "' value = 'Modificar'/></td>";
-                        echo "<td><input type = 'submit' id='eliminarProducto" . $i . "' name='eliminarProducto" . $i . "' value = 'Eliminar'/></td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
         </div>
-        <!--FIN TABLA USUARIOS -->
-    </form>
+        <table id="tablaProductos" class="table">
+            <thead class="text-center">
+                <tr>
+                    <th style="background-color: #ECECEC;">Id Registro</th>
+                    <th style="background-color: #ECECEC;">Id Producto</th>
+                    <th style="background-color: #ECECEC;">Nombre</th>
+                    <th style="background-color: #ECECEC;">Precio</th>
+                    <th style="background-color: #ECECEC;">Talla</th>
+                    <th style="background-color: #ECECEC;">Existencias</th>
+                    <th style="background-color: #ECECEC;">Imagen</th>
+                    <th style="background-color: #ECECEC;">Editar</th>
+                    <th style="background-color: #ECECEC;">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <?php
+                for ($i = 0; $i < count($datosProductos); $i++) {
+                    echo "<tr>";
+                    echo "<td>"  . $datosProductos[$i]['id_registro'] . "</td>";
+                    echo "<td>"  . $datosProductos[$i]['id_producto'] . "</td>";
+                    echo "<td>"  . $datosProductos[$i]['nombre'] . "</td>";
+                    echo "<td>"  . $datosProductos[$i]['precio'] . "</td>";
+                    echo "<td>";
+                    if ($datosProductos[$i]['id_talla'] == 1) {
+                        echo "XXS";
+                    } elseif ($datosProductos[$i]['id_talla'] == 2) {
+                        echo "XS";
+                    } elseif ($datosProductos[$i]['id_talla'] == 3) {
+                        echo "S";
+                    } elseif ($datosProductos[$i]['id_talla'] == 4) {
+                        echo "M";
+                    } elseif ($datosProductos[$i]['id_talla'] == 5) {
+                        echo "L";
+                    } elseif ($datosProductos[$i]['id_talla'] == 6) {
+                        echo "XL";
+                    } else {
+                        echo "XXL";
+                    }
+                    "</td>";
+                    echo "<td>"  . $datosProductos[$i]['existencias'] . "</td>";
+                    echo "<td>"  . '<img style = "max-width: 90px" src = "' . $datosProductos[$i]['imagen'] . '"/>' . "</td>";
+                    echo "<td><button class='btn btn-warning btnEditarProducto'><i class='fa fa-fw fa-pen'></i></button></td>";
+                    echo "<td><button class='btn btn-danger btnBorrarProducto'><i class='fa fa-fw fa-trash'></i></button></td>";
+                    echo "</tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <!--FIN TABLA PRODUCTOS -->
 
-    <!-- MODAL NUEVO ROL -->
+    <!-- MODAL NUEVO PRODUCTO -->
     <form id="#" autocomplete="off" class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
         <div class="modal" id="myModal">
             <div class="modal-dialog">
@@ -239,16 +268,102 @@
                 </div>
             </div>
         </div>
-        <form id="#" autocomplete="off" class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
-        </form>
+    </form>
 
-        <!-- JQUERY -->
-        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-        <!-- DATATABLES -->
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-        <!-- BOOTSTRAP -->
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-        <script type="text/javascript" src="js/funciones.js"></script>
+    <!--MODAL PARA MODFICAR-->
+    <form id="#" autocomplete="off" class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+        <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header" style="background-color: #0d6efd; color: white;">
+                        <h4 class="modal-title">Productos</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="container">
+                        <!--FORMULARIO-->
+                        <div class="m-0 row justify-content-center align-items-center">
+                            <div class="form-group">
+                                <h3><strong>EDITAR PRODUCTO</strong></h3>
+                                <br>
+                                <label for="id_registroP">Id Registro</label>
+                                <input type="text" class="form-control" name="id_registroP" id="id_registroP" readonly>
+                                <label for="id_productoP">id Producto</label>
+                                <input type="text" class="form-control" name="id_productoP" id="id_productoP">
+                                <label for="nombreP">Nombre</label>
+                                <input type="text" class="form-control" name="nombreP" id="nombreP">
+                                <label for="precioP">Precio</label>
+                                <input type="text" class="form-control" name="precioP" id="precioP">
+                                <label for="id_tallaP">Talla</label>
+                                <input type="text" class="form-control" name="id_tallaP" id="id_tallaP">
+                                <label for="existenciasP">Existencias</label>
+                                <input type="text" class="form-control" name="existenciasP" id="existenciasP">
+                            </div>
+                        </div>
+                        <!--FIN FORMULARIO-->
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                        <input type="submit" id="editarProducto" name="editarProducto" class="btn btn-success" value="Guardar Cambios">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+    <!--MODAL PARA ELIMINAR-->
+    <form id="#" autocomplete="off" class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+        <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post">
+                        <!-- Modal Header -->
+                        <div class="modal-header" style="background-color: #0d6efd; color: white;">
+                            <h4 class="modal-title">Eliminar</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="container">
+                            <!--FORMULARIO-->
+                            <div class="m-0 row justify-content-center align-items-center">
+                                <div class="form-group">
+                                    <h3><strong>ELIMINAR PRODUCTO</strong></h3>
+                                    <strong>
+                                        <p style="font-size:17px">¿Estas seguro de querer eliminar permanentemente este producto?</p>
+                                    </strong>
+                                    <br>
+                                    <label for="id_registroP2">Id Registro</label>
+                                    <input type="text" class="form-control" name="id_registroP2" id="id_registroP2" readonly>
+                                    <label for="id_productoP2">Id Producto</label>
+                                    <input type="text" class="form-control" name="id_productoP2" id="id_productoP2" readonly>
+                                    <label for="nombreP2">Nombre</label>
+                                    <input type="text" class="form-control" name="nombreP2" id="nombreP2" readonly>
+                                    <label for="id_tallaP2">Talla</label>
+                                    <input type="text" class="form-control" name="id_tallaP2" id="id_tallaP2" readonly>
+                                </div>
+                            </div>
+                            <!--FIN FORMULARIO-->
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <input type="submit" id="eliminarProducto" name="eliminarProducto" class="btn btn-success" value="Aceptar">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <!-- DATATABLES -->
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="js/funciones.js"></script>
 </body>
 
 </html>

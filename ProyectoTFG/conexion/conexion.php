@@ -171,6 +171,8 @@ class Singleton
         $consulta->execute();
     }
 
+   
+
     public function incrementarTablaRegistro()
     {
         $consulta = $this->con->prepare("ALTER TABLE registro AUTO_INCREMENT = 1");
@@ -278,4 +280,21 @@ class Singleton
         $consulta = $this->con->prepare("ALTER TABLE producto AUTO_INCREMENT = 1");
         $consulta->execute();
     }
+
+    public function editarProducto($id_pro, $nombre, $precio, $talla,$existencias,$id_reg)
+    {
+        $consulta = $this->con->prepare("UPDATE producto SET id_producto = ?, nombre = ?, precio = ? , id_talla = ? , existencias = ? WHERE id_registro = ?");
+        $consulta->bindparam(1, $id_pro);
+        $consulta->bindparam(2, $nombre);
+        $consulta->bindparam(3, $precio);
+        $consulta->bindparam(4, $talla);
+        $consulta->bindparam(5, $existencias);
+        $consulta->bindparam(6, $id_reg);
+        if ($consulta->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

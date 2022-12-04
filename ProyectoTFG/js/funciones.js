@@ -97,24 +97,59 @@ $(document).ready(function () {
 
 //TABLA AREA ADMINISTRADOR PRODUCTOS
 
-$(document).ready(function(){
-   
-    $('#tablax').DataTable({
-          
-       "language":{
-           "lengthMenu":"Mostrar _MENU_ registros",
-           "zeroRecords":"No se encontraron resultados",
-           "info":"Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-           "infoEmpty":"Mostrando registros del 0 al 0 de un total de 0 registros",
-           "infoFiltered":"(filtrado de un total de _MAX_ registros)",
-           "sSearch":"Buscar:",
-           "oPaginate":{
-               "sFirst":"Primero",
-               "sLast":"Último",
-               "sNext":"Siguiente",
-               "sPrevious":"Anterior"
-           },
-           "sProcessing":"Procesando...",
-       }
-   });
+$(document).ready(function () {
+
+    $('#tablaProductos').DataTable({
+
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registros",
+            "zeroRecords": "No se encontraron resultados",
+            "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sSearch": "Buscar:",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "sProcessing": "Procesando...",
+        }
+    });
+
+    var fila; //capturar la fila para editar o borrar el registro
+    //BOTON EDITAR    
+    $(document).on("click", ".btnEditarProducto", function () {
+        fila = $(this).closest("tr");
+        id_registroP = parseInt(fila.find('td:eq(0)').text());
+        id_productoP = fila.find('td:eq(1)').text();
+        nombreP = fila.find('td:eq(2)').text();
+        precioP = fila.find('td:eq(3)').text();
+        tallaP = fila.find('td:eq(4)').text();
+        existenciasP = fila.find('td:eq(5)').text();
+
+        $("#id_registroP").val(id_registroP);
+        $("#id_productoP").val(id_productoP);
+        $("#nombreP").val(nombreP);
+        $("#precioP").val(precioP);
+        $("#id_tallaP").val(tallaP);
+        $("#existenciasP").val(existenciasP);
+        $("#modalEditar").modal("show");
+
+    });
+    //BOTON BORRAR
+    $(document).on("click", ".btnBorrarProducto", function () {
+        fila = $(this).closest("tr");
+        id_registroP2 = parseInt(fila.find('td:eq(0)').text());
+        id_productoP2 = fila.find('td:eq(1)').text();
+        nombreP2 = fila.find('td:eq(2)').text();
+        tallaP2 = fila.find('td:eq(4)').text();
+
+        $("#id_registroP2").val(id_registroP2);
+        $("#id_productoP2").val(id_productoP2);
+        $("#nombreP2").val(nombreP2);
+        $("#id_tallaP2").val(tallaP2);
+        $("#modalEliminar").modal("show");
+    });
 });
