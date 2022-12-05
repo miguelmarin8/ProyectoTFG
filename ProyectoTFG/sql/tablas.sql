@@ -25,15 +25,12 @@ VALUES ('XXS'), ('XS'), ('S'), ('M'), ('L'), ('XL'), ('XXL');
 
 CREATE TABLE
     `producto`(
-        `id_registro` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        `id_producto` INT NOT NULL,
+        `id_producto` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         `nombre` VARCHAR(100) NOT NULL,
-        `color` VARCHAR(10) NOT NULL,
+        `sexo` VARCHAR(10) NOT NULL,
         `precio` INT NOT NULL,
-        `id_talla` INT NOT NULL,
         `existencias` INT NOT NULL,
-        `imagen` LONGBLOB NOT NULL,
-        FOREIGN KEY (`id_talla`) REFERENCES tallas (`id_talla`)
+        `imagen` VARCHAR(50) NOT NULL
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 /*INSERT INTO producto (`id_producto`,`nombre`, `color`, `precio`,`id_talla`,`existencias`) VALUES (1,'Camiseta', 'Blanco', 7,5,800);*/

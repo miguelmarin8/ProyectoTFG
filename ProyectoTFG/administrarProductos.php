@@ -49,21 +49,7 @@
 
 
         if (isset($_POST['editarProducto'])) {
-            if ($_POST['id_tallaP'] == "XXS") {
-                $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 1, $_POST['existenciasP'], $_POST['id_registroP']);
-            } elseif ($_POST['id_tallaP'] == "XS") {
-                $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 2, $_POST['existenciasP'], $_POST['id_registroP']);
-            } elseif ($_POST['id_tallaP'] == "S") {
-                $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 3, $_POST['existenciasP'], $_POST['id_registroP']);
-            } elseif ($_POST['id_tallaP'] == "M") {
-                $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 4, $_POST['existenciasP'], $_POST['id_registroP']);
-            } elseif ($_POST['id_tallaP'] == "L") {
-                $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 5, $_POST['existenciasP'], $_POST['id_registroP']);
-            } elseif ($_POST['id_tallaP'] == "XL") {
-                $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 6, $_POST['existenciasP'], $_POST['id_registroP']);
-            } else {
-                $conexion->editarProducto($_POST['id_productoP'], $_POST['nombreP'], $_POST['precioP'], 7, $_POST['existenciasP'], $_POST['id_registroP']);
-            }
+                $conexion->editarProducto($_POST['nombreP'], $_POST['sexoP'], $_POST['precioP'], $_POST['existenciasP'], $_POST['id_productoP']);
             echo '<script>alert("Producto modificado correctamente")
             document.location=("administrarProductos.php");
             </script>';
@@ -72,25 +58,24 @@
 
 
         if (isset($_POST['eliminarProducto'])) {
-            $conexion->eliminarProducto($_POST['id_registroP2']);
+            $conexion->eliminarProducto($_POST['id_productoP2']);
             $conexion->incrementarTablaProducto();
-        
+
             echo '<script>alert("Producto eliminado correctamente")
             document.location=("administrarProductos.php");
             </script>';
         }
 
         if (isset($_POST["guardarProducto"])) {
-            $id_producto = $_POST['id_producto'];
             $nombre = $_POST['nombre'];
+            $sexo = $_POST['sexo'];
             $precio = $_POST['precio'];
-            $id_talla = $_POST['id_talla'];
             $existencias = $_POST['existencias'];
 
             $rutaenservidor = "img";
             $rutatemporal = $_FILES['imagen']['tmp_name'];
             $rutadestino = $rutaenservidor . "/" . $_FILES['imagen']['name'];
-            $insertar = $conexion->anadirProducto($id_producto, $nombre, $precio, $id_talla, $existencias, $rutadestino);
+            $insertar = $conexion->anadirProducto($nombre, $sexo, $precio,$existencias, $rutadestino);
             header("location:administrarProductos.php");
         }
     }
@@ -173,11 +158,10 @@
         <table id="tablaProductos" class="table">
             <thead class="text-center">
                 <tr>
-                    <th style="background-color: #ECECEC;">Id Registro</th>
                     <th style="background-color: #ECECEC;">Id Producto</th>
                     <th style="background-color: #ECECEC;">Nombre</th>
+                    <th style="background-color: #ECECEC;">Sexo</th>
                     <th style="background-color: #ECECEC;">Precio</th>
-                    <th style="background-color: #ECECEC;">Talla</th>
                     <th style="background-color: #ECECEC;">Existencias</th>
                     <th style="background-color: #ECECEC;">Imagen</th>
                     <th style="background-color: #ECECEC;">Editar</th>
@@ -188,29 +172,12 @@
                 <?php
                 for ($i = 0; $i < count($datosProductos); $i++) {
                     echo "<tr>";
-                    echo "<td>"  . $datosProductos[$i]['id_registro'] . "</td>";
                     echo "<td>"  . $datosProductos[$i]['id_producto'] . "</td>";
                     echo "<td>"  . $datosProductos[$i]['nombre'] . "</td>";
-                    echo "<td>"  . $datosProductos[$i]['precio'] . "</td>";
-                    echo "<td>";
-                    if ($datosProductos[$i]['id_talla'] == 1) {
-                        echo "XXS";
-                    } elseif ($datosProductos[$i]['id_talla'] == 2) {
-                        echo "XS";
-                    } elseif ($datosProductos[$i]['id_talla'] == 3) {
-                        echo "S";
-                    } elseif ($datosProductos[$i]['id_talla'] == 4) {
-                        echo "M";
-                    } elseif ($datosProductos[$i]['id_talla'] == 5) {
-                        echo "L";
-                    } elseif ($datosProductos[$i]['id_talla'] == 6) {
-                        echo "XL";
-                    } else {
-                        echo "XXL";
-                    }
-                    "</td>";
+                    echo "<td>"  . $datosProductos[$i]['sexo'] . "</td>";
+                    echo "<td>"  . $datosProductos[$i]['precio'] . "</td>";                  
                     echo "<td>"  . $datosProductos[$i]['existencias'] . "</td>";
-                    echo "<td>"  . '<img style = "max-width: 90px" src = "' . $datosProductos[$i]['imagen'] . '"/>' . "</td>";
+                    echo "<td>"  . '<img style = "max-width: 50px" src = "' . $datosProductos[$i]['imagen'] . '"/>' . "</td>";
                     echo "<td><button class='btn btn-warning btnEditarProducto'><i class='fa fa-fw fa-pen'></i></button></td>";
                     echo "<td><button class='btn btn-danger btnBorrarProducto'><i class='fa fa-fw fa-trash'></i></button></td>";
                     echo "</tr>";
@@ -238,23 +205,16 @@
                             <div class="form-group">
                                 <h3><strong>NUEVO PRODUCTO</strong></h3>
                                 <p style="color:red">*Para añadir un nuevo producto debes rellenar todos los campos*</p>
-                                <br>
-                                <label for="id_producto">Identificación Producto</label>
-                                <input type="text" class="form-control" name="id_producto" id="id_producto" value="" required>
                                 <label for="nombre">Nombre</label>
-                                <input type="text" class="form-control" name="nombre" id="nombre" value="" required>
+                                <input type="text" class="form-control" name="nombre" id="nombre" value="" required> <br>
+                                <label for="sexo">Sexo</label> <br>
+                                <select name="sexo">
+                                    <option value="Hombre">Hombre</option>
+                                    <option value="Mujer">Mujer</option>
+                                    <option value="Unisex">Unisex</option>
+                                </select> <br><br>
                                 <label for="precio">Precio</label>
                                 <input type="number" class="form-control" name="precio" id="precio" value="" required>
-                                <label for="talla">Talla</label> <br>
-                                <select name="id_talla">
-                                    <option value="1">XSS</option>
-                                    <option value="2">XS</option>
-                                    <option value="3">S</option>
-                                    <option value="4">M</option>
-                                    <option value="5">L</option>
-                                    <option value="6">XL</option>
-                                    <option value="7">XXL</option>
-                                </select> <br><br>
                                 <label for="existencias">Existencias</label>
                                 <input type="text" class="form-control" name="existencias" id="existencias" value="" required>
                                 <label for="imagen">Imagen</label>
@@ -290,16 +250,14 @@
                             <div class="form-group">
                                 <h3><strong>EDITAR PRODUCTO</strong></h3>
                                 <br>
-                                <label for="id_registroP">Id Registro</label>
-                                <input type="text" class="form-control" name="id_registroP" id="id_registroP" readonly>
                                 <label for="id_productoP">id Producto</label>
-                                <input type="text" class="form-control" name="id_productoP" id="id_productoP">
+                                <input type="text" class="form-control" name="id_productoP" id="id_productoP" readonly>
                                 <label for="nombreP">Nombre</label>
                                 <input type="text" class="form-control" name="nombreP" id="nombreP">
+                                <label for="sexoP">Sexo</label>
+                                <input type="text" class="form-control" name="sexoP" id="sexoP">
                                 <label for="precioP">Precio</label>
                                 <input type="text" class="form-control" name="precioP" id="precioP">
-                                <label for="id_tallaP">Talla</label>
-                                <input type="text" class="form-control" name="id_tallaP" id="id_tallaP">
                                 <label for="existenciasP">Existencias</label>
                                 <input type="text" class="form-control" name="existenciasP" id="existenciasP">
                             </div>
@@ -338,14 +296,10 @@
                                         <p style="font-size:17px">¿Estas seguro de querer eliminar permanentemente este producto?</p>
                                     </strong>
                                     <br>
-                                    <label for="id_registroP2">Id Registro</label>
-                                    <input type="text" class="form-control" name="id_registroP2" id="id_registroP2" readonly>
                                     <label for="id_productoP2">Id Producto</label>
                                     <input type="text" class="form-control" name="id_productoP2" id="id_productoP2" readonly>
                                     <label for="nombreP2">Nombre</label>
                                     <input type="text" class="form-control" name="nombreP2" id="nombreP2" readonly>
-                                    <label for="id_tallaP2">Talla</label>
-                                    <input type="text" class="form-control" name="id_tallaP2" id="id_tallaP2" readonly>
                                 </div>
                             </div>
                             <!--FIN FORMULARIO-->

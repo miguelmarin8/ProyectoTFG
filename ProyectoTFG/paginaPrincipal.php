@@ -25,10 +25,10 @@
     $conexion = Singleton::singleton();
     $usuario = $_SESSION['usuario'];
 
-
-    /* echo '<pre>';
-    print_r($usuario);
-    echo '</pre>';*/
+    
+    echo '<pre>';
+    print_r($_SESSION);
+    echo '</pre>';
 
 
 
@@ -57,7 +57,7 @@
                             Hombre
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Camisetas</a></li>
+                            <li><a class="dropdown-item" href="hombreCamisetas.php">Camisetas</a></li>
                             <li><a class="dropdown-item" href="#">Pantalones</a></li>
                             <li><a class="dropdown-item" href="#">Calzado</a></li>
                         </ul>
@@ -95,112 +95,208 @@
     </nav>
     <!-- FIN MENÚ -->
 
-    <div class="container" style="margin-top: 50px;">
-        <div class="row align-items-center">
-            <div class="col">
-                <div class="card text-center" style="width: 18rem;">
-                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                    Camiseta Nike
-                    <div class="card-body ">
-                        <a href="informacion.php"><button name="medicamentos" class="btn btn-light">Información</button></a>
+    <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+        <div class="container" style="margin-top: 50px;">
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                        Camiseta Nike
+                        <div class="card-body ">
+                            <button name="medicamentos" class="btn btn-light">Información</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card text-center" style="width: 18rem;">
-                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                    Camiseta Nike
-                    <div class="card-body ">
-                        <button name="medicamentos" class="btn btn-light">Información</button>
+                <div class="col">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                        Camiseta Nike
+                        <div class="card-body ">
+                            <button name="medicamentos" class="btn btn-light">Información</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card text-center" style="width: 18rem;">
-                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                    Camiseta Nike
-                    <div class="card-body ">
-                        <button name="medicamentos" class="btn btn-light">Información</button>
+                <div class="col">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                        Camiseta Nike
+                        <div class="card-body ">
+                            <button name="medicamentos" class="btn btn-light">Información</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-
-    </div>
-
-
-    <!--SEGUNDA LÍNEA-->
-    <div class="container" style="margin-top: 100px;">
-        <div class="row align-items-center">
-            <div class="col">
-                <div class="card text-center" style="width: 18rem;">
-                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                    Camiseta Nike
-                    <div class="card-body ">
-                        <button name="medicamentos" class="btn btn-light">Información</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card text-center" style="width: 18rem;">
-                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                    Camiseta Nike
-                    <div class="card-body ">
-                        <button name="medicamentos" class="btn btn-light">Información</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card text-center" style="width: 18rem;">
-                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                    Camiseta Nike
-                    <div class="card-body ">
-                        <button name="medicamentos" class="btn btn-light">Información</button>
-                    </div>
-                </div>
             </div>
 
         </div>
 
-    </div>
 
-    <!--TERCERA LÍNEA-->
-    <div class="container" style="margin-top: 100px;">
-        <div class="row align-items-center">
-            <div class="col">
-                <div class="card text-center" style="width: 18rem;">
-                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                    Camiseta Nike
-                    <div class="card-body ">
-                        <button name="medicamentos" class="btn btn-light">Información</button>
+        <!--SEGUNDA LÍNEA-->
+        <div class="container" style="margin-top: 100px;">
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                        Camiseta Nike
+                        <div class="card-body ">
+                            <button name="medicamentos" class="btn btn-light">Información</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card text-center" style="width: 18rem;">
-                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                    Camiseta Nike
-                    <div class="card-body ">
-                        <button name="medicamentos" class="btn btn-light">Información</button>
+                <div class="col">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                        Camiseta Nike
+                        <div class="card-body ">
+                            <button name="medicamentos" class="btn btn-light">Información</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card text-center" style="width: 18rem;">
-                    <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                    Camiseta Nike
-                    <div class="card-body ">
-                        <button name="medicamentos" class="btn btn-light">Información</button>
+                <div class="col">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                        Camiseta Nike
+                        <div class="card-body ">
+                            <button name="medicamentos" class="btn btn-light">Información</button>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
         </div>
 
-    </div>
+        <!--TERCERA LÍNEA-->
+        <div class="container" style="margin-top: 100px;">
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                        Camiseta Nike
+                        <div class="card-body ">
+                            <button name="medicamentos" class="btn btn-light">Información</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                        Camiseta Nike
+                        <div class="card-body ">
+                            <button name="medicamentos" class="btn btn-light">Información</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
+                        Camiseta Nike
+                        <div class="card-body ">
+                            <button name="medicamentos" class="btn btn-light">Información</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
 
 
+    <!-- Footer -->
+    <footer class="text-center text-muted" style="background-color: rgba(0, 0, 0, 0.025); margin-top:100px;">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            <!-- Left -->
+            <div class="me-5 d-none d-lg-block">
+                <span>Get connected with us on social networks:</span>
+            </div>
+            <!-- Left -->
+
+            <!-- Right -->
+            <div>
+                <a target="_blank" href="https://es-es.facebook.com/" class="me-4 link-secondary">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a target="_blank" href="https://twitter.com/?lang=es" class="me-4 link-secondary">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a target="_blank" href="https://www.google.es/" class="me-4 link-secondary">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a target="_blank" href="https://www.instagram.com/" class="me-4 link-secondary">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3 text-secondary"></i>Company name
+                        </h6>
+                        <p>
+                            Here you can use rows and columns to organize your footer content. Lorem ipsum
+                            dolor sit amet, consectetur adipisicing elit.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Products
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Angular</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">React</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Vue</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Laravel</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <p><i class="fas fa-home me-3 text-secondary"></i> New York, NY 10012, US</p>
+                        <p>
+                            <i class="fas fa-envelope me-3 text-secondary"></i>
+                            info@example.com
+                        </p>
+                        <p><i class="fas fa-phone me-3 text-secondary"></i> + 01 234 567 88</p>
+                        <p><i class="fas fa-print me-3 text-secondary"></i> + 01 234 567 89</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+            © 2021 Copyright:
+            <a class="text-reset fw-bold" href="">MR.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
 </body>
 
 </html>

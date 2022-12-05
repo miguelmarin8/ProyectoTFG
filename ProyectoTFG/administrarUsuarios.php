@@ -55,7 +55,7 @@
             $conexion->incrementarTablaRegistro();
 
             echo '<script>alert("Usuario eliminado correctamente")
-            document.location=("administrarProductos.php");
+            document.location=("administrarUsuarios.php");
             </script>';
         }
     }

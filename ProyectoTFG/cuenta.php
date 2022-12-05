@@ -76,6 +76,7 @@
 
             $id_usuario = filtrado($_POST['id_usuario']);
             $conexion->eliminarCuenta($id_usuario);
+            $conexion->incrementarTablaRegistro();
             echo '<script>alert("Has sido dado de baja. Muchas gracias")
             document.location=("inicio.php");
             </script>';

@@ -122,18 +122,16 @@ $(document).ready(function () {
     //BOTON EDITAR    
     $(document).on("click", ".btnEditarProducto", function () {
         fila = $(this).closest("tr");
-        id_registroP = parseInt(fila.find('td:eq(0)').text());
-        id_productoP = fila.find('td:eq(1)').text();
-        nombreP = fila.find('td:eq(2)').text();
+        id_productoP = parseInt(fila.find('td:eq(0)').text());
+        nombreP = fila.find('td:eq(1)').text();
+        sexoP = fila.find('td:eq(2)').text();
         precioP = fila.find('td:eq(3)').text();
-        tallaP = fila.find('td:eq(4)').text();
-        existenciasP = fila.find('td:eq(5)').text();
+        existenciasP = fila.find('td:eq(4)').text();
 
-        $("#id_registroP").val(id_registroP);
         $("#id_productoP").val(id_productoP);
         $("#nombreP").val(nombreP);
+        $("#sexoP").val(sexoP);
         $("#precioP").val(precioP);
-        $("#id_tallaP").val(tallaP);
         $("#existenciasP").val(existenciasP);
         $("#modalEditar").modal("show");
 
@@ -141,15 +139,11 @@ $(document).ready(function () {
     //BOTON BORRAR
     $(document).on("click", ".btnBorrarProducto", function () {
         fila = $(this).closest("tr");
-        id_registroP2 = parseInt(fila.find('td:eq(0)').text());
-        id_productoP2 = fila.find('td:eq(1)').text();
-        nombreP2 = fila.find('td:eq(2)').text();
-        tallaP2 = fila.find('td:eq(4)').text();
+        id_productoP2 = parseInt(fila.find('td:eq(0)').text());
+        nombreP2 = fila.find('td:eq(1)').text();
 
-        $("#id_registroP2").val(id_registroP2);
         $("#id_productoP2").val(id_productoP2);
         $("#nombreP2").val(nombreP2);
-        $("#id_tallaP2").val(tallaP2);
         $("#modalEliminar").modal("show");
     });
 });

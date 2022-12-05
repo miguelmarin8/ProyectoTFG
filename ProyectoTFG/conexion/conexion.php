@@ -41,15 +41,14 @@ class Singleton
         $consulta->execute();
     }
 
-    public function anadirProducto($id,$nombre,$precio,$talla,$existencias,$imagen)
+    public function anadirProducto($nombre, $sexo, $precio, $existencias, $imagen)
     {
-        $consulta = $this->con->prepare("INSERT INTO producto (id_producto,nombre,precio,id_talla,existencias,imagen) values (?,?,?,?,?,?)");
-        $consulta->bindparam(1, $id);
-        $consulta->bindparam(2, $nombre);
+        $consulta = $this->con->prepare("INSERT INTO producto (nombre,sexo,precio,existencias,imagen) values (?,?,?,?,?)");
+        $consulta->bindparam(1, $nombre);
+        $consulta->bindparam(2, $sexo);
         $consulta->bindparam(3, $precio);
-        $consulta->bindparam(4, $talla);
-        $consulta->bindparam(5, $existencias);
-        $consulta->bindparam(6, $imagen);
+        $consulta->bindparam(4, $existencias);
+        $consulta->bindparam(5, $imagen);
         $consulta->execute();
     }
 
@@ -149,7 +148,7 @@ class Singleton
         }
     }
 
-    public function modificarRegistroAdmin($nombre, $apellidos, $email, $usuario,$id_usu)
+    public function modificarRegistroAdmin($nombre, $apellidos, $email, $usuario, $id_usu)
     {
         $consulta = $this->con->prepare("UPDATE registro SET nombre = ?, apellidos = ?, email = ? , usuario = ? WHERE id_usuario = ?");
         $consulta->bindparam(1, $nombre);
@@ -171,7 +170,7 @@ class Singleton
         $consulta->execute();
     }
 
-   
+
 
     public function incrementarTablaRegistro()
     {
@@ -214,18 +213,18 @@ class Singleton
 
     public function seleccionarProducto($id)
     {
-        $consulta = $this->con->prepare("SELECT id_producto,nombre,precio,id_talla,existencias FROM producto WHERE id_producto = ?");
+        $consulta = $this->con->prepare("SELECT id_producto,nombre,sexo,precio,existencias,imagen FROM producto WHERE id_producto = ?");
         $consulta->bindParam(1, $id);
         $consulta->execute();
         if ($consulta->execute()) {
-            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            $datos = $consulta->fetch(PDO::FETCH_ASSOC);
             return $datos;
         } else {
             return false;
         }
     }
 
-    public function añadirCarrito($id,$nombre,$precio,$existencias,$talla,$color)
+    public function añadirCarrito($id, $nombre, $precio, $existencias, $talla, $color)
     {
         $consulta = $this->con->prepare("INSERT INTO carrito (id_producto,nombre,precio,existencias,id_talla,color) values (?,?,?,?,?,?)");
         $consulta->bindparam(1, $id);
@@ -269,7 +268,7 @@ class Singleton
 
     public function eliminarProducto($id)
     {
-        $consulta = $this->con->prepare("DELETE FROM producto WHERE id_registro = ?");
+        $consulta = $this->con->prepare("DELETE FROM producto WHERE id_producto = ?");
         $consulta->bindparam(1, $id);
         $consulta->execute();
     }
@@ -286,15 +285,14 @@ class Singleton
         $consulta->execute();
     }
 
-    public function editarProducto($id_pro, $nombre, $precio, $talla,$existencias,$id_reg)
+    public function editarProducto($nombre, $sexo, $precio, $existencias, $id_pro)
     {
-        $consulta = $this->con->prepare("UPDATE producto SET id_producto = ?, nombre = ?, precio = ? , id_talla = ? , existencias = ? WHERE id_registro = ?");
-        $consulta->bindparam(1, $id_pro);
-        $consulta->bindparam(2, $nombre);
+        $consulta = $this->con->prepare("UPDATE producto SET  nombre = ?, sexo = ?, precio = ? , existencias = ? WHERE id_producto = ?");
+        $consulta->bindparam(1, $nombre);
+        $consulta->bindparam(2, $sexo);
         $consulta->bindparam(3, $precio);
-        $consulta->bindparam(4, $talla);
-        $consulta->bindparam(5, $existencias);
-        $consulta->bindparam(6, $id_reg);
+        $consulta->bindparam(4, $existencias);
+        $consulta->bindparam(5, $id_pro);
         if ($consulta->execute()) {
             return true;
         } else {
@@ -326,4 +324,17 @@ class Singleton
         }
     }
 
+
+    public function seleccionarCamisetaHombre()
+    {
+        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE sexo = 'hombre'");
+        $consulta->execute();
+
+        if ($consulta->execute()) {
+            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $datos;
+        } else {
+            return false;
+        }
+    }
 }
