@@ -49,7 +49,7 @@
 
 
         if (isset($_POST['editarProducto'])) {
-                $conexion->editarProducto($_POST['nombreP'], $_POST['sexoP'], $_POST['precioP'], $_POST['existenciasP'], $_POST['id_productoP']);
+            $conexion->editarProducto($_POST['nombreP'], $_POST['sexoP'], $_POST['precioP'], $_POST['existenciasP'], $_POST['id_productoP']);
             echo '<script>alert("Producto modificado correctamente")
             document.location=("administrarProductos.php");
             </script>';
@@ -58,8 +58,11 @@
 
 
         if (isset($_POST['eliminarProducto'])) {
+            $conexion->eliminarProductoEvaluaciones($_POST['id_productoP2']);
             $conexion->eliminarProducto($_POST['id_productoP2']);
             $conexion->incrementarTablaProducto();
+            $conexion->incrementarTablaEvaluaciones();
+
 
             echo '<script>alert("Producto eliminado correctamente")
             document.location=("administrarProductos.php");
@@ -75,7 +78,7 @@
             $rutaenservidor = "img";
             $rutatemporal = $_FILES['imagen']['tmp_name'];
             $rutadestino = $rutaenservidor . "/" . $_FILES['imagen']['name'];
-            $insertar = $conexion->anadirProducto($nombre, $sexo, $precio,$existencias, $rutadestino);
+            $insertar = $conexion->anadirProducto($nombre, $sexo, $precio, $existencias, $rutadestino);
             header("location:administrarProductos.php");
         }
     }
@@ -175,7 +178,7 @@
                     echo "<td>"  . $datosProductos[$i]['id_producto'] . "</td>";
                     echo "<td>"  . $datosProductos[$i]['nombre'] . "</td>";
                     echo "<td>"  . $datosProductos[$i]['sexo'] . "</td>";
-                    echo "<td>"  . $datosProductos[$i]['precio'] . "</td>";                  
+                    echo "<td>"  . $datosProductos[$i]['precio'] . "</td>";
                     echo "<td>"  . $datosProductos[$i]['existencias'] . "</td>";
                     echo "<td>"  . '<img style = "max-width: 50px" src = "' . $datosProductos[$i]['imagen'] . '"/>' . "</td>";
                     echo "<td><button class='btn btn-warning btnEditarProducto'><i class='fa fa-fw fa-pen'></i></button></td>";

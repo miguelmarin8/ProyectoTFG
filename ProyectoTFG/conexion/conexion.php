@@ -133,6 +133,17 @@ class Singleton
         }
     }
 
+    public function tablaOpiniones()
+    {
+        $consulta = $this->con->prepare("SELECT * FROM evaluaciones");
+        $consulta->execute();
+        if ($consulta->execute()) {
+            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $datos;
+        } else {
+            return false;
+        }
+    }
 
     public function modificar_registro($nombre, $apellidos, $clave, $id_usu)
     {
@@ -170,7 +181,29 @@ class Singleton
         $consulta->execute();
     }
 
+    public function eliminarUsuarioEvaluaciones($id_usu)
+    {
+        $consulta = $this->con->prepare("DELETE FROM evaluaciones where id_usuario = ?");
+        $consulta->bindparam(1, $id_usu);
+        $consulta->execute();
+        if ($consulta->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    public function eliminarProductoEvaluaciones($id_usu)
+    {
+        $consulta = $this->con->prepare("DELETE FROM evaluaciones where id_producto = ?");
+        $consulta->bindparam(1, $id_usu);
+        $consulta->execute();
+        if ($consulta->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function incrementarTablaRegistro()
     {
@@ -263,6 +296,13 @@ class Singleton
     public function eliminarCarritoEntero()
     {
         $consulta = $this->con->prepare("DELETE FROM carrito");
+        $consulta->execute();
+    }
+
+    public function eliminarOpinion($id)
+    {
+        $consulta = $this->con->prepare("DELETE FROM evaluaciones WHERE id = ?");
+        $consulta->bindparam(1, $id);
         $consulta->execute();
     }
 

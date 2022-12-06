@@ -24,7 +24,7 @@
     include_once "conexion/conexion.php";
     include_once "otros/filtrado.php";
     $conexion = Singleton::singleton();
-    $datosUsuarios = $conexion->tablaUsuarios();
+    $datosOpiniones = $conexion->tablaUsuarios();
 
     /* echo '<pre>';
     print_r($_SESSION['usuario']);
@@ -55,7 +55,7 @@
                             Hombre
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Camisetas</a></li>
+                            <li><a class="dropdown-item" href="hombreCamisetas.php">Camisetas</a></li>
                             <li><a class="dropdown-item" href="#">Pantalones</a></li>
                             <li><a class="dropdown-item" href="#">Calzado</a></li>
                         </ul>
@@ -98,11 +98,11 @@
     <!--TARJETAS--->
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" style="margin-top: 100px;">
         <div class="container" style="margin-top: 50px; padding-bottom: 50px;">
-            <div class="row align-items-center">
+        <div class="row justify-content-around" style="margin-top:50px">
                 <div class="col">
                     <div class="card text-center" style="width: 19rem;">
                         SECCIÓN USUARIOS
-                        <img src="img/usuarios.jpg" class="card-img-top" alt="...">
+                        <a href="administrarUsuarios.php"><img src="img/usuarios.jpg" class="card-img-top" alt="..."></a>
                         <div class="card-body ">
                             <a href="administrarUsuarios.php"><button type="button" class="btn btn-info">Registros</button></a>
                         </div>
@@ -111,14 +111,26 @@
                 <div class="col">
                     <div class="card text-center" style="width: 20rem;">
                         SECCIÓN PRODUCTOS
-                        <img src="img/productos.jpg" class="card-img-top" alt="...">
+                        <a href="administrarProductos.php"><img src="img/productos.jpg" class="card-img-top" alt="..."></a>
                         <div class="card-body ">
                             <a href="administrarProductos.php"><button type="button" class="btn btn-info">Productos</button></a>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="row justify-content-around" style="margin-top:50px">
                 <div class="col">
-                    <div class="card text-center" style="width: 15rem;">
+                    <div class="card text-center" style="width: 18rem;">
+                        SECCIÓN OPINIONES
+                        <a href="administrarOpiniones.php"><img src="img/evaluaciones.jpg" class="card-img-top" alt="..."></a>
+                        <div class="card-body ">
+                        <a href="administrarOpiniones.php"><button type="button" class="btn btn-info">Opiniones</button></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center" style="width: 19rem;">
                         SECCIÓN VENTAS
                         <img src="img/ventas.jpg" class="card-img-top" alt="...">
                         <div class="card-body ">

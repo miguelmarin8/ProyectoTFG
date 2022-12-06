@@ -51,9 +51,10 @@
         }
 
         if (isset($_POST['eliminarUsuario'])) {
+            $existe = $conexion->eliminarUsuarioEvaluaciones($_POST['id_usuario2']);
             $conexion->eliminarCuenta($_POST['id_usuario2']);
             $conexion->incrementarTablaRegistro();
-
+            $conexion->incrementarTablaEvaluaciones();
             echo '<script>alert("Usuario eliminado correctamente")
             document.location=("administrarUsuarios.php");
             </script>';
