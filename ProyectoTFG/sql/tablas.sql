@@ -37,14 +37,14 @@ CREATE TABLE
 
 CREATE TABLE
     `carrito`(
-        `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        `id_carrito` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         `id_producto` INT NOT NULL,
         `nombre` VARCHAR(100) NOT NULL,
+        `sexo` VARCHAR(10) NOT NULL,
         `precio` INT NOT NULL,
-        `id_talla` INT NOT NULL,
         `existencias` INT NOT NULL,
         `color` VARCHAR(10) NOT NULL,
-        FOREIGN KEY (`id_talla`) REFERENCES tallas (`id_talla`)
+        FOREIGN KEY (`id_producto`) REFERENCES producto (`id_producto`)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE

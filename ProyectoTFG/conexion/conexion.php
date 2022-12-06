@@ -180,7 +180,7 @@ class Singleton
 
     public function eliminarCarrito($id)
     {
-        $consulta = $this->con->prepare("DELETE FROM carrito where id = ?");
+        $consulta = $this->con->prepare("DELETE FROM carrito where id_carrito = ?");
         $consulta->bindparam(1, $id);
         $consulta->execute();
     }
@@ -224,14 +224,14 @@ class Singleton
         }
     }
 
-    public function añadirCarrito($id, $nombre, $precio, $existencias, $talla, $color)
+    public function añadirCarrito($id, $nombre, $sexo, $precio, $existencias, $color)
     {
-        $consulta = $this->con->prepare("INSERT INTO carrito (id_producto,nombre,precio,existencias,id_talla,color) values (?,?,?,?,?,?)");
+        $consulta = $this->con->prepare("INSERT INTO carrito (id_producto,nombre,sexo,precio,existencias,color) values (?,?,?,?,?,?)");
         $consulta->bindparam(1, $id);
         $consulta->bindparam(2, $nombre);
-        $consulta->bindparam(3, $precio);
-        $consulta->bindparam(4, $existencias);
-        $consulta->bindparam(5, $talla);
+        $consulta->bindparam(3, $sexo);
+        $consulta->bindparam(4, $precio);
+        $consulta->bindparam(5, $existencias);
         $consulta->bindparam(6, $color);
         $consulta->execute();
     }
@@ -282,6 +282,12 @@ class Singleton
     public function incrementarTablaProducto()
     {
         $consulta = $this->con->prepare("ALTER TABLE producto AUTO_INCREMENT = 1");
+        $consulta->execute();
+    }
+
+    public function incrementarTablaEvaluaciones()
+    {
+        $consulta = $this->con->prepare("ALTER TABLE evaluaciones AUTO_INCREMENT = 1");
         $consulta->execute();
     }
 

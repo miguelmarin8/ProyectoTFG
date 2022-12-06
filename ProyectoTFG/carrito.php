@@ -48,7 +48,7 @@
 
         for ($i = 0; $i < count($datosCarrito); $i++) {
             if (isset($_POST["eliminarProducto$i"])) {
-                $conexion->eliminarCarrito($_POST["id$i"]);
+                $conexion->eliminarCarrito($_POST["id_carrito$i"]);
                 $conexion->incrementarTablaCarrito();
                 header("location:carrito.php");
             }
@@ -122,9 +122,9 @@
                         <th>Registro</th>
                         <th>Id Producto</th>
                         <th>Nombre</th>
+                        <th>Sexo</th>
                         <th>Precio</th>
                         <th>Existencias</th>
-                        <th>Talla</th>
                         <th>Color</th>
                         <th>Eliminar</th>
                     </tr>
@@ -133,28 +133,12 @@
                     <?php
                     for ($i = 0; $i < count($datosCarrito); $i++) {
                         echo "<tr>";
-                        echo "<td> <input readonly type = 'text' name = 'id$i' style = 'text-align: center; border: 0; width: 50px; background-color: white' value='" . $datosCarrito[$i]['id'] . "'</td>";
+                        echo "<td> <input readonly type = 'text' name = 'id_carrito$i' style = 'text-align: center; border: 0; width: 50px; background-color: white' value='" . $datosCarrito[$i]['id_carrito'] . "'</td>";
                         echo "<td>"  . $datosCarrito[$i]['id_producto'] . "</td>";
                         echo "<td>"  . $datosCarrito[$i]['nombre'] . "</td>";
+                        echo "<td>"  . $datosCarrito[$i]['sexo'] . "</td>";
                         echo "<td>"  . $datosCarrito[$i]['precio'] . "</td>";
                         echo "<td>"  . $datosCarrito[$i]['existencias'] . "</td>";
-                        echo "<td>";
-                        if ($datosCarrito[$i]['id_talla'] == 1) {
-                            echo "XXS";
-                        } elseif ($datosCarrito[$i]['id_talla'] == 2) {
-                            echo "XS";
-                        } elseif ($datosCarrito[$i]['id_talla'] == 3) {
-                            echo "S";
-                        } elseif ($datosCarrito[$i]['id_talla'] == 4) {
-                            echo "M";
-                        } elseif ($datosCarrito[$i]['id_talla'] == 5) {
-                            echo "L";
-                        } elseif ($datosCarrito[$i]['id_talla'] == 6) {
-                            echo "XL";
-                        } else {
-                            echo "XXL";
-                        }
-                        echo "</td>";
                         echo "<td>"  . $datosCarrito[$i]['color'] . "</td>";
                         echo "<td><input type = 'submit' id='eliminarProducto" . $i . "' name='eliminarProducto" . $i . "' value = 'Eliminar' style = 'background-color:#FF5D5D;'/></td>";
                         echo "</tr>";

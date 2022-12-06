@@ -68,6 +68,13 @@
             document.location=("camisetaHombre1.php");
             </script>';
         }
+
+        if (isset($_POST["añadirCarrito"])) {
+            $conexion->añadirCarrito($_SESSION['id_producto'],$_POST['nombre'], $_POST['sexo'],$_POST['precio'],$_POST['existencias'],$_POST['color']);
+            echo '<script>alert("Producto añadido con éxito.")
+            document.location=("camisetaHombre1.php");
+            </script>';
+        }
     }
 
 
