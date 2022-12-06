@@ -247,8 +247,8 @@
                             <i class="fas fa-gem me-3 text-secondary"></i>COMPAÑIA HR
                         </h6>
                         <p>
-                            Here you can use rows and columns to organize your footer content. Lorem ipsum
-                            dolor sit amet, consectetur adipisicing elit.
+                           En esta pagina tenemos productos de buena calidad y buenos precios, confia en nosotros,
+                           no te vamos a defraudar.
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -277,10 +277,10 @@
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                        <p><i class="fas fa-home me-3 text-secondary"></i> New York, NY 10012, US</p>
+                        <p><i class="fas fa-home me-3 text-secondary"></i> MADRID, MA 10012, ES</p>
                         <p>
                             <i class="fas fa-envelope me-3 text-secondary"></i>
-                            info@example.com
+                            mmarinb12@gmail.com
                         </p>
                         <p><i class="fas fa-phone me-3 text-secondary"></i> + 01 234 567 88</p>
                         <p><i class="fas fa-print me-3 text-secondary"></i> + 01 234 567 89</p>
