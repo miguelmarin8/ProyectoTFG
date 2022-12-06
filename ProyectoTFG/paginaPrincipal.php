@@ -24,8 +24,11 @@
     include_once "otros/filtrado.php";
     $conexion = Singleton::singleton();
     $usuario = $_SESSION['usuario'];
+    $id_usu = $conexion->seleccionarIdUsuario($usuario);
+    $id_usuario = implode(',', $id_usu); //Para sacar solo el valor del array
+    $_SESSION['id_usuario'] = $id_usuario;
 
-    
+
     echo '<pre>';
     print_r($_SESSION);
     echo '</pre>';

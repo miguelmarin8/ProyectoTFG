@@ -29,7 +29,23 @@ function mostrarFactura() {
     }
 }
 
+function mostrarDevoluciones() {
+    var tablausu = document.getElementById('devoluciones');
+    if (tablausu.style.display === 'none') {
+        tablausu.style.display = 'block';
+    } else {
+        tablausu.style.display = 'none';
+    }
+}
 
+function mostrarEvaluaciones() {
+    var tablausu = document.getElementById('evaluaciones');
+    if (tablausu.style.display === 'none') {
+        tablausu.style.display = 'block';
+    } else {
+        tablausu.style.display = 'none';
+    }
+}
 //TABLA AREA ADMINISTRADOR USUARIOS
 $(document).ready(function () {
     $('#tablaUsuarios').DataTable({

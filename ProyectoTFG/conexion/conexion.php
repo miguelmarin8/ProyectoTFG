@@ -337,4 +337,41 @@ class Singleton
             return false;
         }
     }
+
+
+    public function seleccionarIdUsuario($usu)
+    {
+        $consulta = $this->con->prepare("SELECT id_usuario FROM registro WHERE usuario = ?");
+        $consulta->bindparam(1, $usu);
+        $consulta->execute();
+        if ($consulta->execute()) {
+            $datos = $consulta->fetch(PDO::FETCH_ASSOC);
+            return $datos;
+        } else {
+            return false;
+        }
+    }
+
+    public function insertarEvaluaciones($id_usu, $id_pro, $usuario, $coment)
+    {
+        $consulta = $this->con->prepare("INSERT INTO evaluaciones (id_usuario,id_producto,usuario,comentario) values (?,?,?,?)");
+        $consulta->bindparam(1, $id_usu);
+        $consulta->bindparam(2, $id_pro);
+        $consulta->bindparam(3, $usuario);
+        $consulta->bindparam(4, $coment);
+        $consulta->execute();
+    }
+
+    public function visualizarEvaluaciones($id)
+    {
+        $consulta = $this->con->prepare("SELECT usuario, comentario FROM evaluaciones WHERE id_producto = ?");
+        $consulta->bindparam(1, $id);
+        $consulta->execute();
+        if ($consulta->execute()) {
+            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $datos;
+        } else {
+            return false;
+        }
+    }
 }

@@ -46,3 +46,14 @@ CREATE TABLE
         `color` VARCHAR(10) NOT NULL,
         FOREIGN KEY (`id_talla`) REFERENCES tallas (`id_talla`)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE
+    `evaluaciones`(
+        `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        `id_usuario` INT NOT NULL,
+        `id_producto` INT NOT NULL,
+        `usuario` VARCHAR(10) NOT NULL,
+        `comentario` VARCHAR(100) NOT NULL,
+        FOREIGN KEY (`id_usuario`) REFERENCES registro (`id_usuario`),
+        FOREIGN KEY (`id_producto`) REFERENCES producto (`id_producto`)
+    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
