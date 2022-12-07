@@ -58,3 +58,23 @@ CREATE TABLE
         FOREIGN KEY (`id_usuario`) REFERENCES registro (`id_usuario`),
         FOREIGN KEY (`id_producto`) REFERENCES producto (`id_producto`)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE
+    `compra`(
+        `id_compra` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        `id_usuario` INT NOT NULL,
+        `id_producto` INT NOT NULL,
+        `precio` INT NOT NULL,
+        `nombre` VARCHAR(10) NOT NULL,
+        `apellidos` VARCHAR(50) NOT NULL,
+        `usuario` VARCHAR(50) NOT NULL,
+        `contraseña` VARCHAR(50) NOT NULL,
+        `tipo_pago` VARCHAR(10) NOT NULL,
+        `numero_tarjeta` INT,
+        `fecha_caducidad_tarjeta` DATETIME,
+        `email_paypal` VARCHAR(50),
+        `contraseña_paypal` VARCHAR(50),
+        `fecha_compra` DATETIME,
+        FOREIGN KEY (`id_usuario`) REFERENCES registro (`id_usuario`),
+        FOREIGN KEY (`id_producto`) REFERENCES producto (`id_producto`)
+    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;

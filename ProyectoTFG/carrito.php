@@ -54,14 +54,10 @@
             }
         }
 
-        for ($i = 0; $i < count($datosCarrito); $i++) {
-            if (isset($_POST["pagar"])) {
-               
-                $hola = $datosCarrito[$i]['id_producto'];
+        if (isset($_POST["pagar"])) {
 
-                $_SESSION['pagos'] = $hola;
-                header("location:sistemaPago.php");
-            }
+
+            header("location:sistemaPago.php");
         }
     }
     ?>
@@ -169,7 +165,7 @@
                                             } ?> </p>
                 <p style="font-size:20px;"><?php echo "Usted se lleva una cantidad de: <strong>" . $productosTotal . "</strong> productos" ?></p>
                 <p style="font-size:20px;"><?php echo "El precio total de su compra es de: <strong>" . $precioTotal . "€</strong>" ?></p>
-                <input type="submit" id="pagar" name="pagar" value="ACEPTAR Y PAGAR">
+                <input type="submit" id="pagar" name="pagar" value="ACEPTAR Y PAGAR" style="background-color:#A7F766;">
             </div>
         </div>
 

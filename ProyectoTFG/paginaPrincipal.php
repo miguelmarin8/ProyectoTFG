@@ -50,7 +50,7 @@
                     header("location:calzadoHombre1.php");
                 }
 
-                if ($_SESSION['id_producto'] == 45) {
+                if ($_SESSION['id_producto'] == 42) {
                     header("location:pantalonMujer1.php");
                 }
 

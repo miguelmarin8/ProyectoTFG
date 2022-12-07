@@ -47,20 +47,33 @@
     include_once "otros/filtrado.php";
     $conexion = Singleton::singleton();
     $usuario = $_SESSION['usuario'];
-   
-    echo '<pre>';
-    print_r($_SESSION);
+    $productos = $conexion->seleccionarProductosCarrito(); //Ver cuantos productos hay en el carrito
+    $date = date("Y-m-d H:i:s");
+
+
+    /*echo '<pre>';
+    print_r($productos);
     echo '</pre>';
+*/
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-       
+        if (isset($_POST["pagar"])) {
+            for ($i = 0; $i < count($productos); $i++) {
+                $conexion->insertarCompra($_SESSION['id_usuario'], $productos[$i]['id_producto'],$productos[$i]['precio'],$_POST['nombre'], $_POST['apellidos'], $_POST['usuario'], $_POST['clave'], $_POST['tipo_pago'], $_POST['numero_tarjeta'], $_POST['fecha_cad'], $_POST['email_pay'], $_POST['contra_pay'], $date);
+                echo '<script>alert("Su compra ha sido realizada con éxito.")
+               alert("En breves recibirá la información por correo. Muchas Gracias!.")
+                document.location=("paginaPrincipal.php");
+                </script>';
+            }
+            $conexion->eliminarCarritoEntero();
+             $conexion->incrementarTablaCarrito();
+        }
     }
 
 
     ?>
     <div id="cabecera" class="col-auto p-5 text-center">
-        <p class="display-4" style="font-family: Lucida Handwriting;text-shadow: 0px 0px 9px #000;color: black;">SECCIÓN MUJER</p>
+        <p class="display-4" style="font-family: Lucida Handwriting;color: blue;">FORMULARIO DE PAGO</p>
     </div>
 
     <!-- MENÚ -->
@@ -119,8 +132,56 @@
     </nav>
     <!-- FIN MENÚ -->
 
-   
-    
+    <?php
+
+    ?>
+
+
+    <div class="container">
+        <!--FORMULARIO-->
+        <div class="justify-content-center align-items-center">
+            <form id="formularioPago" autocomplete="off" class="text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <div class="form-group">
+                    <i class="fa fa-fw fa-credit-card" style="font-size: 40px ;"></i><br>
+                    <h3><strong>DATOS DE PAGO</strong></h3>
+                    <strong>
+                        <p style="color:red">*RELLENA LOS SIGUIENTES CAMPOS PARA FINALIZAR TU COMPRA*</p>
+                    </strong>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre">
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Apellidos">
+                    <label for="usuario">Usuario</label>
+                    <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Usuario">
+                    <label for="clave">Contraseña</label>
+                    <input type="password" class="form-control" name="clave" id="clave" placeholder="Contraseña">
+                    <label for="tipo_pago">Tipo Pago</label>
+                    <select id="tipo_pago" name="tipo_pago" class="form-control">
+                        <option value="Visa" selected>Visa</option>
+                        <option value="Paypal">Paypal</option>
+                    </select>
+                    <label for="numero_tarjeta">Numero Tarjeta</label>
+                    <input type="number" class="form-control" name="numero_tarjeta" id="numero_tarjeta" placeholder="Numero Tarjeta">
+                    <label for="fecha_cad">Fecha Caducidad</label>
+                    <input type="date" class="form-control" name="fecha_cad" id="fecha_cad">
+                    <label for="email_pay">Email Paypal</label>
+                    <input type="email" class="form-control" name="email_pay" id="email_pay" placeholder="Email Paypal">
+                    <label for="contra_pay">Contraseña Pypal</label>
+                    <input type="password" class="form-control" name="contra_pay" id="contra_pay" placeholder="Contraseña Paypal"> <br>
+
+
+                    <input type="submit" id="pagar" name="pagar" class="btn btn-success" value="ACEPTAR Y PAGAR"><br><br>
+
+                </div>
+
+            </form>
+
+        </div>
+        <!--FIN FORMULARIO-->
+    </div>
+
+
+
 
 </body>
 

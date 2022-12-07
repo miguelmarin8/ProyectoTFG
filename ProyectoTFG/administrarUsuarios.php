@@ -51,7 +51,8 @@
         }
 
         if (isset($_POST['eliminarUsuario'])) {
-            $existe = $conexion->eliminarUsuarioEvaluaciones($_POST['id_usuario2']);
+            $conexion->eliminarUsuarioCompra($_POST['id_usuario2']);
+            $conexion->eliminarUsuarioEvaluaciones($_POST['id_usuario2']);
             $conexion->eliminarCuenta($_POST['id_usuario2']);
             $conexion->incrementarTablaRegistro();
             $conexion->incrementarTablaEvaluaciones();

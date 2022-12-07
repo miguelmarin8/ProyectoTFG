@@ -193,6 +193,30 @@ class Singleton
         }
     }
 
+    public function eliminarUsuarioCompra($id_usu)
+    {
+        $consulta = $this->con->prepare("DELETE FROM compra where id_usuario = ?");
+        $consulta->bindparam(1, $id_usu);
+        $consulta->execute();
+        if ($consulta->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function eliminarProductoCompra($id_usu)
+    {
+        $consulta = $this->con->prepare("DELETE FROM compra where id_producto = ?");
+        $consulta->bindparam(1, $id_usu);
+        $consulta->execute();
+        if ($consulta->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function eliminarProductoEvaluaciones($id_usu)
     {
         $consulta = $this->con->prepare("DELETE FROM evaluaciones where id_producto = ?");
@@ -490,6 +514,50 @@ class Singleton
     public function seleccionarProductosRandom()
     {
         $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto ORDER BY RAND()");
+        $consulta->execute();
+        if ($consulta->execute()) {
+            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $datos;
+        } else {
+            return false;
+        }
+    }
+
+    public function seleccionarProductosCarrito()
+    {
+        $consulta = $this->con->prepare("SELECT id_producto,precio FROM carrito");
+        $consulta->execute();
+        if ($consulta->execute()) {
+            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $datos;
+        } else {
+            return false;
+        }
+    }
+
+    public function insertarCompra($id_usu, $id_pro, $pre, $nom, $ape, $usu, $contr, $tipo, $num, $fechaCad, $emailP, $contraP, $fecha)
+    {
+        $consulta = $this->con->prepare("INSERT INTO compra (id_usuario,id_producto,precio,nombre,apellidos,usuario,contraseña,tipo_pago,numero_tarjeta,fecha_caducidad_tarjeta,email_paypal,contraseña_paypal,fecha_compra) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $consulta->bindparam(1, $id_usu);
+        $consulta->bindparam(2, $id_pro);
+        $consulta->bindparam(3, $pre);
+        $consulta->bindparam(4, $nom);
+        $consulta->bindparam(5, $ape);
+        $consulta->bindparam(6, $usu);
+        $consulta->bindparam(7, $contr);
+        $consulta->bindparam(8, $tipo);
+        $consulta->bindparam(9, $num);
+        $consulta->bindparam(10, $fechaCad);
+        $consulta->bindparam(11, $emailP);
+        $consulta->bindparam(12, $contraP);
+        $consulta->bindparam(13, $fecha);
+        $consulta->execute();
+    }
+
+
+    public function seleccionarVentas()
+    {
+        $consulta = $this->con->prepare("SELECT * FROM compra ");
         $consulta->execute();
         if ($consulta->execute()) {
             $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);

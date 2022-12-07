@@ -56,8 +56,9 @@
         }
 
 
-
+        
         if (isset($_POST['eliminarProducto'])) {
+            $conexion->eliminarProductoCompra($_POST['id_productoP2']);
             $conexion->eliminarProductoEvaluaciones($_POST['id_productoP2']);
             $conexion->eliminarProducto($_POST['id_productoP2']);
             $conexion->incrementarTablaProducto();
