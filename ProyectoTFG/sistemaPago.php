@@ -10,26 +10,33 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="css/estilos.css">
-    <title>Administrar Opiniones</title>
+    <script type="text/javascript" src="js/funciones.js"></script>
 
+    <title>Sistema de pago</title>
 </head>
 <style>
-    td,
-    th {
-        border: #DCDCDC 1px solid;
+    #foto {
+        list-style: none;
+        margin: 50px;
     }
 
-    img {
+    #foto {
         transition: transform .2s;
     }
 
-    img:hover {
-        transform: scale(5);
+    #foto:hover {
+        transform: scale(1.4);
+    }
+
+    #imagen {
+        max-width: 400px;
+        margin-top: 30px;
+        margin: auto;
+        display: block;
     }
 </style>
+
 
 <body>
 
@@ -39,33 +46,25 @@
     include_once "conexion/conexion.php";
     include_once "otros/filtrado.php";
     $conexion = Singleton::singleton();
-    $datosOpiniones = $conexion->tablaOpiniones();
-
-    /*echo '<pre>';
-    print_r($_SESSION['usuario']);
-    echo '</pre>';*/
+    $usuario = $_SESSION['usuario'];
+   
+    echo '<pre>';
+    print_r($_SESSION);
+    echo '</pre>';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        for ($i = 0; $i < count($datosOpiniones); $i++) {
-            if (isset($_POST["eliminarOpinion$i"])) {
-                $conexion->eliminarOpinion($_POST["id$i"]);
-                $conexion->incrementarTablaEvaluaciones();
-                echo '<script>alert("Comentario eliminado correctamente")
-                document.location=("administrarOpiniones.php");
-                </script>';
-            }
-        }
-    }
 
+       
+    }
 
 
     ?>
     <div id="cabecera" class="col-auto p-5 text-center">
-        <p class="display-4" style="font-family: Lucida Handwriting;text-shadow: 0px 0px 9px #000;color:black;">AREA ADMINISTRADOR</p>
+        <p class="display-4" style="font-family: Lucida Handwriting;text-shadow: 0px 0px 9px #000;color: black;">SECCIÓN MUJER</p>
     </div>
 
- <!-- MENÚ -->
- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- MENÚ -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a href="areaAdministrador.php"><button class="btn btn-outline-secondary" name="admin" id="admin" <?php if ($_SESSION['usuario'] != "MiguelMB") { ?> style="display:none;" <?php } ?>>Area Administrador</button></a>
             <a class="navbar-brand" href="paginaPrincipal.php">HOME</a>
@@ -120,46 +119,9 @@
     </nav>
     <!-- FIN MENÚ -->
 
-    <!--TABLA EVALUACIONES--->
-    <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" style="margin-top: 100px;">
-        <div class="container" id="productos" style="margin-top: 50px;padding-bottom: 100px;">
-            <h1 style="justify-content:center;text-align:center">TABLA EVALUACIONES</h1>
+   
+    
 
-            <table id="tablaEvaluaciones" class="table">
-                <thead class="text-center">
-                    <tr>
-                        <th style="background-color: #ECECEC;">Registro</th>
-                        <th style="background-color: #ECECEC;">Id Usuario</th>
-                        <th style="background-color: #ECECEC;">Id Producto</th>
-                        <th style="background-color: #ECECEC;">Usuario</th>
-                        <th style="background-color: #ECECEC;">Comentario</th>
-                        <th style="background-color: #ECECEC;">Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody class="text-center">
-                    <?php
-                    for ($i = 0; $i < count($datosOpiniones); $i++) {
-                        echo "<td> <input readonly type = 'text' name = 'id$i' style = 'text-align: center; border: 0; width: 50px; background-color: white' value='" . $datosOpiniones[$i]['id'] . "'</td>";
-                        echo "<td>"  . $datosOpiniones[$i]['id_usuario'] . "</td>";
-                        echo "<td>"  . $datosOpiniones[$i]['id_producto'] . "</td>";
-                        echo "<td>"  . $datosOpiniones[$i]['usuario'] . "</td>";
-                        echo "<td>"  . $datosOpiniones[$i]['comentario'] . "</td>";
-                        echo "<td><input type = 'submit' id='eliminarOpinion" . $i . "' name='eliminarOpinion" . $i . "' value = 'Eliminar' style = 'background-color:#FF5D5D;'/></td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </form>
-        <!--FIN TABLA PRODUCTOS -->
-        <!-- JQUERY -->
-        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-        <!-- DATATABLES -->
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-        <!-- BOOTSTRAP -->
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-        <script type="text/javascript" src="js/funciones.js"></script>
 </body>
 
 </html>

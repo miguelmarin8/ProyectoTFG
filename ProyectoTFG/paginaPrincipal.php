@@ -27,13 +27,46 @@
     $id_usu = $conexion->seleccionarIdUsuario($usuario);
     $id_usuario = implode(',', $id_usu); //Para sacar solo el valor del array
     $_SESSION['id_usuario'] = $id_usuario;
+    $producto = $conexion->seleccionarProductosRandom();
 
 
-    echo '<pre>';
+
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        for ($i = 0; $i < count($producto); $i++) {
+            if (isset($_POST["informacion$i"])) {
+
+                $_SESSION['id_producto'] = $_POST["id_producto$i"];
+
+                if ($_SESSION['id_producto'] == 1) {
+                    header("location:camisetaHombre1.php");
+                }
+
+                if ($_SESSION['id_producto'] == 25) {
+                    header("location:pantalonHombre1.php");
+                }
+
+                if ($_SESSION['id_producto'] == 32) {
+                    header("location:calzadoHombre1.php");
+                }
+
+                if ($_SESSION['id_producto'] == 45) {
+                    header("location:pantalonMujer1.php");
+                }
+
+                if ($_SESSION['id_producto'] == 13) {
+                    header("location:camisetaMujer1.php");
+                }
+
+                if ($_SESSION['id_producto'] == 47) {
+                    header("location:calzadoMujer1.php");
+                }
+            }
+        }
+    }
+   /* echo '<pre>';
     print_r($_SESSION);
-    echo '</pre>';
-
-
+    echo '</pre>';*/
 
 
     ?>
@@ -45,8 +78,8 @@
     <!-- MENÚ -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="paginaPrincipal.php">HOME</a>
             <a href="areaAdministrador.php"><button class="btn btn-outline-secondary" name="admin" id="admin" <?php if ($_SESSION['usuario'] != "MiguelMB") { ?> style="display:none;" <?php } ?>>Area Administrador</button></a>
+            <a class="navbar-brand" href="paginaPrincipal.php">HOME</a>
             <button class=" navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -60,9 +93,9 @@
                             Hombre
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="hombreCamisetas.php"><i class="fa fa-fw fa-shirt-long"></i>Camisetas</a></li>
-                            <li><a class="dropdown-item" href="pantalonesHombre.php">Pantalones</a></li>
-                            <li><a class="dropdown-item" href="calzadoHombre.php">Calzado</a></li>
+                            <li><a class="dropdown-item" href="hombreCamisetas.php"><i class="fa fa-fw fa-tshirt"></i> Camisetas</a></li>
+                            <li><a class="dropdown-item" href="pantalonesHombre.php"><i class="fa fa-fw fa-socks"></i> Pantalones</a></li>
+                            <li><a class="dropdown-item" href="calzadoHombre.php"> <img src="img/zapatillaIcono.jpg" style="max-width: 30px;"> Calzado</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -70,9 +103,9 @@
                             Mujer
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="mujerCamisetas.php">Camisetas</a></li>
-                            <li><a class="dropdown-item" href="pantalonesMujer.php">Pantalones</a></li>
-                            <li><a class="dropdown-item" href="calzadoMujer.php">Calzado</a></li>
+                            <li><a class="dropdown-item" href="mujerCamisetas.php"><i class="fa fa-fw fa-tshirt"></i> Camisetas</a></li>
+                            <li><a class="dropdown-item" href="pantalonesMujer.php"><i class="fa fa-fw fa-socks"></i> Pantalones</a></li>
+                            <li><a class="dropdown-item" href="calzadoMujer.php"><img src="img/zapatillaIcono.jpg" style="max-width: 30px;"> Calzado</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -99,112 +132,87 @@
     <!-- FIN MENÚ -->
 
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-        <div class="container" style="margin-top: 50px;">
+        <div class="container" style="margin-top: 100px;">
             <div class="row align-items-center">
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
+                <?php for ($i = 0; $i < 3; $i++) {
+                ?>
+                    <div class="col">
+                        <div class="card text-center" style="width: 18rem;">
+                            <?php
+                            echo "<td> <input hidden type = 'text' name = 'id_producto$i' value='" . $producto[$i]['id_producto'] . "'</td>";
+                            echo "<td>"  . '<img style = "max-width: 550px" src = "' . $producto[$i]['imagen'] . '"/>' . "</td>";
+                            echo "<br>";
+                            echo "<strong>" . $producto[$i]['nombre'] . "</strong>";
+                            echo "<input type = 'submit' id='informacion" . $i . "' name='informacion" . $i . "' value = 'Información'/>";
+                            ?>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
-                        </div>
-                    </div>
-                </div>
-
+                <?php
+                } ?> </p>
             </div>
 
         </div>
+
 
 
         <!--SEGUNDA LÍNEA-->
         <div class="container" style="margin-top: 100px;">
             <div class="row align-items-center">
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
+                <?php for ($i = 3; $i < 6; $i++) {
+                ?>
+                    <div class="col">
+                        <div class="card text-center" style="width: 18rem;">
+                            <?php
+                            echo "<td> <input hidden type = 'text' name = 'id_producto$i' value='" . $producto[$i]['id_producto'] . "'</td>";
+                            echo "<td>"  . '<img style = "max-width: 550px" src = "' . $producto[$i]['imagen'] . '"/>' . "</td>";
+                            echo "<br>";
+                            echo "<strong>" . $producto[$i]['nombre'] . "</strong>";
+                            echo "<input type = 'submit' id='informacion" . $i . "' name='informacion" . $i . "' value = 'Información'/>";
+                            ?>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
-                        </div>
-                    </div>
-                </div>
-
+                <?php
+                } ?> </p>
             </div>
 
         </div>
 
+
         <!--TERCERA LÍNEA-->
         <div class="container" style="margin-top: 100px;">
             <div class="row align-items-center">
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
+                <?php for ($i = 6; $i < 9; $i++) {
+                ?>
+                    <div class="col">
+                        <div class="card text-center" style="width: 18rem;">
+                            <?php
+                            echo "<td> <input hidden type = 'text' name = 'id_producto$i' value='" . $producto[$i]['id_producto'] . "'</td>";
+                            echo "<td>"  . '<img style = "max-width: 550px" src = "' . $producto[$i]['imagen'] . '"/>' . "</td>";
+                            echo "<br>";
+                            echo "<strong>" . $producto[$i]['nombre'] . "</strong>";
+                            echo "<input type = 'submit' id='informacion" . $i . "' name='informacion" . $i . "' value = 'Información'/>";
+                            ?>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
-                        <img src="img/camisetaNikeBlanca.jpg" class="card-img-top" alt="...">
-                        Camiseta Nike
-                        <div class="card-body ">
-                            <button name="medicamentos" class="btn btn-light">Información</button>
-                        </div>
-                    </div>
-                </div>
-
+                <?php
+                } ?> </p>
             </div>
 
         </div>
     </form>
 
+    <div class="container">
+        <!--FORMULARIO-->
+        <div class="row justify-content-center align-items-center">
+            <form class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">VER MÁS PRODUCTOS</button>
+                </div>
+            </form>
+
+        </div>
+        <!--FIN FORMULARIO-->
+    </div>
 
     <!-- Footer -->
     <footer class="text-center text-muted" style="background-color: rgba(0, 0, 0, 0.025); margin-top:100px;">
@@ -247,8 +255,8 @@
                             <i class="fas fa-gem me-3 text-secondary"></i>COMPAÑIA HR
                         </h6>
                         <p>
-                           En esta pagina tenemos productos de buena calidad y buenos precios, confia en nosotros,
-                           no te vamos a defraudar.
+                            En esta pagina tenemos productos de buena calidad y buenos precios, confia en nosotros,
+                            no te vamos a defraudar.
                         </p>
                     </div>
                     <!-- Grid column -->

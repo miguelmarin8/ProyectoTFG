@@ -70,7 +70,7 @@
         }
 
         if (isset($_POST["añadirCarrito"])) {
-            $conexion->añadirCarrito($_SESSION['id_producto'], $_POST['nombre'], $_POST['sexo'], $_POST['precio'], $_POST['existencias'],$_POST['talla'], $_POST['color']);
+            $conexion->añadirCarrito($_SESSION['id_producto'], $_POST['nombre'], $_POST['sexo'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['color']);
             echo '<script>alert("Producto añadido con éxito.")
             document.location=("camisetaHombre1.php");
             </script>';
@@ -80,15 +80,13 @@
 
     ?>
     <div id="cabecera" class="col-auto p-5 text-center">
-        <p class="display-4" style="font-family: Lucida Handwriting;text-shadow: 0px 0px 9px #000;color: black;">BIENVENIDO A MR</p>
-        <p class="display-7" style="font-family: cursive;">GRACIAS POR SU CONFIANZA</p>
+        <p class="display-4" style="font-family: Lucida Handwriting;text-shadow: 0px 0px 9px #000;color: black;">SECCIÓN HOMBRE</p>
     </div>
-
     <!-- MENÚ -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="paginaPrincipal.php">HOME</a>
             <a href="areaAdministrador.php"><button class="btn btn-outline-secondary" name="admin" id="admin" <?php if ($_SESSION['usuario'] != "MiguelMB") { ?> style="display:none;" <?php } ?>>Area Administrador</button></a>
+            <a class="navbar-brand" href="paginaPrincipal.php">HOME</a>
             <button class=" navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -102,9 +100,9 @@
                             Hombre
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="hombreCamisetas.php">Camisetas</a></li>
-                            <li><a class="dropdown-item" href="#">Pantalones</a></li>
-                            <li><a class="dropdown-item" href="#">Calzado</a></li>
+                            <li><a class="dropdown-item" href="hombreCamisetas.php"><i class="fa fa-fw fa-tshirt"></i> Camisetas</a></li>
+                            <li><a class="dropdown-item" href="pantalonesHombre.php"><i class="fa fa-fw fa-socks"></i> Pantalones</a></li>
+                            <li><a class="dropdown-item" href="calzadoHombre.php"> <img src="img/zapatillaIcono.jpg" style="max-width: 30px;"> Calzado</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -112,9 +110,9 @@
                             Mujer
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Camisetas</a></li>
-                            <li><a class="dropdown-item" href="#">Pantalones</a></li>
-                            <li><a class="dropdown-item" href="#">Calzado</a></li>
+                            <li><a class="dropdown-item" href="mujerCamisetas.php"><i class="fa fa-fw fa-tshirt"></i> Camisetas</a></li>
+                            <li><a class="dropdown-item" href="pantalonesMujer.php"><i class="fa fa-fw fa-socks"></i> Pantalones</a></li>
+                            <li><a class="dropdown-item" href="calzadoMujer.php"><img src="img/zapatillaIcono.jpg" style="max-width: 30px;"> Calzado</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -138,9 +136,8 @@
             </div>
         </div>
     </nav>
-
-
     <!-- FIN MENÚ -->
+
     <div class="container" style="margin-top:50px;">
         <div class="row">
             <div class="col-sm" style="background: #EFF1F4; margin: 10px; height: 50%;">
@@ -234,18 +231,18 @@
                 </div>
                 <!-- Modal body -->
                 <div class="container">
-                <img id="imagen" src="img/camiseta1.jpg" style="max-width:90px;float: right;">
+                    <img id="imagen" src="img/camiseta1.jpg" style="max-width:90px;float: right;">
                     <div class="m-0 row justify-content-center align-items-center">
                         <div class="form-group">
                             <p><br>
-                            <strong>CARACTERÍSTICAS <br></strong>
+                                <strong>CARACTERÍSTICAS <br></strong>
                                 - Material exterior: 100% algodón <br>
                                 - Material/composición: Jersey <br>
                                 - Cuidados: Programa delicado <br>
                                 - Deporte: Fitness <br>
                                 - Cuello/escote: Cuello redondo <br>
                                 - Estampado: Estampado <br><br>
-                               <strong>VENTAJAS: </strong> <br>
+                                <strong>VENTAJAS: </strong> <br>
                                 · Materiales sintéticos, pegamentos y colores sin cantidades detectables de contenido animal. <br>
                                 · Revestimientos cosidos en la parte superior para ofrecer durabilidad, sujeción y un estilo clásico.
                             </p>
@@ -300,11 +297,11 @@
                     <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                         <!-- Content -->
                         <h6 class="text-uppercase fw-bold mb-4">
-                            <i class="fas fa-gem me-3 text-secondary"></i>Company name
+                            <i class="fas fa-gem me-3 text-secondary"></i>COMPAÑIA HR
                         </h6>
                         <p>
-                            Here you can use rows and columns to organize your footer content. Lorem ipsum
-                            dolor sit amet, consectetur adipisicing elit.
+                            En esta pagina tenemos productos de buena calidad y buenos precios, confia en nosotros,
+                            no te vamos a defraudar.
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -313,19 +310,19 @@
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">
-                            Products
+                            Productos
                         </h6>
                         <p>
-                            <a href="#!" class="text-reset">Angular</a>
+                            <a href="#!" class="text-reset">CAMISETAS</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">React</a>
+                            <a href="#!" class="text-reset">PANTALONES</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Vue</a>
+                            <a href="#!" class="text-reset">ZAPATLLIAS</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Laravel</a>
+                            <a href="#!" class="text-reset">SUDADERAS</a>
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -333,10 +330,10 @@
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                        <p><i class="fas fa-home me-3 text-secondary"></i> New York, NY 10012, US</p>
+                        <p><i class="fas fa-home me-3 text-secondary"></i> MADRID, MA 10012, ES</p>
                         <p>
                             <i class="fas fa-envelope me-3 text-secondary"></i>
-                            info@example.com
+                            mmarinb12@gmail.com
                         </p>
                         <p><i class="fas fa-phone me-3 text-secondary"></i> + 01 234 567 88</p>
                         <p><i class="fas fa-print me-3 text-secondary"></i> + 01 234 567 89</p>
@@ -356,7 +353,6 @@
         <!-- Copyright -->
     </footer>
     <!-- Footer -->
-
     <script type="text/javascript" src="js/funciones.js"></script>
 
 </body>

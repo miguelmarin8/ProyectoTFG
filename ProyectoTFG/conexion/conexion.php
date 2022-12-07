@@ -486,4 +486,16 @@ class Singleton
             return false;
         }
     }
+
+    public function seleccionarProductosRandom()
+    {
+        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto ORDER BY RAND()");
+        $consulta->execute();
+        if ($consulta->execute()) {
+            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $datos;
+        } else {
+            return false;
+        }
+    }
 }

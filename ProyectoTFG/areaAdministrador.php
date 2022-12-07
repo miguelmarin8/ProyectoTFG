@@ -55,9 +55,9 @@
                             Hombre
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="hombreCamisetas.php">Camisetas</a></li>
-                            <li><a class="dropdown-item" href="#">Pantalones</a></li>
-                            <li><a class="dropdown-item" href="#">Calzado</a></li>
+                            <li><a class="dropdown-item" href="hombreCamisetas.php"><i class="fa fa-fw fa-tshirt"></i> Camisetas</a></li>
+                            <li><a class="dropdown-item" href="pantalonesHombre.php"><i class="fa fa-fw fa-socks"></i> Pantalones</a></li>
+                            <li><a class="dropdown-item" href="calzadoHombre.php"> <img src="img/zapatillaIcono.jpg" style="max-width: 30px;"> Calzado</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -65,9 +65,9 @@
                             Mujer
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Camisetas</a></li>
-                            <li><a class="dropdown-item" href="#">Pantalones</a></li>
-                            <li><a class="dropdown-item" href="#">Calzado</a></li>
+                            <li><a class="dropdown-item" href="mujerCamisetas.php"><i class="fa fa-fw fa-tshirt"></i> Camisetas</a></li>
+                            <li><a class="dropdown-item" href="pantalonesMujer.php"><i class="fa fa-fw fa-socks"></i> Pantalones</a></li>
+                            <li><a class="dropdown-item" href="calzadoMujer.php"><img src="img/zapatillaIcono.jpg" style="max-width: 30px;"> Calzado</a></li>
                         </ul>
                     </li>
                 </ul>
