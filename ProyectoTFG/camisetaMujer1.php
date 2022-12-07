@@ -11,8 +11,32 @@
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="css/estilos.css">
-    <title>Sección Mujer</title>
+    <script type="text/javascript" src="js/funciones.js"></script>
+
+    <title>Comprar</title>
 </head>
+<style>
+    #foto {
+        list-style: none;
+        margin: 50px;
+    }
+
+    #foto {
+        transition: transform .2s;
+    }
+
+    #foto:hover {
+        transform: scale(1.4);
+    }
+
+    #imagen {
+        max-width: 500px;
+        margin-top: 30px;
+        margin: auto;
+        display: block;
+    }
+</style>
+
 
 <body>
 
@@ -23,31 +47,34 @@
     include_once "otros/filtrado.php";
     $conexion = Singleton::singleton();
     $usuario = $_SESSION['usuario'];
+    $datosProducto = $conexion->seleccionarProducto($_SESSION['id_producto']);
+    $id_producto = $datosProducto['id_producto'];
+    $nombre = $datosProducto['nombre'];
+    $sexo = $datosProducto['sexo'];
+    $precio = $datosProducto['precio'];
+    $existencias = $datosProducto['existencias'];
 
-    $imagenes = $conexion->seleccionarPantalonMujer();
+    $evaluaciones = $conexion->visualizarEvaluaciones($_SESSION['id_producto']);
 
-
-    /*
     echo '<pre>';
-    print_r($imagenes);
+    print_r($_SESSION);
     echo '</pre>';
-*/
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        for ($i = 0; $i < count($imagenes); $i++) {
-            if (isset($_POST["informacion$i"])) {
 
-                $_SESSION['id_producto'] = $_POST["id_producto$i"];
-
-                if ($_SESSION['id_producto'] == 42) {
-                    header("location:pantalonMujer1.php");
-                }
-            }
+        if (isset($_POST["guardarComentario"])) {
+            $conexion->insertarEvaluaciones($_SESSION['id_usuario'], $_SESSION['id_producto'], $_SESSION['usuario'], $_POST['comentario']);
+            echo '<script>alert("Tu comentario ha sido guardado con éxito.")
+            document.location=("camisetaHombre1.php");
+            </script>';
         }
 
-        echo '<pre>';
-        print_r($_POST);
-        echo '</pre>';
+        if (isset($_POST["añadirCarrito"])) {
+            $conexion->añadirCarrito($_SESSION['id_producto'], $_POST['nombre'], $_POST['sexo'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['color']);
+            echo '<script>alert("Producto añadido con éxito.")
+            document.location=("camisetaHombre1.php");
+            </script>';
+        }
     }
 
 
@@ -111,78 +138,128 @@
             </div>
         </div>
     </nav>
+
+
     <!-- FIN MENÚ -->
-
-    <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-
-        <div class="container" style="margin-top: 100px;">
-            <div class="row align-items-center">
-                <?php for ($i = 0; $i < 3; $i++) {
-                ?>
-                    <div class="col">
-                        <div class="card text-center" style="width: 18rem;">
-                            <?php
-                            echo "<td> <input readonly type = 'text' name = 'id_producto$i' value='" . $imagenes[$i]['id_producto'] . "'</td>";
-                            echo "<td>"  . '<img style = "max-width: 550px" src = "' . $imagenes[$i]['imagen'] . '"/>' . "</td>";
-                            echo "<br>";
-                            echo "<strong>" . $imagenes[$i]['nombre'] . "</strong>";
-                            echo "<input type = 'submit' id='informacion" . $i . "' name='informacion" . $i . "' value = 'Información'/>";
-                            ?>
-                        </div>
-                    </div>
-                <?php
-                } ?> </p>
+    <div class="container" style="margin-top:50px;">
+        <div class="row">
+            <div class="col-sm" style="background: #EFF1F4; margin: 10px; height: 50%;">
+                <li id="foto"><img id="imagen" src="img/camisetaM5.jpg"></li>
             </div>
 
+            <div class="col-sm" style="background: #F3F7F7;border: grey 2px solid; margin: 10px;">
+                <!--FORMULARIO-->
+                <div class="m-0 row justify-content-center align-items-center">
+                    <form id="#" autocomplete="off" class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                        <div class="form-group">
+                            <i class="fa fa-solid fa-cart-arrow-down" style="font-size: 40px ;"></i><br>
+                            <h3><strong>TOP FIESTA</strong></h3>
+                            <p>Elegante modelo perfecto para una ocasión especial y lucir espectacular.</p>
+                            <br>
+                            <label for="nombre">Nombre Producto</label>
+                            <input type="text" class="form-control" name="nombre" id="nombre" value="<?php echo $nombre; ?>" readonly>
+                            <label for="sexo">Sexo</label>
+                            <input type="text" class="form-control" name="sexo" id="sexo" value="<?php echo $sexo; ?>" readonly>
+                            <label for="precio">Precio(€)</label>
+                            <input type="text" class="form-control" name="precio" id="precio" value="<?php echo $precio; ?> €" readonly>
+                            <label for="existencias">Existencias</label>
+                            <input type="text" class="form-control" name="existencias" id="existencias" value="<?php echo $existencias; ?>" readonly><br>
+                            <label for="talla">Tallas Disponibles</label>
+                            <select name="talla">
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                            </select><br><br>
+                            <label for="color">Color</label>
+                            <select name="color">
+                                <option value="Negro">Negro</option>
+                            </select><br><br>
+                            <input type="submit" id="añadirCarrito" name="añadirCarrito" class="btn btn-success" value="Añadir Al Carrito"> <br><br>
+                        </div>
+                    </form>
+                </div>
+                <!--FIN FORMULARIO-->
+            </div>
         </div>
 
+        <!--PARTE COMENTARIOS-->
+        <div class="m-0 row justify-content-center align-items-center" style="font-size: 18px">
+            <form id="#" autocomplete="off" class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <div class="form-group">
+                    <i class="fa fa-fw fa-info" style="font-size: 40px ;"></i><br>
+                    <h3><strong>MÁS INFORMACIÓN</strong></h3>
+                    <p>Aquí puedes ver más datos sobre tu producto</p>
+                    <br>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#myModal">Ver todos los datos del producto</a> <br><br>
+                    <div>
+                        <strong>Devoluciones y Envíos <input type="button" class="btn btn-light" onclick="mostrarDevoluciones()" value="↓"></strong>
 
-        <!--SEGUNDA LÍNEA-->
-        <div class="container" style="margin-top: 100px;">
-            <div class="row align-items-center">
-                <?php for ($i = 3; $i < 6; $i++) {
-                ?>
-                    <div class="col">
-                        <div class="card text-center" style="width: 18rem;">
-                            <?php
-                            echo "<td> <input readonly type = 'text' name = 'id_producto$i' value='" . $imagenes[$i]['id_producto'] . "'</td>";
-                            echo "<td>"  . '<img style = "max-width: 550px" src = "' . $imagenes[$i]['imagen'] . '"/>' . "</td>";
-                            echo "<br>";
-                            echo "<strong>" . $imagenes[$i]['nombre'] . "</strong>";
-                            echo "<input type = 'submit' id='informacion" . $i . "' name='informacion" . $i . "' value = 'Información'/>";
+                        <p id="devoluciones" style="display:none;">- Entrega estándar gratuita con tu cuenta MR. <br>
+                            - Puedes devolver tu pedido por cualquier motivo en un plazo de 30 días sin ningún coste <br>
+                            - Tiempo estimado de entrega , 2 - 4 días laborables
+                        </p>
+                    </div> <br>
+
+                    <div>
+                        <strong>Evaluaciones <input type="button" class="btn btn-light" onclick="mostrarEvaluaciones()" value="↓"></strong>
+
+                        <div id="evaluaciones" style="display:none">
+                            <label for="comentario">¿Quieres dejar tu evaluación?</label> <img src="img/estrellas.jpg" alt="1" style="max-width:120px"><br>
+                            <textarea name="comentario" id="comentario" cols="30" rows="" required></textarea> <br>
+
+                            <?php for ($i = 0; $i < count($evaluaciones); $i++) {
+                                echo "<p>- El usuario: <strong>" . $evaluaciones[$i]['usuario'] . "</strong> dice: " . $evaluaciones[$i]['comentario'] .  "</p>";
+                            }
                             ?>
+                            <input type="submit" id="guardarComentario" name="guardarComentario" class="btn btn-success" value="Guardar Comentario">
+                        </div>
+
+                    </div> <br>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    <!-- MODAL INFORMACIÓN -->
+
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header" style="background-color: #0d6efd; color: white;">
+                    <h4 class="modal-title">Información</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="container">
+                    <img id="imagen" src="img/camisetaM5.jpg" style="max-width:90px;float: right;">
+                    <div class="m-0 row justify-content-center align-items-center">
+                        <div class="form-group">
+                            <p><br>
+                                <strong>CARACTERÍSTICAS <br></strong>
+                               - Material exterior: 81% viscosa, 19% poliamida <br>
+                               - Material/composición: Tejido de punto <br>
+                               - Cuidados: No utilizar secadora, lavar a máquina a 30°C, programa delicado <br>
+                               - Cuello/escote: Cuello redondo <br>
+                               - Estampado: negro <br><br>
+                                <strong>VENTAJAS: </strong> <br>
+                                · 50% material de origen responsable<br>
+                                · La marca ha declarado el uso de una fibra con licencia o de un estandar independiente
+                            </p>
                         </div>
                     </div>
-
-                <?php
-                } ?> </p>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
-
         </div>
+    </div>
 
-        <!--TERCERA LÍNEA-->
-        <div class="container" style="margin-top: 100px;">
-            <div class="row align-items-center">
-                <?php for ($i = 6; $i < 9; $i++) {
-                ?>
-                    <div class="col">
-                        <div class="card text-center" style="width: 18rem;">
-                            <?php
-                            echo "<td> <input readonly type = 'text' name = 'id_producto$i' value='" . $imagenes[$i]['id_producto'] . "'</td>";
-                            echo "<td>"  . '<img style = "max-width: 550px" src = "' . $imagenes[$i]['imagen'] . '"/>' . "</td>";
-                            echo "<br>";
-                            echo "<strong>" . $imagenes[$i]['nombre'] . "</strong>";
-                            echo "<input type = 'submit' id='informacion" . $i . "' name='informacion" . $i . "' value = 'Información'/>";
-                            ?>
-                        </div>
-                    </div>
 
-                <?php
-                } ?> </p>
-            </div>
-
-        </div>
-    </form>
 
     <!-- Footer -->
     <footer class="text-center text-muted" style="background-color: rgba(0, 0, 0, 0.025); margin-top:100px;">
@@ -278,6 +355,9 @@
         <!-- Copyright -->
     </footer>
     <!-- Footer -->
+
+    <script type="text/javascript" src="js/funciones.js"></script>
+
 </body>
 
 </html>

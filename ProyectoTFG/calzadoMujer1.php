@@ -65,14 +65,14 @@
         if (isset($_POST["guardarComentario"])) {
             $conexion->insertarEvaluaciones($_SESSION['id_usuario'], $_SESSION['id_producto'], $_SESSION['usuario'], $_POST['comentario']);
             echo '<script>alert("Tu comentario ha sido guardado con éxito.")
-            document.location=("camisetaHombre1.php");
+            document.location=("calzadoMujer1.php");
             </script>';
         }
 
         if (isset($_POST["añadirCarrito"])) {
-            $conexion->añadirCarrito($_SESSION['id_producto'], $_POST['nombre'], $_POST['sexo'], $_POST['precio'], $_POST['existencias'],$_POST['talla'], $_POST['color']);
+            $conexion->añadirCarrito($_SESSION['id_producto'], $_POST['nombre'], $_POST['sexo'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['color']);
             echo '<script>alert("Producto añadido con éxito.")
-            document.location=("camisetaHombre1.php");
+            document.location=("calzadoMujer1.php");
             </script>';
         }
     }
@@ -144,7 +144,7 @@
     <div class="container" style="margin-top:50px;">
         <div class="row">
             <div class="col-sm" style="background: #EFF1F4; margin: 10px; height: 50%;">
-                <li id="foto"><img id="imagen" src="img/camiseta1.jpg"></li>
+                <li id="foto"><img id="imagen" src="img/zapatillasM2.jpg"></li>
             </div>
 
             <div class="col-sm" style="background: #F3F7F7;border: grey 2px solid; margin: 10px;">
@@ -153,8 +153,11 @@
                     <form id="#" autocomplete="off" class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                         <div class="form-group">
                             <i class="fa fa-solid fa-cart-arrow-down" style="font-size: 40px ;"></i><br>
-                            <h3><strong>CAMISETA VANS</strong></h3>
-                            <p>Camiseta de algodón perfecta para realizar cualquier <br> tipo de deporte o usar en tu vida cotidiana.</p>
+                            <h3><strong>JORDAN WMNS AIR 1 LOW</strong></h3>
+                            <p>Zapatilla muy cómoda gracias a su composición y es una de las más vendidas del mercado. <br>
+                                ¡Pídela ya!
+                            </p>
+                            <br>
                             <br>
                             <label for="nombre">Nombre Producto</label>
                             <input type="text" class="form-control" name="nombre" id="nombre" value="<?php echo $nombre; ?>" readonly>
@@ -164,15 +167,19 @@
                             <input type="text" class="form-control" name="precio" id="precio" value="<?php echo $precio; ?> €" readonly>
                             <label for="existencias">Existencias</label>
                             <input type="text" class="form-control" name="existencias" id="existencias" value="<?php echo $existencias; ?>" readonly><br>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#myModal2">Guía De Tallas</a> <br>
                             <label for="talla">Tallas Disponibles</label>
                             <select name="talla">
-                                <option value="S">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
+                                <option value="35">35</option>
+                                <option value="36">36</option>
+                                <option value="38">38</option>
+                                <option value="40">40</option>
+                                <option value="41">41</option>
+                                <option value="42">42</option>
                             </select><br><br>
                             <label for="color">Color</label>
                             <select name="color">
-                                <option value="Blanco">Blanco</option>
+                                <option value="Rojo">Rojo</option>
                             </select><br><br>
                             <input type="submit" id="añadirCarrito" name="añadirCarrito" class="btn btn-success" value="Añadir Al Carrito"> <br><br>
                         </div>
@@ -234,20 +241,27 @@
                 </div>
                 <!-- Modal body -->
                 <div class="container">
-                <img id="imagen" src="img/camiseta1.jpg" style="max-width:90px;float: right;">
+                    <img id="imagen" src="img/zapatillasM2.jpg" style="max-width:90px;float: right;">
                     <div class="m-0 row justify-content-center align-items-center">
                         <div class="form-group">
                             <p><br>
-                            <strong>CARACTERÍSTICAS <br></strong>
-                                - Material exterior: 100% algodón <br>
-                                - Material/composición: Jersey <br>
-                                - Cuidados: Programa delicado <br>
-                                - Deporte: Fitness <br>
-                                - Cuello/escote: Cuello redondo <br>
-                                - Estampado: Estampado <br><br>
-                               <strong>VENTAJAS: </strong> <br>
-                                · Materiales sintéticos, pegamentos y colores sin cantidades detectables de contenido animal. <br>
-                                · Revestimientos cosidos en la parte superior para ofrecer durabilidad, sujeción y un estilo clásico.
+                                <strong>CARACTERÍSTICAS <br></strong>
+                                - Material exterior: Piel <br>
+                                - Material interior: Tela <br>
+                                - Plantilla: Tela <br>
+                                - Suela: Fibra sintética <br>
+                                - Grosor del relleno: Relleno contra el frío <br>
+                                - Puntera: Redonda <br>
+                                - Forma del tacón: Plano <br>
+                                - Cierre: Cordones <br>
+                                - Detalles: Dibujo calado<br><br>
+                                <strong>VENTAJAS: </strong> <br>
+                                · Amortiguación Zoom Air en el talón con carga superior para aportar reactividad cercana al pie.<br>
+                                · Parte superior en piel flor para un look premium y desenfadado.<br>
+                                · Zona del tobillo renovada que envuelve el talón para un ajuste cómodo.<br>
+                                · Forro de microfibra para ofrecer comodidad total.<br>
+                                · Mediasuela de espuma de una sola pieza suave, ligera y flexible.<br>
+                                · Suela exterior de goma para mayor tracción. <br>
                             </p>
                         </div>
                     </div>
@@ -260,6 +274,103 @@
         </div>
     </div>
 
+
+    <!-- MODAL TALLAS -->
+    <div class="modal" id="myModal2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header" style="background-color: #0d6efd; color: white;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="container">
+                    <div class="m-0 row justify-content-center align-items-center">
+                        <div class="form-group">
+                            <p>
+                                <strong>
+                                    <h4>CONSULTA TU TALLA AQUI</h4>
+                                </strong>
+                                Comprueba la equivalencia de tu talla habitual en la tabla. <br>
+                                Ten en cuenta que se trata de una guía general y que puede variar dependiendo del fabricante, el modelo o la temporada.
+                                <br><br>
+                                <strong>
+                                    Equivalencias de tallas
+                                </strong>
+                            </p>
+
+                            <table class="table" style="justify-content:center;text-align:center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">FR</th>
+                                        <th scope="col">EU</th>
+                                        <th scope="col">LONGITUD DEL PIE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>35.5</td>
+                                        <td>35.5</td>
+                                        <td>22.34</td>
+                                    </tr>
+                                    <tr>
+                                        <td>36</td>
+                                        <td>36</td>
+                                        <td>22.65</td>
+                                    </tr>
+                                    <tr>
+                                        <td>37</td>
+                                        <td>37</td>
+                                        <td>23.3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>38</td>
+                                        <td>38</td>
+                                        <td>23.94</td>
+                                    </tr>
+                                    <tr>
+                                        <td>38.5</td>
+                                        <td>38.5</td>
+                                        <td>24.24</td>
+                                    </tr>
+                                    <tr>
+                                        <td>39</td>
+                                        <td>39</td>
+                                        <td>24.54</td>
+                                    </tr>
+                                    <tr>
+                                        <td>40</td>
+                                        <td>40</td>
+                                        <td>25.17</td>
+                                    </tr>
+                                    <tr>
+                                        <td>41</td>
+                                        <td>41</td>
+                                        <td>25.76</td>
+                                    </tr>
+                                    <tr>
+                                        <td>42</td>
+                                        <td>42</td>
+                                        <td>26.37</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <strong>Cómo tomar las medidas</strong> <br>
+                            <img src="img/pie.jpg" alt="" style="max-width:400px">
+                            <strong>Longitud del pie</strong> <br>
+                            <p>Mide la planta del pie, desde el dedo más largo hasta el talón.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- Footer -->

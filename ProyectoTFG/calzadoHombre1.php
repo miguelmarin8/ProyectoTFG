@@ -65,14 +65,14 @@
         if (isset($_POST["guardarComentario"])) {
             $conexion->insertarEvaluaciones($_SESSION['id_usuario'], $_SESSION['id_producto'], $_SESSION['usuario'], $_POST['comentario']);
             echo '<script>alert("Tu comentario ha sido guardado con éxito.")
-            document.location=("camisetaHombre1.php");
+            document.location=("calzadoHombre1.php");
             </script>';
         }
 
         if (isset($_POST["añadirCarrito"])) {
-            $conexion->añadirCarrito($_SESSION['id_producto'], $_POST['nombre'], $_POST['sexo'], $_POST['precio'], $_POST['existencias'],$_POST['talla'], $_POST['color']);
+            $conexion->añadirCarrito($_SESSION['id_producto'], $_POST['nombre'], $_POST['sexo'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['color']);
             echo '<script>alert("Producto añadido con éxito.")
-            document.location=("camisetaHombre1.php");
+            document.location=("calzadoHombre1.php");
             </script>';
         }
     }
@@ -144,7 +144,7 @@
     <div class="container" style="margin-top:50px;">
         <div class="row">
             <div class="col-sm" style="background: #EFF1F4; margin: 10px; height: 50%;">
-                <li id="foto"><img id="imagen" src="img/camiseta1.jpg"></li>
+                <li id="foto"><img id="imagen" src="img/zapatillasH5.jpg"></li>
             </div>
 
             <div class="col-sm" style="background: #F3F7F7;border: grey 2px solid; margin: 10px;">
@@ -153,8 +153,10 @@
                     <form id="#" autocomplete="off" class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                         <div class="form-group">
                             <i class="fa fa-solid fa-cart-arrow-down" style="font-size: 40px ;"></i><br>
-                            <h3><strong>CAMISETA VANS</strong></h3>
-                            <p>Camiseta de algodón perfecta para realizar cualquier <br> tipo de deporte o usar en tu vida cotidiana.</p>
+                            <h3><strong>AIR FORCE 1</strong></h3>
+                            <p>Son Air Force, no van a decepcionar. La combinación de azules es espectacular.
+                                <br> La suela parece de material reciclado y tiene detalles retro muy chulos
+                            </p>
                             <br>
                             <label for="nombre">Nombre Producto</label>
                             <input type="text" class="form-control" name="nombre" id="nombre" value="<?php echo $nombre; ?>" readonly>
@@ -164,11 +166,15 @@
                             <input type="text" class="form-control" name="precio" id="precio" value="<?php echo $precio; ?> €" readonly>
                             <label for="existencias">Existencias</label>
                             <input type="text" class="form-control" name="existencias" id="existencias" value="<?php echo $existencias; ?>" readonly><br>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#myModal2">Guía De Tallas</a> <br>
                             <label for="talla">Tallas Disponibles</label>
                             <select name="talla">
-                                <option value="S">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
+                                <option value="38">38</option>
+                                <option value="40">40</option>
+                                <option value="41">41</option>
+                                <option value="42">42</option>
+                                <option value="43">43</option>
+                                <option value="44">44</option>
                             </select><br><br>
                             <label for="color">Color</label>
                             <select name="color">
@@ -234,24 +240,25 @@
                 </div>
                 <!-- Modal body -->
                 <div class="container">
-                    <!--FORMULARIO-->
+                    <img id="imagen" src="img/zapatillasH5.jpg" style="max-width:90px;float: right;">
                     <div class="m-0 row justify-content-center align-items-center">
                         <div class="form-group">
                             <p><br>
-                            <strong>CARACTERÍSTICAS <br></strong>
-                                - Material exterior: 100% algodón <br>
-                                - Material/composición: Jersey <br>
-                                - Cuidados: Programa delicado <br>
-                                - Deporte: Fitness <br>
-                                - Cuello/escote: Cuello redondo <br>
-                                - Estampado: Estampado <br><br>
-                               <strong>VENTAJAS: </strong> <br>
-                                · Materiales sintéticos, pegamentos y colores sin cantidades detectables de contenido animal. <br>
-                                · Revestimientos cosidos en la parte superior para ofrecer durabilidad, sujeción y un estilo clásico.
+                                <strong>CARACTERÍSTICAS <br></strong>
+                                - Material exterior: Piel de imitación de alta calidad <br>
+                                - Material interior: Tela <br>
+                                - Plantilla: Tela <br>
+                                - Suela: Fibra sintética <br>
+                                - Grosor del relleno: Relleno contra el frío <br>
+                                - Material/composición: Cuero sintético <br><br>
+                                <strong>VENTAJAS: </strong> <br>
+                                · Revestimientos cosidos en la parte superior para un estilo clásico, durabilidad y sujeción. <br>
+                                · Amortiguación Nike Air diseñada originalmente para el baloncesto que ofrece una comodidad ligera durante todo el día. <br>
+                                · Perfil bajo para un look impecable y estilizado.<br>
+                                · Zona del tobillo acolchada, suave y cómoda. <br>
                             </p>
                         </div>
                     </div>
-                    <!--FIN FORMULARIO-->
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
@@ -261,6 +268,98 @@
         </div>
     </div>
 
+
+    <!-- MODAL TALLAS -->
+    <div class="modal" id="myModal2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header" style="background-color: #0d6efd; color: white;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="container">
+                    <div class="m-0 row justify-content-center align-items-center">
+                        <div class="form-group">
+                            <p>
+                                <strong>
+                                    <h4>CONSULTA TU TALLA AQUI</h4>
+                                </strong>
+                                Comprueba la equivalencia de tu talla habitual en la tabla. <br>
+                                Ten en cuenta que se trata de una guía general y que puede variar dependiendo del fabricante, el modelo o la temporada.
+                                <br><br>
+                                <strong>
+                                    Equivalencias de tallas
+                                </strong>
+                            </p>
+
+                            <table class="table" style="justify-content:center;text-align:center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">FR</th>
+                                        <th scope="col">EU</th>
+                                        <th scope="col">LONGITUD DEL PIE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>40</td>
+                                        <td>40</td>
+                                        <td>24.97</td>
+                                    </tr>
+                                    <tr>
+                                        <td>41</td>
+                                        <td>41</td>
+                                        <td>25.6</td>
+                                    </tr>
+                                    <tr>
+                                        <td>42</td>
+                                        <td>42</td>
+                                        <td>26.24</td>
+                                    </tr>
+                                    <tr>
+                                        <td>43</td>
+                                        <td>43</td>
+                                        <td>26.87</td>
+                                    </tr>
+                                    <tr>
+                                        <td>44</td>
+                                        <td>44</td>
+                                        <td>27.48</td>
+                                    </tr>
+                                    <tr>
+                                        <td>45</td>
+                                        <td>45</td>
+                                        <td>28.01</td>
+                                    </tr>
+                                    <tr>
+                                        <td>46.5</td>
+                                        <td>46.5</td>
+                                        <td>28.86</td>
+                                    </tr>
+                                    <tr>
+                                        <td>48.5</td>
+                                        <td>48.5</td>
+                                        <td>29.93</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <strong>Cómo tomar las medidas</strong> <br>
+                            <img src="img/pie.jpg" alt="" style="max-width:400px">
+                            <strong>Longitud del pie</strong> <br>
+                            <p>Mide la planta del pie, desde el dedo más largo hasta el talón.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- Footer -->

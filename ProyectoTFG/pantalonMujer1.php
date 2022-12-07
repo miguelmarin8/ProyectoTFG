@@ -54,7 +54,7 @@
     $precio = $datosProducto['precio'];
     $existencias = $datosProducto['existencias'];
 
-    $evaluaciones = $conexion->visualizarEvaluaciones($_SESSION['id_producto']);
+    $evaluaciones = $conexion->visualizarEvaluaciones($_SESSION['id_producto']); //Visualizar Comentarios
 
     echo '<pre>';
     print_r($_SESSION);
@@ -65,14 +65,14 @@
         if (isset($_POST["guardarComentario"])) {
             $conexion->insertarEvaluaciones($_SESSION['id_usuario'], $_SESSION['id_producto'], $_SESSION['usuario'], $_POST['comentario']);
             echo '<script>alert("Tu comentario ha sido guardado con éxito.")
-            document.location=("camisetaHombre1.php");
+            document.location=("pantalonMujer1.php");
             </script>';
         }
 
         if (isset($_POST["añadirCarrito"])) {
-            $conexion->añadirCarrito($_SESSION['id_producto'], $_POST['nombre'], $_POST['sexo'], $_POST['precio'], $_POST['existencias'],$_POST['talla'], $_POST['color']);
+            $conexion->añadirCarrito($_SESSION['id_producto'], $_POST['nombre'], $_POST['sexo'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['color']);
             echo '<script>alert("Producto añadido con éxito.")
-            document.location=("camisetaHombre1.php");
+            document.location=("pantalonMujer1.php");
             </script>';
         }
     }
@@ -144,7 +144,7 @@
     <div class="container" style="margin-top:50px;">
         <div class="row">
             <div class="col-sm" style="background: #EFF1F4; margin: 10px; height: 50%;">
-                <li id="foto"><img id="imagen" src="img/camiseta1.jpg"></li>
+                <li id="foto"><img id="imagen" src="img/pantalonesM6.jpg"></li>
             </div>
 
             <div class="col-sm" style="background: #F3F7F7;border: grey 2px solid; margin: 10px;">
@@ -153,8 +153,10 @@
                     <form id="#" autocomplete="off" class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                         <div class="form-group">
                             <i class="fa fa-solid fa-cart-arrow-down" style="font-size: 40px ;"></i><br>
-                            <h3><strong>CAMISETA VANS</strong></h3>
-                            <p>Camiseta de algodón perfecta para realizar cualquier <br> tipo de deporte o usar en tu vida cotidiana.</p>
+                            <h3><strong>PANTALÓN CHÁNDAL BÁSICO</strong></h3>
+                            <p>Chandal cómodo para mujer, perfecto para usar en cualquier tipo de ocasión. <br>
+                                La comodidad absoluta
+                            </p>
                             <br>
                             <label for="nombre">Nombre Producto</label>
                             <input type="text" class="form-control" name="nombre" id="nombre" value="<?php echo $nombre; ?>" readonly>
@@ -164,15 +166,17 @@
                             <input type="text" class="form-control" name="precio" id="precio" value="<?php echo $precio; ?> €" readonly>
                             <label for="existencias">Existencias</label>
                             <input type="text" class="form-control" name="existencias" id="existencias" value="<?php echo $existencias; ?>" readonly><br>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#myModal2">Guía De Tallas</a> <br>
                             <label for="talla">Tallas Disponibles</label>
                             <select name="talla">
+                                <option value="XS">XS</option>
                                 <option value="S">S</option>
                                 <option value="M">M</option>
                                 <option value="L">L</option>
                             </select><br><br>
                             <label for="color">Color</label>
                             <select name="color">
-                                <option value="Blanco">Blanco</option>
+                                <option value="Negro">Negro</option>
                             </select><br><br>
                             <input type="submit" id="añadirCarrito" name="añadirCarrito" class="btn btn-success" value="Añadir Al Carrito"> <br><br>
                         </div>
@@ -234,21 +238,125 @@
                 </div>
                 <!-- Modal body -->
                 <div class="container">
-                <img id="imagen" src="img/camiseta1.jpg" style="max-width:90px;float: right;">
+                    <img id="imagen" src="img/pantalonesM6.jpg" style="max-width:90px;float: right;">
+                    <!--FORMULARIO-->
                     <div class="m-0 row justify-content-center align-items-center">
                         <div class="form-group">
                             <p><br>
-                            <strong>CARACTERÍSTICAS <br></strong>
-                                - Material exterior: 100% algodón <br>
-                                - Material/composición: Jersey <br>
-                                - Cuidados: Programa delicado <br>
+                                <strong>CARACTERÍSTICAS <br></strong>
+                                - Material exterior: 53% algodón, 36% poliéster, 11% viscosa <br>
+                                - Material/composición: Tejido de algodón <br>
+                                - Cuidados: Lavar a máquina a 40 °C, no utilizar secadora <br>
                                 - Deporte: Fitness <br>
-                                - Cuello/escote: Cuello redondo <br>
-                                - Estampado: Estampado <br><br>
-                               <strong>VENTAJAS: </strong> <br>
-                                · Materiales sintéticos, pegamentos y colores sin cantidades detectables de contenido animal. <br>
+                                - Pretina: Elástica, ajustable <br>
+                                - Cintura: Alto <br>
+                                - Bolsillos: Laterales <br>
+                                - Bolsillos: Verticales <br>
+                                - Detalles: Cintura elástica<br><br>
+                                <strong>VENTAJAS: </strong> <br>
+                                · 30% material reciclado <br>
+                                . Suavidad del tejido Fleece para elevar tu look en el día a día <br>
                                 · Revestimientos cosidos en la parte superior para ofrecer durabilidad, sujeción y un estilo clásico.
                             </p>
+                        </div>
+                    </div>
+                    <!--FIN FORMULARIO-->
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL TALLAS -->
+    <div class="modal" id="myModal2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header" style="background-color: #0d6efd; color: white;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="container">
+                    <div class="m-0 row justify-content-center align-items-center">
+                        <div class="form-group">
+                            <p>
+                                <strong>
+                                    <h4>CONSULTA TU TALLA AQUI</h4>
+                                </strong>
+                                Comprueba la equivalencia de tu talla habitual en la tabla. <br>
+                                Ten en cuenta que se trata de una guía general y que puede variar dependiendo del fabricante, el modelo o la temporada.
+                                <br><br>
+                                <strong>
+                                    Equivalencias de tallas
+                                </strong>
+                            </p>
+
+                            <table class="table" style="justify-content:center;text-align:center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">FR</th>
+                                        <th scope="col">INT</th>
+                                        <th scope="col">CINTURA</th>
+                                        <th scope="col">CADERA</th>
+                                        <th scope="col">PERNERA INTERIOR</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>34</td>
+                                        <td>XS</td>
+                                        <td>61</td>
+                                        <td>82</td>
+                                        <td>78.25</td>
+                                    </tr>
+                                    <tr>
+                                        <td>36</td>
+                                        <td>S</td>
+                                        <td>69</td>
+                                        <td>93</td>
+                                        <td>78.2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>38</td>
+                                        <td>M</td>
+                                        <td>73</td>
+                                        <td>97</td>
+                                        <td>78.1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>40</td>
+                                        <td>M</td>
+                                        <td>78.5</td>
+                                        <td>101.5</td>
+                                        <td>77.95</td>
+                                    </tr>
+                                    <tr>
+                                        <td>44</td>
+                                        <td>L</td>
+                                        <td>86</td>
+                                        <td>106</td>
+                                        <td>77.8</td>
+                                    </tr>
+                                    <tr>
+                                        <td>46</td>
+                                        <td>XL</td>
+                                        <td>91</td>
+                                        <td>109</td>
+                                        <td>77.7</td>
+                                    </tr>
+                                    <tr>
+                                        <td>48</td>
+                                        <td>XXL</td>
+                                        <td>96.5</td>
+                                        <td>114</td>
+                                        <td>77.5</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -259,7 +367,6 @@
             </div>
         </div>
     </div>
-
 
 
     <!-- Footer -->

@@ -235,6 +235,7 @@
                 </div>
                 <!-- Modal body -->
                 <div class="container">
+                <img id="imagen" src="img/pantalonesH7.jpg" style="max-width:90px;float: right;">
                     <!--FORMULARIO-->
                     <div class="m-0 row justify-content-center align-items-center">
                         <div class="form-group">
@@ -276,7 +277,7 @@
                 <div class="container">
                     <div class="m-0 row justify-content-center align-items-center">
                         <div class="form-group">
-                            <p><br>
+                            <p>
                                 <strong>
                                     <h4>CONSULTA TU TALLA AQUI</h4>
                                 </strong>

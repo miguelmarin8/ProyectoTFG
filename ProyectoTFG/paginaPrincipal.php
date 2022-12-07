@@ -60,7 +60,7 @@
                             Hombre
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="hombreCamisetas.php">Camisetas</a></li>
+                            <li><a class="dropdown-item" href="hombreCamisetas.php"><i class="fa fa-fw fa-shirt-long"></i>Camisetas</a></li>
                             <li><a class="dropdown-item" href="pantalonesHombre.php">Pantalones</a></li>
                             <li><a class="dropdown-item" href="calzadoHombre.php">Calzado</a></li>
                         </ul>

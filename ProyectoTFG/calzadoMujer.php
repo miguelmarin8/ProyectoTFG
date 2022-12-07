@@ -40,8 +40,8 @@
 
                 $_SESSION['id_producto'] = $_POST["id_producto$i"];
 
-                if ($_SESSION['id_producto'] == 1) {
-                    header("location:camisetaHombre1.php");
+                if ($_SESSION['id_producto'] == 47) {
+                    header("location:calzadoMujer1.php");
                 }
             }
         }
