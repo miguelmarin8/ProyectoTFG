@@ -61,8 +61,8 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="hombreCamisetas.php">Camisetas</a></li>
-                            <li><a class="dropdown-item" href="#">Pantalones</a></li>
-                            <li><a class="dropdown-item" href="#">Calzado</a></li>
+                            <li><a class="dropdown-item" href="pantalonesHombre.php">Pantalones</a></li>
+                            <li><a class="dropdown-item" href="calzadoHombre.php">Calzado</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -70,9 +70,9 @@
                             Mujer
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Camisetas</a></li>
-                            <li><a class="dropdown-item" href="#">Pantalones</a></li>
-                            <li><a class="dropdown-item" href="#">Calzado</a></li>
+                            <li><a class="dropdown-item" href="mujerCamisetas.php">Camisetas</a></li>
+                            <li><a class="dropdown-item" href="pantalonesMujer.php">Pantalones</a></li>
+                            <li><a class="dropdown-item" href="calzadoMujer.php">Calzado</a></li>
                         </ul>
                     </li>
                 </ul>

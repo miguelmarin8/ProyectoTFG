@@ -125,6 +125,7 @@
                         <th>Sexo</th>
                         <th>Precio</th>
                         <th>Existencias</th>
+                        <th>Talla</th>
                         <th>Color</th>
                         <th>Eliminar</th>
                     </tr>
@@ -139,6 +140,7 @@
                         echo "<td>"  . $datosCarrito[$i]['sexo'] . "</td>";
                         echo "<td>"  . $datosCarrito[$i]['precio'] . "</td>";
                         echo "<td>"  . $datosCarrito[$i]['existencias'] . "</td>";
+                        echo "<td>"  . $datosCarrito[$i]['talla'] . "</td>";
                         echo "<td>"  . $datosCarrito[$i]['color'] . "</td>";
                         echo "<td><input type = 'submit' id='eliminarProducto" . $i . "' name='eliminarProducto" . $i . "' value = 'Eliminar' style = 'background-color:#FF5D5D;'/></td>";
                         echo "</tr>";

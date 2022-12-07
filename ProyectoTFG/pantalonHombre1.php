@@ -54,7 +54,7 @@
     $precio = $datosProducto['precio'];
     $existencias = $datosProducto['existencias'];
 
-    $evaluaciones = $conexion->visualizarEvaluaciones($_SESSION['id_producto']);
+    $evaluaciones = $conexion->visualizarEvaluaciones($_SESSION['id_producto']); //Visualizar Comentarios
 
     echo '<pre>';
     print_r($_SESSION);
@@ -65,14 +65,14 @@
         if (isset($_POST["guardarComentario"])) {
             $conexion->insertarEvaluaciones($_SESSION['id_usuario'], $_SESSION['id_producto'], $_SESSION['usuario'], $_POST['comentario']);
             echo '<script>alert("Tu comentario ha sido guardado con éxito.")
-            document.location=("camisetaHombre1.php");
+            document.location=("pantalonHombre1.php");
             </script>';
         }
 
         if (isset($_POST["añadirCarrito"])) {
-            $conexion->añadirCarrito($_SESSION['id_producto'], $_POST['nombre'], $_POST['sexo'], $_POST['precio'], $_POST['existencias'],$_POST['talla'], $_POST['color']);
+            $conexion->añadirCarrito($_SESSION['id_producto'], $_POST['nombre'], $_POST['sexo'], $_POST['precio'], $_POST['existencias'], $_POST['talla'], $_POST['color']);
             echo '<script>alert("Producto añadido con éxito.")
-            document.location=("camisetaHombre1.php");
+            document.location=("pantalonHombre1.php");
             </script>';
         }
     }
@@ -144,7 +144,7 @@
     <div class="container" style="margin-top:50px;">
         <div class="row">
             <div class="col-sm" style="background: #EFF1F4; margin: 10px; height: 50%;">
-                <li id="foto"><img id="imagen" src="img/camiseta1.jpg"></li>
+                <li id="foto"><img id="imagen" src="img/pantalonesH7.jpg"></li>
             </div>
 
             <div class="col-sm" style="background: #F3F7F7;border: grey 2px solid; margin: 10px;">
@@ -153,8 +153,9 @@
                     <form id="#" autocomplete="off" class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                         <div class="form-group">
                             <i class="fa fa-solid fa-cart-arrow-down" style="font-size: 40px ;"></i><br>
-                            <h3><strong>CAMISETA VANS</strong></h3>
-                            <p>Camiseta de algodón perfecta para realizar cualquier <br> tipo de deporte o usar en tu vida cotidiana.</p>
+                            <h3><strong>PANTALÓN CHÁNDAL NIKE</strong></h3>
+                            <p>Chandal cómodo para hombre, perfecto para usar en cualquier tipo de ocasión.
+                            </p>
                             <br>
                             <label for="nombre">Nombre Producto</label>
                             <input type="text" class="form-control" name="nombre" id="nombre" value="<?php echo $nombre; ?>" readonly>
@@ -164,15 +165,15 @@
                             <input type="text" class="form-control" name="precio" id="precio" value="<?php echo $precio; ?> €" readonly>
                             <label for="existencias">Existencias</label>
                             <input type="text" class="form-control" name="existencias" id="existencias" value="<?php echo $existencias; ?>" readonly><br>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#myModal2">Guía De Tallas</a> <br>
                             <label for="talla">Tallas Disponibles</label>
                             <select name="talla">
-                                <option value="S">S</option>
                                 <option value="M">M</option>
                                 <option value="L">L</option>
                             </select><br><br>
                             <label for="color">Color</label>
                             <select name="color">
-                                <option value="Blanco">Blanco</option>
+                                <option value="Gris">Gris</option>
                             </select><br><br>
                             <input type="submit" id="añadirCarrito" name="añadirCarrito" class="btn btn-success" value="Añadir Al Carrito"> <br><br>
                         </div>
@@ -238,15 +239,16 @@
                     <div class="m-0 row justify-content-center align-items-center">
                         <div class="form-group">
                             <p><br>
-                            <strong>CARACTERÍSTICAS <br></strong>
-                                - Material exterior: 100% algodón <br>
-                                - Material/composición: Jersey <br>
-                                - Cuidados: Programa delicado <br>
+                                <strong>CARACTERÍSTICAS <br></strong>
+                                - Cintura: Normal<br>
+                                - Bolsillos: Traseros, laterales <br>
+                                - Largo: Por el tobillo <br>
                                 - Deporte: Fitness <br>
-                                - Cuello/escote: Cuello redondo <br>
-                                - Estampado: Estampado <br><br>
-                               <strong>VENTAJAS: </strong> <br>
-                                · Materiales sintéticos, pegamentos y colores sin cantidades detectables de contenido animal. <br>
+                                - Material exterior: 80% algodón, 20% poliéster <br>
+                                - Cuidados: Lavar a máquina a 40 °C <br><br>
+                                <strong>VENTAJAS: </strong> <br>
+                                · El jogger Nike Sportswear Club Fleece es un clásico de tu fondo de armario que combina un look clásico con la comodidad <br>
+                                . Suavidad del tejido Fleece para elevar tu look en el día a día <br>
                                 · Revestimientos cosidos en la parte superior para ofrecer durabilidad, sujeción y un estilo clásico.
                             </p>
                         </div>
@@ -261,6 +263,110 @@
         </div>
     </div>
 
+
+    <!-- MODAL TALLAS -->
+    <div class="modal" id="myModal2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header" style="background-color: #0d6efd; color: white;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="container">
+                    <div class="m-0 row justify-content-center align-items-center">
+                        <div class="form-group">
+                            <p><br>
+                                <strong>
+                                    <h4>CONSULTA TU TALLA AQUI</h4>
+                                </strong>
+                                Comprueba la equivalencia de tu talla habitual en la tabla. <br>
+                                Ten en cuenta que se trata de una guía general y que puede variar dependiendo del fabricante, el modelo o la temporada.
+                                <br><br>
+                                <strong>
+                                    Equivalencias de tallas
+                                </strong>
+                            </p>
+
+                            <table class="table" style="justify-content:center;text-align:center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">FR</th>
+                                        <th scope="col">INT</th>
+                                        <th scope="col">CINTURA</th>
+                                        <th scope="col">CADERA</th>
+                                        <th scope="col">PERNERA INTERIOR</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>40</td>
+                                        <td>XS</td>
+                                        <td>61</td>
+                                        <td>84</td>
+                                        <td>80</td>
+                                    </tr>
+                                    <tr>
+                                        <td>42</td>
+                                        <td>XXS</td>
+                                        <td>58.5</td>
+                                        <td>82.5</td>
+                                        <td>79.75</td>
+                                    </tr>
+                                    <tr>
+                                        <td>44</td>
+                                        <td>S</td>
+                                        <td>72</td>
+                                        <td>91.5</td>
+                                        <td>81.25</td>
+                                    </tr>
+                                    <tr>
+                                        <td>46</td>
+                                        <td>S/M</td>
+                                        <td>76</td>
+                                        <td>94.5</td>
+                                        <td>82.75</td>
+                                    </tr>
+                                    <tr>
+                                        <td>48</td>
+                                        <td>M</td>
+                                        <td>80.5</td>
+                                        <td>97.5</td>
+                                        <td>82.25</td>
+                                    </tr>
+                                    <tr>
+                                        <td>50</td>
+                                        <td>L</td>
+                                        <td>85.5</td>
+                                        <td>100.5</td>
+                                        <td>82.75</td>
+                                    </tr>
+                                    <tr>
+                                        <td>54</td>
+                                        <td>XL</td>
+                                        <td>95.5</td>
+                                        <td>106.5</td>
+                                        <td>83.75</td>
+                                    </tr>
+                                    <tr>
+                                        <td>56</td>
+                                        <td>XXL</td>
+                                        <td>102</td>
+                                        <td>111</td>
+                                        <td>84.5</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- Footer -->

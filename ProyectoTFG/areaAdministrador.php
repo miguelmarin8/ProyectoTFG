@@ -121,7 +121,7 @@
 
             <div class="row justify-content-around" style="margin-top:50px">
                 <div class="col">
-                    <div class="card text-center" style="width: 18rem;">
+                    <div class="card text-center" style="width: 19rem;">
                         SECCIÓN OPINIONES
                         <a href="administrarOpiniones.php"><img src="img/evaluaciones.jpg" class="card-img-top" alt="..."></a>
                         <div class="card-body ">
@@ -130,7 +130,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card text-center" style="width: 19rem;">
+                    <div class="card text-center" style="width: 20rem;">
                         SECCIÓN VENTAS
                         <img src="img/ventas.jpg" class="card-img-top" alt="...">
                         <div class="card-body ">

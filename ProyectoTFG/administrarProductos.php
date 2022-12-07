@@ -179,7 +179,15 @@
                     echo "<td>"  . $datosProductos[$i]['nombre'] . "</td>";
                     echo "<td>"  . $datosProductos[$i]['sexo'] . "</td>";
                     echo "<td>"  . $datosProductos[$i]['precio'] . "</td>";
-                    echo "<td>"  . $datosProductos[$i]['existencias'] . "</td>";
+                    echo "<td>";
+                    if ($datosProductos[$i]['existencias'] > 0) {
+
+                        echo "<strong><p style = 'color:#0DA262'>" . $datosProductos[$i]['existencias'] . "</p></strong>";
+                    } else {
+                        echo "<strong><p style = 'color:red'>" . $datosProductos[$i]['existencias'] . "</p></strong>";
+                    }
+
+                    echo "</td>";
                     echo "<td>"  . '<img style = "max-width: 50px" src = "' . $datosProductos[$i]['imagen'] . '"/>' . "</td>";
                     echo "<td><button class='btn btn-warning btnEditarProducto'><i class='fa fa-fw fa-pen'></i></button></td>";
                     echo "<td><button class='btn btn-danger btnBorrarProducto'><i class='fa fa-fw fa-trash'></i></button></td>";

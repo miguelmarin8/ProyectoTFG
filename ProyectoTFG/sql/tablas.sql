@@ -43,6 +43,7 @@ CREATE TABLE
         `sexo` VARCHAR(10) NOT NULL,
         `precio` INT NOT NULL,
         `existencias` INT NOT NULL,
+        `talla` VARCHAR(10) NOT NULL,
         `color` VARCHAR(10) NOT NULL,
         FOREIGN KEY (`id_producto`) REFERENCES producto (`id_producto`)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;

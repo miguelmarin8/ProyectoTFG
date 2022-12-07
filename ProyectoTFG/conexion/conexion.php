@@ -257,15 +257,16 @@ class Singleton
         }
     }
 
-    public function añadirCarrito($id, $nombre, $sexo, $precio, $existencias, $color)
+    public function añadirCarrito($id, $nombre, $sexo, $precio, $existencias, $talla, $color)
     {
-        $consulta = $this->con->prepare("INSERT INTO carrito (id_producto,nombre,sexo,precio,existencias,color) values (?,?,?,?,?,?)");
+        $consulta = $this->con->prepare("INSERT INTO carrito (id_producto,nombre,sexo,precio,existencias,talla,color) values (?,?,?,?,?,?,?)");
         $consulta->bindparam(1, $id);
         $consulta->bindparam(2, $nombre);
         $consulta->bindparam(3, $sexo);
         $consulta->bindparam(4, $precio);
         $consulta->bindparam(5, $existencias);
-        $consulta->bindparam(6, $color);
+        $consulta->bindparam(6, $talla);
+        $consulta->bindparam(7, $color);
         $consulta->execute();
     }
 
@@ -384,6 +385,71 @@ class Singleton
         }
     }
 
+    public function seleccionarPantalonHombre()
+    {
+        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE nombre LIKE '%Pantalones%' AND sexo = 'hombre'");
+        $consulta->execute();
+
+        if ($consulta->execute()) {
+            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $datos;
+        } else {
+            return false;
+        }
+    }
+
+    public function seleccionarZapatillaHombre()
+    {
+        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE nombre LIKE '%Zapatillas%' AND sexo = 'hombre'");
+        $consulta->execute();
+
+        if ($consulta->execute()) {
+            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $datos;
+        } else {
+            return false;
+        }
+    }
+
+    public function seleccionarCamisetaMujer()
+    {
+        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE sexo = 'mujer'");
+        $consulta->execute();
+
+        if ($consulta->execute()) {
+            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $datos;
+        } else {
+            return false;
+        }
+    }
+
+    public function seleccionarPantalonMujer()
+    {
+        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE nombre LIKE '%Pantalones%' AND sexo = 'Mujer'");
+        $consulta->execute();
+
+        if ($consulta->execute()) {
+            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $datos;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function seleccionarZapatillaMujer()
+    {
+        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE nombre LIKE '%Zapatillas%' AND sexo = 'Mujer' OR nombre LIKE '%Tacones%' AND sexo = 'Mujer' OR nombre LIKE '%Botines%' AND sexo = 'Mujer' OR nombre LIKE '%Mocasines%' AND sexo = 'Mujer'");
+        $consulta->execute();
+
+        if ($consulta->execute()) {
+            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $datos;
+        } else {
+            return false;
+        }
+    }
 
     public function seleccionarIdUsuario($usu)
     {
