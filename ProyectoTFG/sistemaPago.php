@@ -49,6 +49,10 @@
     $usuario = $_SESSION['usuario'];
     $productos = $conexion->seleccionarProductosCarrito(); //Ver cuantos productos hay en el carrito
     $date = date("Y-m-d H:i:s");
+    $errores = [];
+    $datosUsu = $conexion->datosUsuario($_SESSION['usuario']);
+    $nombreUsu = $datosUsu[0]['nombre'];
+    $apellidosUsu = $datosUsu[0]['apellidos'];
 
 
     /*echo '<pre>';
@@ -57,16 +61,25 @@
 */
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        $nombre = filtrado($_POST['nombre']);
+        $apellidos = filtrado($_POST['apellidos']);
+        $usuario2 = filtrado($_POST['usuario']);
+        $clave = filtrado($_POST['clave']);
+        $tipo_pago = filtrado($_POST['tipo_pago']);
+        $numero_tarjeta = filtrado($_POST['numero_tarjeta']);
+        $fecha_cad = filtrado($_POST['fecha_cad']);
+        $email_pay = filtrado($_POST['email_pay']);
+        $contra_pay = filtrado($_POST['contra_pay']);
+
+
+
         if (isset($_POST["pagar"])) {
-            for ($i = 0; $i < count($productos); $i++) {
-                $conexion->insertarCompra($_SESSION['id_usuario'], $productos[$i]['id_producto'],$productos[$i]['precio'],$_POST['nombre'], $_POST['apellidos'], $_POST['usuario'], $_POST['clave'], $_POST['tipo_pago'], $_POST['numero_tarjeta'], $_POST['fecha_cad'], $_POST['email_pay'], $_POST['contra_pay'], $date);
-                echo '<script>alert("Su compra ha sido realizada con éxito.")
-               alert("En breves recibirá la información por correo. Muchas Gracias!.")
-                document.location=("paginaPrincipal.php");
-                </script>';
-            }
+                for ($i = 0; $i < count($productos); $i++) {
+                    $conexion->insertarCompra($_SESSION['id_usuario'], $productos[$i]['id_producto'], $productos[$i]['precio'], $_POST['nombre'], $_POST['apellidos'], $_POST['usuario'], $_POST['clave'], $_POST['tipo_pago'], $_POST['numero_tarjeta'], $_POST['fecha_cad'], $_POST['email_pay'], $_POST['contra_pay'], $date);
+                }
             $conexion->eliminarCarritoEntero();
-             $conexion->incrementarTablaCarrito();
+            $conexion->incrementarTablaCarrito();
         }
     }
 
@@ -147,31 +160,48 @@
                     <strong>
                         <p style="color:red">*RELLENA LOS SIGUIENTES CAMPOS PARA FINALIZAR TU COMPRA*</p>
                     </strong>
+
+                    <!--VISUALIZAR ERRORES-->
+                    <?php
+                    if (!empty($errores)) {
+                        echo '<strong> <span style="color:red">' . implode("<br>", $errores) . '</span> </strong><br><br>';
+                    }
+                    ?>
+                    <!--VISUALIZAR ERRORES-->
+
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre">
+                    <input type="text" class="form-control" name="nombre" id="nombre" value="<?php echo $nombreUsu; ?>" readonly style="background-color:#FCEFEC">
                     <label for="apellidos">Apellidos</label>
-                    <input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Apellidos">
+                    <input type="text" class="form-control" name="apellidos" id="apellidos" value="<?php echo $apellidosUsu; ?>" readonly style="background-color:#FCEFEC">
                     <label for="usuario">Usuario</label>
-                    <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Usuario">
+                    <input type="text" class="form-control" name="usuario" id="usuario" value="<?php echo $usuario; ?>" readonly style="background-color:#FCEFEC">
                     <label for="clave">Contraseña</label>
-                    <input type="password" class="form-control" name="clave" id="clave" placeholder="Contraseña">
+                    <input type="password" class="form-control" name="clave" id="clave" placeholder="Contraseña" required>
                     <label for="tipo_pago">Tipo Pago</label>
                     <select id="tipo_pago" name="tipo_pago" class="form-control">
-                        <option value="Visa" selected>Visa</option>
+                        <option value="NULO"></option>
+                        <option value="Visa">Visa</option>
                         <option value="Paypal">Paypal</option>
                     </select>
-                    <label for="numero_tarjeta">Numero Tarjeta</label>
-                    <input type="number" class="form-control" name="numero_tarjeta" id="numero_tarjeta" placeholder="Numero Tarjeta">
-                    <label for="fecha_cad">Fecha Caducidad</label>
-                    <input type="date" class="form-control" name="fecha_cad" id="fecha_cad">
-                    <label for="email_pay">Email Paypal</label>
-                    <input type="email" class="form-control" name="email_pay" id="email_pay" placeholder="Email Paypal">
-                    <label for="contra_pay">Contraseña Pypal</label>
-                    <input type="password" class="form-control" name="contra_pay" id="contra_pay" placeholder="Contraseña Paypal"> <br>
-
-
-                    <input type="submit" id="pagar" name="pagar" class="btn btn-success" value="ACEPTAR Y PAGAR"><br><br>
-
+                    <div id="tarjeta" class="form-group">
+                        <label for="numero_tarjeta">Numero Tarjeta</label>
+                        <input type="number" class="form-control" name="numero_tarjeta" id="numero_tarjeta" placeholder="Numero Tarjeta">
+                    </div>
+                    <div id="fechacad" class="form-group">
+                        <label for="fecha_cad">Fecha Caducidad</label>
+                        <input type="date" class="form-control" name="fecha_cad" id="fecha_cad">
+                    </div>
+                    <div id="paypal-email" class="form-group">
+                        <label for="email_pay">Email Paypal</label>
+                        <input type="email" class="form-control" name="email_pay" id="email_pay" placeholder="Email Paypal">
+                    </div>
+                    <div id="paypal-pass" class="form-group">
+                        <label for="contra_pay">Contraseña Pypal</label>
+                        <input type="password" class="form-control" name="contra_pay" id="contra_pay" placeholder="Contraseña Paypal"> <br>
+                    </div>
+                    <br>
+                    <input type="submit" id="pagar" name="pagar" class="btn btn-success" value="ACEPTAR Y PAGAR">
+                    <br><br>
                 </div>
 
             </form>
@@ -184,5 +214,29 @@
 
 
 </body>
+
+<script type="text/javascript">
+    document.getElementById("tipo_pago").addEventListener("change", mostrarOcultar);
+
+    function mostrarOcultar() {
+        var selectVal = document.getElementById("tipo_pago").value;
+        var tarjeta = document.getElementById("tarjeta");
+        var fechacad = document.getElementById("fechacad");
+        var paypalemail = document.getElementById("paypal-email");
+        var paypalpass = document.getElementById("paypal-pass");
+
+        if (selectVal == "Visa") {
+            paypalemail.style.display = "None";
+            paypalpass.style.display = "None";
+            tarjeta.style.display = "block";
+            fechacad.style.display = "block";
+        } else {
+            paypalemail.style.display = "block";
+            paypalpass.style.display = "block";
+            tarjeta.style.display = "None";
+            fechacad.style.display = "None";
+        }
+    }
+</script>
 
 </html>

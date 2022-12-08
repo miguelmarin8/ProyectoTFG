@@ -130,12 +130,6 @@
                         <p>¿No tienes cuenta?<a href="registro.php"> Registrate</a></p>
                     
                         <!--<p>Entrar sin cuenta<a href="paginaPrincipal.php"> Entrar</a></p>-->
-
-                        <div>
-                            <h6>Iniciar sesión con: </h6>
-                            <button type="button" class="btn btn-light">Continue With <img id="apple" src="img/apple.jpg" /></button>
-                            <button type="button" class="btn btn-light">Continue With <img id="google" src="img/google.jpg" /></button>
-                        </div>
                     </form>
                 </div>
             </div>

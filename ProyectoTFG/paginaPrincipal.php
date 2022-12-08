@@ -29,7 +29,7 @@
     $_SESSION['id_usuario'] = $id_usuario;
     $producto = $conexion->seleccionarProductosRandom();
 
-
+    
 
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {

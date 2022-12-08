@@ -98,7 +98,7 @@
     <!--TARJETAS--->
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" style="margin-top: 100px;">
         <div class="container" style="margin-top: 50px; padding-bottom: 50px;">
-        <div class="row justify-content-around" style="margin-top:50px">
+            <div class="row justify-content-around" style="margin-top:50px">
                 <div class="col">
                     <div class="card text-center" style="width: 19rem;">
                         SECCIÓN USUARIOS
@@ -125,16 +125,16 @@
                         SECCIÓN OPINIONES
                         <a href="administrarOpiniones.php"><img src="img/evaluaciones.jpg" class="card-img-top" alt="..."></a>
                         <div class="card-body ">
-                        <a href="administrarOpiniones.php"><button type="button" class="btn btn-info">Opiniones</button></a>
+                            <a href="administrarOpiniones.php"><button type="button" class="btn btn-info">Opiniones</button></a>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card text-center" style="width: 20rem;">
                         SECCIÓN VENTAS
-                        <img src="img/ventas.jpg" class="card-img-top" alt="...">
+                        <a href="administrarVentas.php"><img src="img/ventas.jpg" class="card-img-top" alt="..."></a>
                         <div class="card-body ">
-                            <button type="button" class="btn btn-info">Ventas</button>
+                            <a href="administrarVentas.php"><button type="button" class="btn btn-info">Ventas</button></a>
                         </div>
                     </div>
                 </div>

@@ -343,6 +343,11 @@ class Singleton
         $consulta = $this->con->prepare("ALTER TABLE carrito AUTO_INCREMENT = 1");
         $consulta->execute();
     }
+    public function incrementarTablaCompra()
+    {
+        $consulta = $this->con->prepare("ALTER TABLE compra AUTO_INCREMENT = 1");
+        $consulta->execute();
+    }
 
     public function incrementarTablaProducto()
     {
@@ -398,7 +403,7 @@ class Singleton
 
     public function seleccionarCamisetaHombre()
     {
-        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE sexo = 'hombre'");
+        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE nombre LIKE '%Camiseta%' AND sexo = 'hombre' ORDER BY RAND()");
         $consulta->execute();
 
         if ($consulta->execute()) {
@@ -411,7 +416,7 @@ class Singleton
 
     public function seleccionarPantalonHombre()
     {
-        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE nombre LIKE '%Pantalones%' AND sexo = 'hombre'");
+        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE nombre LIKE '%Pantalones%' AND sexo = 'hombre' ORDER BY RAND()");
         $consulta->execute();
 
         if ($consulta->execute()) {
@@ -424,7 +429,7 @@ class Singleton
 
     public function seleccionarZapatillaHombre()
     {
-        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE nombre LIKE '%Zapatillas%' AND sexo = 'hombre'");
+        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE nombre LIKE '%Zapatillas%' AND sexo = 'hombre' ORDER BY RAND()");
         $consulta->execute();
 
         if ($consulta->execute()) {
@@ -437,7 +442,7 @@ class Singleton
 
     public function seleccionarCamisetaMujer()
     {
-        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE sexo = 'mujer'");
+        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE nombre LIKE '%Camiseta%'  AND sexo = 'mujer' OR nombre LIKE '%Top%' AND sexo = 'Mujer' OR nombre LIKE '%Camisa%' AND sexo = 'Mujer' OR nombre LIKE '%Blusa%' AND sexo = 'Mujer' ORDER BY RAND()");
         $consulta->execute();
 
         if ($consulta->execute()) {
@@ -450,7 +455,7 @@ class Singleton
 
     public function seleccionarPantalonMujer()
     {
-        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE nombre LIKE '%Pantalones%' AND sexo = 'Mujer'");
+        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE nombre LIKE '%Pantalones%' AND sexo = 'Mujer'ORDER BY RAND()");
         $consulta->execute();
 
         if ($consulta->execute()) {
@@ -464,7 +469,7 @@ class Singleton
 
     public function seleccionarZapatillaMujer()
     {
-        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE nombre LIKE '%Zapatillas%' AND sexo = 'Mujer' OR nombre LIKE '%Tacones%' AND sexo = 'Mujer' OR nombre LIKE '%Botines%' AND sexo = 'Mujer' OR nombre LIKE '%Mocasines%' AND sexo = 'Mujer'");
+        $consulta = $this->con->prepare("SELECT id_producto, imagen, nombre FROM producto WHERE nombre LIKE '%Zapatillas%' AND sexo = 'Mujer' OR nombre LIKE '%Tacones%' AND sexo = 'Mujer' OR nombre LIKE '%Botines%' AND sexo = 'Mujer' OR nombre LIKE '%Mocasines%' AND sexo = 'Mujer' ORDER BY RAND()");
         $consulta->execute();
 
         if ($consulta->execute()) {
@@ -565,5 +570,13 @@ class Singleton
         } else {
             return false;
         }
+    }
+
+    
+    public function eliminarVenta($id)
+    {
+        $consulta = $this->con->prepare("DELETE FROM compra WHERE id_compra = ?");
+        $consulta->bindparam(1, $id);
+        $consulta->execute();
     }
 }

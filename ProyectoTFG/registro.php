@@ -81,12 +81,6 @@
                     <i class="fa fa-fw fa-user" style="font-size: 40px ;"></i><br>
                     <h3><strong>REGISTER</strong></h3>
                     <p>Muchas gracias por confiar en nosotros. ¡APÚNTATE!</p>
-                    <div>
-                        <button type="button" class="btn btn-light">Register With <img id="google" src="img/google.jpg" /></button>
-                    </div><br>
-                    <hr style="width:40%; float: left;">O
-                    <hr style="width:40%;float: right;">
-                    <br>
                     <br>
                     <strong>
                         <p>Introduzca los siguientes datos personales</p>

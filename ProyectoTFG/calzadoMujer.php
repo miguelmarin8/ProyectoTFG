@@ -163,7 +163,7 @@
         <!--TERCERA LÍNEA-->
         <div class="container" style="margin-top: 100px;">
             <div class="row align-items-center">
-                <?php for ($i = 6; $i < count($imagenes); $i++) {
+                <?php for ($i = 6; $i < 9; $i++) {
                 ?>
                     <div class="col">
                         <div class="card text-center" style="width: 18rem;">
@@ -184,6 +184,18 @@
         </div>
     </form>
 
+    <div class="container">
+        <!--FORMULARIO-->
+        <div class="row justify-content-center align-items-center">
+            <form class="col-auto p-5 text-center" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">VER MÁS PRODUCTOS</button>
+                </div>
+            </form>
+
+        </div>
+        <!--FIN FORMULARIO-->
+    </div>
     <!-- Footer -->
     <footer class="text-center text-muted" style="background-color: rgba(0, 0, 0, 0.025); margin-top:100px;">
         <!-- Section: Social media -->
