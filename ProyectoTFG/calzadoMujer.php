@@ -46,9 +46,9 @@
             }
         }
 
-        echo '<pre>';
+        /* echo '<pre>';
         print_r($_POST);
-        echo '</pre>';
+        echo '</pre>'; */
     }
 
 
@@ -104,6 +104,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="cuenta.php"><i class="fa fa-fw fa-user"></i> Cuenta</a></li>
+                            <li><a class="dropdown-item" href="verCompras.php"><img src="img/bolsa.jpg" style="max-width: 20px;"> Compras</a></li>
                             <li><a class="dropdown-item" href="otros/cerrarSesion.php"><i class="fa fa-fw fa-power-off"></i> Cerrar Sesión</a></li>
                         </ul>
                     </li>
@@ -122,7 +123,7 @@
                     <div class="col">
                         <div class="card text-center" style="width: 18rem;">
                             <?php
-                            echo "<td> <input readonly type = 'text' name = 'id_producto$i' value='" . $imagenes[$i]['id_producto'] . "'</td>";
+                            echo "<td> <input hidden type = 'text' name = 'id_producto$i' value='" . $imagenes[$i]['id_producto'] . "'</td>";
                             echo "<td>"  . '<img style = "max-width: 550px" src = "' . $imagenes[$i]['imagen'] . '"/>' . "</td>";
                             echo "<br>";
                             echo "<strong>" . $imagenes[$i]['nombre'] . "</strong>";
@@ -145,7 +146,7 @@
                     <div class="col">
                         <div class="card text-center" style="width: 18rem;">
                             <?php
-                            echo "<td> <input readonly type = 'text' name = 'id_producto$i' value='" . $imagenes[$i]['id_producto'] . "'</td>";
+                            echo "<td> <input hidden type = 'text' name = 'id_producto$i' value='" . $imagenes[$i]['id_producto'] . "'</td>";
                             echo "<td>"  . '<img style = "max-width: 550px" src = "' . $imagenes[$i]['imagen'] . '"/>' . "</td>";
                             echo "<br>";
                             echo "<strong>" . $imagenes[$i]['nombre'] . "</strong>";
@@ -168,7 +169,7 @@
                     <div class="col">
                         <div class="card text-center" style="width: 18rem;">
                             <?php
-                            echo "<td> <input readonly type = 'text' name = 'id_producto$i' value='" . $imagenes[$i]['id_producto'] . "'</td>";
+                            echo "<td> <input hidden type = 'text' name = 'id_producto$i' value='" . $imagenes[$i]['id_producto'] . "'</td>";
                             echo "<td>"  . '<img style = "max-width: 550px" src = "' . $imagenes[$i]['imagen'] . '"/>' . "</td>";
                             echo "<br>";
                             echo "<strong>" . $imagenes[$i]['nombre'] . "</strong>";

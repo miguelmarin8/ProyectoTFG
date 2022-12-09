@@ -33,6 +33,7 @@
         $email = filtrado($_POST['email']);
         $usuario = filtrado($_POST['usuario']);
         $password = filtrado($_POST['password']);
+        $password = hash('sha512',$password);
 
         
         if (isset($_POST["registrar"])) {
@@ -58,8 +59,8 @@
                 $errores[] = "- El usuario no puede tener más de 20 caracteres";
             } elseif (empty($password)) {
                 $errores[] = "- La contraseña no puede estar vacíoa";
-            } elseif (strlen($password) > 20) {
-                $errores[] = "- La contraseña no puede tener más de 20 caracteres";
+            } elseif (strlen($password) > 255) {
+                $errores[] = "- La contraseña no puede tener más de 255 caracteres";
             } elseif ($correo != NULL) {
                 $errores[] = "- Ese correo ya esta en uso";
             } elseif ($nombreUsu != NULL) {

@@ -30,6 +30,8 @@
         //validar los datos.
         $usuario = filtrado($_POST['usuario']);
         $password = filtrado($_POST['password']);
+        $password = hash('sha512',$password);
+
 
         if (empty($usuario)) {
             $errores[] = "- El usuario no puede estar vacío";
@@ -42,6 +44,7 @@
             if ($login != NULL) {
                 header('location: paginaPrincipal.php');
                 $_SESSION['usuario'] = $_POST['usuario'];
+                $_SESSION['clave'] = $_POST['password'];
                 if ($conexion->registroAnteriores($usuario)) {
                     $conexion->actualizarFecha($date, $usuario);
                 } else {

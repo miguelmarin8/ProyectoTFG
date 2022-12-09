@@ -54,6 +54,10 @@
     $nombreUsu = $datosUsu[0]['nombre'];
     $apellidosUsu = $datosUsu[0]['apellidos'];
 
+    $cacularPrecioTotal = $conexion->sumarCarrito(); //Sumar precios
+
+    $precioTotal = implode(',', $cacularPrecioTotal); //Para sacar solo el valor del array
+
 
     /*echo '<pre>';
     print_r($productos);
@@ -75,9 +79,9 @@
 
 
         if (isset($_POST["pagar"])) {
-                for ($i = 0; $i < count($productos); $i++) {
-                    $conexion->insertarCompra($_SESSION['id_usuario'], $productos[$i]['id_producto'], $productos[$i]['precio'], $_POST['nombre'], $_POST['apellidos'], $_POST['usuario'], $_POST['clave'], $_POST['tipo_pago'], $_POST['numero_tarjeta'], $_POST['fecha_cad'], $_POST['email_pay'], $_POST['contra_pay'], $date);
-                }
+            for ($i = 0; $i < count($productos); $i++) {
+                $conexion->insertarCompra($_SESSION['id_usuario'], $productos[$i]['id_producto'], $productos[$i]['precio'], $_POST['nombre'], $_POST['apellidos'], $_POST['usuario'], $_POST['clave'], $_POST['tipo_pago'], $_POST['numero_tarjeta'], $_POST['fecha_cad'], $_POST['email_pay'], $_POST['contra_pay'], $date);
+            }
             $conexion->eliminarCarritoEntero();
             $conexion->incrementarTablaCarrito();
         }
@@ -136,6 +140,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="cuenta.php"><i class="fa fa-fw fa-user"></i> Cuenta</a></li>
+                            <li><a class="dropdown-item" href="verCompras.php"><img src="img/bolsa.jpg" style="max-width: 20px;"> Compras</a></li>
                             <li><a class="dropdown-item" href="otros/cerrarSesion.php"><i class="fa fa-fw fa-power-off"></i> Cerrar Sesión</a></li>
                         </ul>
                     </li>
@@ -200,6 +205,8 @@
                         <input type="password" class="form-control" name="contra_pay" id="contra_pay" placeholder="Contraseña Paypal"> <br>
                     </div>
                     <br>
+                    <p style="font-size:20px;"><?php echo "El precio total de su compra es de: <strong>" . $precioTotal . "€</strong>" ?></p>
+
                     <input type="submit" id="pagar" name="pagar" class="btn btn-success" value="ACEPTAR Y PAGAR">
                     <br><br>
                 </div>

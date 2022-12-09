@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="css/estilos.css">
-    <title>Administrar Ventas</title>
+    <title>Mis Compras</title>
 
 </head>
 <style>
@@ -39,33 +39,24 @@
     include_once "conexion/conexion.php";
     include_once "otros/filtrado.php";
     $conexion = Singleton::singleton();
-    $datosVentas = $conexion->seleccionarVentas();
+    $misCompras = $conexion->verCompras();
 
     /*echo '<pre>';
     print_r($_SESSION['usuario']);
     echo '</pre>';*/
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        for ($i = 0; $i < count($datosVentas); $i++) {
-            if (isset($_POST["eliminarCompra$i"])) {
-                $conexion->eliminarVenta($_POST["id_compra$i"]);
-                $conexion->incrementarTablaCompra();
-                echo '<script>alert("Venta eliminada correctamente")
-                document.location=("administrarVentas.php");
-                </script>';
-            }
-        }
     }
 
 
 
     ?>
     <div id="cabecera" class="col-auto p-5 text-center">
-        <p class="display-4" style="font-family: Lucida Handwriting;text-shadow: 0px 0px 9px #000;color:black;">AREA ADMINISTRADOR</p>
+        <p class="display-4" style="font-family: Lucida Handwriting;text-shadow: 0px 0px 9px #000;color:black;">MIS COMPRAS</p>
     </div>
 
- <!-- MENÚ -->
- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- MENÚ -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a href="areaAdministrador.php"><button class="btn btn-outline-secondary" name="admin" id="admin" <?php if ($_SESSION['usuario'] != "MiguelMB") { ?> style="display:none;" <?php } ?>>Area Administrador</button></a>
             <a class="navbar-brand" href="paginaPrincipal.php">HOME</a>
@@ -111,7 +102,6 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="cuenta.php"><i class="fa fa-fw fa-user"></i> Cuenta</a></li>
-                            <li><a class="dropdown-item" href="verCompras.php"><img src="img/bolsa.jpg" style="max-width: 20px;"> Compras</a></li>
                             <li><a class="dropdown-item" href="otros/cerrarSesion.php"><i class="fa fa-fw fa-power-off"></i> Cerrar Sesión</a></li>
                         </ul>
                     </li>
@@ -124,40 +114,28 @@
     <!--TABLA EVALUACIONES--->
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" style="margin-top: 100px;">
         <div class="container" id="productos" style="margin-top: 50px;padding-bottom: 100px;">
-            <h1 style="justify-content:center;text-align:center">TABLA EVALUACIONES</h1>
+            <h1 style="justify-content:center;text-align:center">REGISTRO DE COMPRAS</h1>
 
             <table id="tablaEvaluaciones" class="table">
                 <thead class="text-center">
                     <tr>
-                        <th style="background-color: #ECECEC;">Id Compra</th>
-                        <th style="background-color: #ECECEC;">Id Usuario</th>
-                        <th style="background-color: #ECECEC;">Id Producto</th>
-                        <th style="background-color: #ECECEC;">Precio</th>
-                        <th style="background-color: #ECECEC;">Nombre</th>
-                        <th style="background-color: #ECECEC;">Apellidos</th>
-                        <th style="background-color: #ECECEC;">Usuario</th>
-                        <th style="background-color: #ECECEC;">Tipo Pago</th>
-                        <th style="background-color: #ECECEC;">Fecha Caducidad</th>
-                        <th style="background-color: #ECECEC;">Email Paypal</th>
-                        <th style="background-color: #ECECEC;">Compra</th>
-                        <th style="background-color: #ECECEC;">Eliminar</th>
+                        <th style="background-color: cornflowerblue;color: white;">Id Compra</th>
+                        <th style="background-color: cornflowerblue;color: white;">Id Usuario</th>
+                        <th style="background-color: cornflowerblue;color: white;">Usuario</th>
+                        <th style="background-color: cornflowerblue;color: white;">Producto</th>
+                        <th style="background-color: cornflowerblue;color: white;">Imagen</th>
+                        <th style="background-color: cornflowerblue;color: white;">Fecha Compra</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
                     <?php
-                    for ($i = 0; $i < count($datosVentas); $i++) {
-                        echo "<td> <input readonly type = 'text' name = 'id_compra$i' style = 'text-align: center; border: 0; width: 50px; background-color: white' value='" . $datosVentas[$i]['id_compra'] . "'</td>";
-                        echo "<td>"  . $datosVentas[$i]['id_usuario'] . "</td>";
-                        echo "<td>"  . $datosVentas[$i]['id_producto'] . "</td>";
-                        echo "<td>"  . $datosVentas[$i]['precio'] . "</td>";
-                        echo "<td>"  . $datosVentas[$i]['nombre'] . "</td>";
-                        echo "<td>"  . $datosVentas[$i]['apellidos'] . "</td>";
-                        echo "<td>"  . $datosVentas[$i]['tipo_pago'] . "</td>";
-                        echo "<td>"  . $datosVentas[$i]['numero_tarjeta'] . "</td>";
-                        echo "<td>"  . $datosVentas[$i]['fecha_caducidad_tarjeta'] . "</td>";
-                        echo "<td>"  . $datosVentas[$i]['email_paypal'] . "</td>";
-                        echo "<td>"  . $datosVentas[$i]['fecha_compra'] . "</td>";
-                        echo "<td><input type = 'submit' id='eliminarCompra" . $i . "' name='eliminarCompra" . $i . "' value = 'Eliminar' style = 'background-color:#FF5D5D;'/></td>";
+                    for ($i = 0; $i < count($misCompras); $i++) {
+                        echo "<td>"  . $misCompras[$i]['id_compra'] . "</td>";
+                        echo "<td>"  . $misCompras[$i]['id_usuario'] . "</td>";
+                        echo "<td>"  . $misCompras[$i]['usuario'] . "</td>";
+                        echo "<td>"  . $misCompras[$i]['nombre'] . "</td>";
+                        echo "<td>"  . '<img style = "max-width: 50px" src = "' . $misCompras[$i]['imagen'] . '"/>' . "</td>";
+                        echo "<td>"  . $misCompras[$i]['fecha_compra'] . "</td>";
                         echo "</tr>";
                     }
                     ?>
@@ -165,14 +143,14 @@
             </table>
         </div>
     </form>
-        <!--FIN TABLA PRODUCTOS -->
-        <!-- JQUERY -->
-        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-        <!-- DATATABLES -->
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-        <!-- BOOTSTRAP -->
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-        <script type="text/javascript" src="js/funciones.js"></script>
+    <!--FIN TABLA PRODUCTOS -->
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <!-- DATATABLES -->
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="js/funciones.js"></script>
 </body>
 
 </html>

@@ -49,6 +49,7 @@
             //$email = filtrado($_POST['email']);
             //$usuario = filtrado($_POST['usuario']);
             $password = filtrado($_POST['password']);
+            $password = hash('sha512', $password);
 
             if (empty($nombre)) {
                 $errores[] = "- El nombre no puede estar vacío";
@@ -62,8 +63,8 @@
                 $errores[] = "- El apellido no puede tener más de 20 letras";
             } elseif (empty($password)) {
                 $errores[] = "- La contraseña no puede estar vacía";
-            } elseif (strlen($password) > 20) {
-                $errores[] = "- La contraseña no puede tener más de 20 caracteres";
+            } elseif (strlen($password) > 225) {
+                $errores[] = "- La contraseña no puede tener más de 225 caracteres";
             } else {
                 $conexion->modificar_registro($nombre, $apellidos, $password, $id_usuario);
                 echo '<script>alert("Usuario modificado correctamente. Vuelva a iniciar sesión")
@@ -145,6 +146,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="cuenta.php"><i class="fa fa-fw fa-user"></i> Cuenta</a></li>
+                            <li><a class="dropdown-item" href="verCompras.php"><img src="img/bolsa.jpg" style="max-width: 20px;"> Compras</a></li>
                             <li><a class="dropdown-item" href="otros/cerrarSesion.php"><i class="fa fa-fw fa-power-off"></i> Cerrar Sesión</a></li>
                         </ul>
                     </li>
@@ -174,7 +176,7 @@
                     <label for="usuario">Usuario</label>
                     <input type="text" class="form-control" name="usuario" id="usuario" value="<?php echo $usuario; ?>" disabled>
                     <label for="password">Password</label>
-                    <input type="text" class="form-control" name="password" id="password" value="<?php echo $clave; ?>">
+                    <input type="text" class="form-control" name="password" id="password" value="<?php echo $_SESSION['clave']; ?>">
                     <label for="fecha">Último Inicio De Sesión</label>
                     <input type="text" class="form-control" name="fecha" id="fecha" value="<?php echo $fecha; ?>" disabled>
                     <label for="fecha">Fecha Registro</label>

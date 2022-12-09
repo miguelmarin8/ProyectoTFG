@@ -26,9 +26,11 @@
     $conexion = Singleton::singleton();
     $datosOpiniones = $conexion->tablaUsuarios();
 
-    /* echo '<pre>';
+    /*echo '<pre>';
     print_r($_SESSION['usuario']);
     echo '</pre>';*/
+
+  
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
@@ -84,6 +86,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="cuenta.php"><i class="fa fa-fw fa-user"></i> Cuenta</a></li>
+                            <li><a class="dropdown-item" href="verCompras.php"><img src="img/bolsa.jpg" style="max-width: 20px;"> Compras</a></li>
                             <li><a class="dropdown-item" href="otros/cerrarSesion.php"><i class="fa fa-fw fa-power-off"></i> Cerrar Sesión</a></li>
                         </ul>
                     </li>

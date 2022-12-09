@@ -572,11 +572,23 @@ class Singleton
         }
     }
 
-    
+
     public function eliminarVenta($id)
     {
         $consulta = $this->con->prepare("DELETE FROM compra WHERE id_compra = ?");
         $consulta->bindparam(1, $id);
         $consulta->execute();
+    }
+
+    public function verCompras()
+    {
+        $consulta = $this->con->prepare("SELECT id_compra,id_usuario, usuario , C.id_producto , P.nombre , P.imagen , C.fecha_compra FROM producto P, compra C WHERE C.id_producto = P.id_producto");
+        $consulta->execute();
+        if ($consulta->execute()) {
+            $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $datos;
+        } else {
+            return false;
+        }
     }
 }
