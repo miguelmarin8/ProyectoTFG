@@ -143,6 +143,100 @@
             </table>
         </div>
     </form>
+    <!-- Footer -->
+    <footer class="text-center text-muted" style="background-color: rgba(0, 0, 0, 0.025); margin-top:100px;">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            <!-- Left -->
+            <div class="me-5 d-none d-lg-block">
+                <span>Get connected with us on social networks:</span>
+            </div>
+            <!-- Left -->
+
+            <!-- Right -->
+            <div>
+                <a target="_blank" href="https://es-es.facebook.com/" class="me-4 link-secondary">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a target="_blank" href="https://twitter.com/?lang=es" class="me-4 link-secondary">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a target="_blank" href="https://www.google.es/" class="me-4 link-secondary">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a target="_blank" href="https://www.instagram.com/" class="me-4 link-secondary">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3 text-secondary"></i>COMPAÑIA HR
+                        </h6>
+                        <p>
+                            En esta pagina tenemos productos de buena calidad y buenos precios, confia en nosotros,
+                            no te vamos a defraudar.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Productos
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">CAMISETAS</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">PANTALONES</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">ZAPATLLIAS</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">SUDADERAS</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <p><i class="fas fa-home me-3 text-secondary"></i> MADRID, MA 10012, ES</p>
+                        <p>
+                            <i class="fas fa-envelope me-3 text-secondary"></i>
+                            mmarinb12@gmail.com
+                        </p>
+                        <p><i class="fas fa-phone me-3 text-secondary"></i> + 01 234 567 88</p>
+                        <p><i class="fas fa-print me-3 text-secondary"></i> + 01 234 567 89</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+            © 2021 Copyright:
+            <a class="text-reset fw-bold" href="">MR.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
     <!--FIN TABLA PRODUCTOS -->
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>

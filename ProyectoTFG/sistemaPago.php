@@ -226,6 +226,7 @@
 
 </body>
 
+
 <script type="text/javascript">
     document.getElementById("tipo_pago").addEventListener("change", mostrarOcultar);
 
@@ -249,5 +250,7 @@
         }
     }
 </script>
+
+
 
 </html>
