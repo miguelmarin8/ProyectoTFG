@@ -124,7 +124,7 @@
     <!--TABLA EVALUACIONES--->
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>" style="margin-top: 100px;">
         <div class="container" id="productos" style="margin-top: 50px;padding-bottom: 100px;">
-            <h1 style="justify-content:center;text-align:center">TABLA EVALUACIONES</h1>
+            <h1 style="justify-content:center;text-align:center">TABLA VENTAS</h1>
 
             <table id="tablaEvaluaciones" class="table">
                 <thead class="text-center">

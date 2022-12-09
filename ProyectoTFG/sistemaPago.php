@@ -84,6 +84,10 @@
             }
             $conexion->eliminarCarritoEntero();
             $conexion->incrementarTablaCarrito();
+
+            echo '<script>alert("Su compra se ha realizado con éxito.")
+            document.location=("paginaPrincipal.php");
+            </script>';
         }
     }
 
@@ -183,8 +187,8 @@
                     <label for="clave">Contraseña</label>
                     <input type="password" class="form-control" name="clave" id="clave" placeholder="Contraseña" required>
                     <label for="tipo_pago">Tipo Pago</label>
-                    <select id="tipo_pago" name="tipo_pago" class="form-control">
-                        <option value="NULO"></option>
+                    <select id="tipo_pago" name="tipo_pago" class="form-control" required>
+                        <option value=""></option>
                         <option value="Visa">Visa</option>
                         <option value="Paypal">Paypal</option>
                     </select>
